@@ -57,8 +57,15 @@ app.all('/*', function(req, res, next) {
 });
 
 var routes = require('./routes');
+var users = require('./routes/users');
 
 app.get('/', routes.index);
+
+app.get('/users', users.query);
+app.post('/users', users.create);
+app.post('/users/auth', users.auth);
+app.put('/users/:userId', users.update);
+app.delete('/users/:userId', users.remove);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
