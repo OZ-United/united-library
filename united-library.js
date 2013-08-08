@@ -72,3 +72,12 @@ server.listen(app.get('port'), function(){
   console.log('Express server listening on port ' + server.address().port);
   ltld.update('united-library', server.address().port);
 });
+
+/**
+ * CRON JOB
+ */
+
+var notification = require('cron').CronJob;
+new notification('0 0 */1 * * *', function(){
+  // TODO
+}, null, true, "Europe/Bratislava");
