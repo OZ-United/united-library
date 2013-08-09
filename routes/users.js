@@ -17,7 +17,7 @@ exports.create = function(req, res, next){
   var user = {};
   user.password = req.body.password;
   user.email = req.body.email;
-  user.login = req.body.login;
+  user.phone = req.body.phone;
   user.name = req.body.name;
   user.admin = req.body.admin;
 
@@ -54,7 +54,7 @@ exports.update = function(req, res, next){
 
     user.password = req.body.password;
     user.name = req.body.name;
-    user.login = req.body.login;
+    user.phone = req.body.phone;
     user.email = req.body.email;
     user.admin = req.body.admin;
 
