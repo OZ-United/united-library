@@ -3,9 +3,10 @@ var Schema = mongoose.Schema;
 var error = require('../lib/error');
 
 var LoanModelSchema = new Schema({
-  status: { type: String, default: 'reserved' },
+  status: { type: String, default: 'reservation' },
   startDate: { type: Date, default: Date.now, index: true },
   endDate: { type: Date, default: Date.now, index: true },
+  book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true },
   bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel', required: true },
   user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true }
 },{
