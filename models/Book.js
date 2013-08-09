@@ -6,10 +6,10 @@ var BookModelSchema = new Schema({
   isbn10: {type: String},
   isbn13: {type: String},
   title: {type: String, required: true},
-  author: [{type: String}],
+  authors: [{type: String}],
   publisher: {type: String},
   cover: {type: String},
-  quantity: {type: Number},
+  copies: [BookCopyModelSchema],
 },{
   toObject:  { virtuals: true },
   toJSON:    { virtuals: true }
