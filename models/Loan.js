@@ -7,7 +7,7 @@ var LoanModelSchema = new Schema({
   startDate: { type: Date, default: Date.now, index: true },
   endDate: { type: Date, default: Date.now, index: true },
   book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true },
-  bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel', required: true },
+  bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel' },
   user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true }
 },{
   toObject:  { virtuals: true },
