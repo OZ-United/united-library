@@ -4,6 +4,11 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 @import "bootstrap-sass/lib/bootstrap";
 
 /* Put your CSS here */
+
+* {
+  @include box-sizing(border-box)
+}
+
 html, body {
   margin: 20px;
 }
@@ -12,6 +17,12 @@ body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+}
+
+input.input-field {
+  height: 40px;
+  line-height: 30px;
+  text-align: left;
 }
 
 .hero-unit {
