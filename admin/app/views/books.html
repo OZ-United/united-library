@@ -1,0 +1,96 @@
+<section style="margin: 50px auto;">
+  <h4 style="text-align: center;margin: 50px auto;">Zoznam kníh</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Obal</th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Vydavateľ</th>
+        <th>Rok</th>
+        <th>ISBN10</th>
+        <th>ISBN13</th>
+        <th>Množstvo</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="book in books">
+        <td><img ng-src="{{book.cover}}" alt=""></td>
+        <td style="line-height: 50px;">{{book.title}}</td>
+        <td style="line-height: 50px;">{{book.author}}</td>
+        <td style="line-height: 50px;">{{book.publisher}}</td>
+        <td style="line-height: 50px;">{{book.year}}</td>
+        <td style="line-height: 50px;">{{book.isbn10}}</td>
+        <td style="line-height: 50px;">{{book.isbn13}}</td>
+        <td style="line-height: 50px;">{{book.quantity}}</td>
+        <td style="line-height: 50px;">
+          <button class="btn btn-link" ng-click="removeBook(book)">vymazať</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<section style="margin: 50px auto;">
+  <h4 style="text-align: center;margin: 50px auto;">Nová kniha</h4>
+  <div style="width: 500px; margin: 0 auto;">
+  <form class="form-horizontal" ng-submit="addBook()" name="addBookForm">
+
+    <div class="control-group">
+    <label class="control-label" for="inputTitle">Názov</label>
+    <div class="controls">
+    <input type="text" ng-model="book.title" id="inputTitle" class="input-field" required placeholder="Názov">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputAuthor">Autor</label>
+    <div class="controls">
+    <input type="text" ng-model="book.author" id="inputAuthor" class="input-field" required placeholder="Autor">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputPublisher">Vydavateľ</label>
+    <div class="controls">
+    <input type="text" ng-model="book.publisher" id="inputPublisher" class="input-field" placeholder="Spoločenstvo United">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputYear">Rok</label>
+    <div class="controls">
+    <input type="number" ng-model="book.year" id="inputYear" class="input-field" placeholder="2013" min="1600">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputISBN10">ISBN-10</label>
+    <div class="controls">
+    <input type="text" ng-model="book.isbn.isbn10" id="inputISBN10" class="input-field" placeholder="1906465592">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputISBN13">ISBN-13</label>
+    <div class="controls">
+    <input type="text" ng-model="book.isbn.isbn13" id="inputISBN13" class="input-field" placeholder="978-1906465599">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputQuantity">Množstvo</label>
+    <div class="controls">
+    <input type="number" ng-model="book.quantity" id="inputQuantity" class="input-field" placeholder="1" min="0">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success">Pridať</button>
+    </div>
+    </div>
+  </form>
+  </div>
+</section>
