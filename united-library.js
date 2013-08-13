@@ -58,6 +58,7 @@ app.all('/*', function(req, res, next) {
 
 var routes = require('./routes');
 var users = require('./routes/users');
+var books = require('./routes/books');
 
 app.get('/', routes.index);
 
@@ -66,6 +67,11 @@ app.post('/users', users.create);
 app.post('/users/auth', users.auth);
 app.put('/users/:userId', users.update);
 app.delete('/users/:userId', users.remove);
+
+app.get('/books', books.query);
+app.post('/books', books.create);
+app.put('/books/:bookId', books.update);
+app.delete('/books/:bookId', books.remove);
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){

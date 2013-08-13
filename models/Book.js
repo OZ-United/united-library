@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var BookCopyModelSchema = require('../models/BookCopy.js');
 var error = require('../lib/error');
 
 var BookModelSchema = new Schema({
