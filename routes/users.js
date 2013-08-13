@@ -14,12 +14,7 @@ exports.query = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  var user = {};
-  user.password = req.body.password;
-  user.email = req.body.email;
-  user.phone = req.body.phone;
-  user.name = req.body.name;
-  user.admin = req.body.admin;
+  var user = req.body;
 
   new UserModel(user).save(function(err, user){
     if (err) {
