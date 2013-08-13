@@ -22,7 +22,7 @@ exports.get = function(req, res, next){
 
 exports.create = function(req, res, next){
   var book = req.body;
-
+  
   new BookModel(book).save(function(err, book){
     if (err) {
       if (err.code == 11000 || err.code == 11001) {
