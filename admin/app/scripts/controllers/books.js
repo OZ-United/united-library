@@ -2,6 +2,8 @@
 
 angular.module('adminApp')
   .controller('BooksCtrl', function ($scope, Books) {
+
+  $scope.book = {};
   $scope.books = Books.query();
 
   $scope.addBook = function(){
@@ -20,5 +22,11 @@ angular.module('adminApp')
     Books.remove({'bookId': $scope.books[index].bookId}, function(){
       $scope.books.splice(index, 1);
     });
+  };
+
+  $scope.setCover = function(dataUrl){
+    console.log('setCover');
+    $scope.book.cover = dataUrl;
+    console.log($scope.book);
   };
 });
