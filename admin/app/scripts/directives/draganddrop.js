@@ -5,7 +5,7 @@ angular.module('adminApp')
   return {
     template:
       '<section class="ddupload">' +
-      '<input type="file" ng-model="logo" name="logo" accept="image/*" required id="logo" onchange="angular.element(this).scope().setFiles(this)" ng-cloak/>' +
+      '<input type="file" ng-model="logo" name="logo" accept="image/*" id="logo" onchange="angular.element(this).scope().setFiles(this)" ng-cloak/>' +
       '<div id="dropbox" class="dropbox" ng-class="dropClass">' +
       '  <span class="dropText">{{dropText}}</span>' +
       '  <div>' +
