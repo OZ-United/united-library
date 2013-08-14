@@ -9,13 +9,13 @@ angular.module('adminApp')
       '<div id="dropbox" class="dropbox" ng-class="dropClass">' +
       '  <span class="dropbox-text">{{dropText}}</span>' +
       '  <div>' +
-      '    <img ng-src="{{image.dataUrl}}" alt="image" ng-show="image.dataUrl"/>' +
+      '    <img ng-src="{{cover}}" alt="cover" ng-show="cover"/>' +
       '  </div>' +
       '</div>' +
       '</section>',
     restrict: 'E',
     scope: {
-      'done': '&'
+      'cover': '='
     },
     controller: function($scope, $element) {
 
@@ -88,8 +88,7 @@ angular.module('adminApp')
         readAsDataURL(file).then(
           function(dataUrl){
             console.log(dataUrl);
-            $scope.image.dataUrl = dataUrl;
-            $scope.done({dataUrl: dataUrl});
+            $scope.cover = dataUrl;
           }
         );
 
@@ -139,8 +138,7 @@ angular.module('adminApp')
           readAsDataURL(file).then(
             function(dataUrl){
               console.log(dataUrl);
-              $scope.image.dataUrl = dataUrl;
-              $scope.done({dataUrl: dataUrl});
+              $scope.cover = dataUrl;
             }
           );
         }
