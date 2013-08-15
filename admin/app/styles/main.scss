@@ -64,7 +64,6 @@ input.input-field {
 }
 
 .dropbox {
-  max-width: 400px;
   border: 2px solid #DDD;
   padding: 5px;
   @include border-radius(8px);
@@ -77,6 +76,11 @@ input.input-field {
 
   &.dropbox-over {
     background-color: #bfb;
+  }
+
+  img {
+    display: block;
+    margin: 0 auto;
   }
 }
 
