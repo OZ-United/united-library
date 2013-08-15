@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var error = require('../lib/error');
 
 var RentModelSchema = new Schema({
-  status: { type: String, default: 'reservation' },
+  status: { type: String, default: 'reserved' },
   book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true },
   user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true },
 
@@ -21,9 +21,26 @@ var RentModelSchema = new Schema({
   toJSON:    { virtuals: true }
 });
 
-RentModelSchema.virtual("rentId").get(function(){
+RentModelSchema.virtual('rentId').get(function(){
   return this.id;
 });
 
+RentModelSchema.methods.reserveBook = function(bookId, userId){
+  this.status = 'reserved';
+  this.book = bookId;
+  this.user = userId;
+};
+
+RentModelSchema.methods.rentBook = function(bookCopyId, userId, endDate){
+  this.status = 'rented';
+  this.rent.startDate = Date.now();
+  this.rent.endDate = endDate || (Date.now() + 1000 * 60 * 60 * 24 * 30);
+  this.rent.bookCopy = bookCopyId;
+};
+
+RentModelSchema.methods.returnBook = function(bookCopyId, userId, endDate){
+  this.status = 'returned';
+  this.rent.returnDate = Date.now();
+};
 
 module.exports = mongoose.model('RentModel', RentModelSchema);
