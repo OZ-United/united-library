@@ -59,6 +59,7 @@ app.all('/*', function(req, res, next) {
 var routes = require('./routes');
 var users = require('./routes/users');
 var books = require('./routes/books');
+var rents = require('./routes/rents');
 
 app.get('/', routes.index);
 
@@ -69,9 +70,17 @@ app.put('/users/:userId', users.update);
 app.delete('/users/:userId', users.remove);
 
 app.get('/books', books.query);
+app.get('/books/:bookId', books.get);
 app.post('/books', books.create);
 app.put('/books/:bookId', books.update);
 app.delete('/books/:bookId', books.remove);
+
+app.get('/rents', rents.query);
+app.get('/rents/:rentId', rents.get);
+app.post('/rents/:rentId/', rents.returned);
+app.post('/rents/:rentId/', rents.canceled);
+app.post('/books/:bookId/rent', rents.rent);
+
 
 var server = http.createServer(app);
 server.listen(app.get('port'), function(){
