@@ -1,1 +1,29 @@
-<p>This is the rents view.</p>
+<section style="margin: 50px auto;">
+  <h4 style="text-align: center;margin: 50px auto;">Zoznam požičaní</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Obal</th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Používateľ</th>
+        <th>Od</th>
+        <th>Do</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="rent in rents">
+        <td>
+          <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
+            <img ng-src="{{rent.book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
+          </a>
+        <td style="line-height: 100px;"><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.title}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.author}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+</section>

@@ -7,7 +7,10 @@ var RentModel = require('../models/Rent.js');
 var error = require('../lib/error');
 
 exports.query = function(req, res, next){
-  RentModel.find(function(err, rents){
+  RentModel
+    .find({})
+    .populate('user book')
+    .exec(function(err, rents){
     if (err) { return next(err); }
     res.json(rents);
   });
