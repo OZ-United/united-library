@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('adminApp', ['ngResource', 'ja.isbn'])
+angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
