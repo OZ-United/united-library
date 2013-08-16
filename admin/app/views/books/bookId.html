@@ -1,0 +1,18 @@
+<img ng-src="{{book.cover}}" alt="cover" class="pull-left">
+
+<h3>{{book.title}}</h3>
+<p>{{book.author}}</p>
+<p>{{book.publisher}}</p>
+<p>{{book.year}}</p>
+<p>ISBN-13: {{book.isbn.isbn13}}</p>
+<p>ISBN-10: {{book.isbn.isbn10}}</p>
+
+<h4>Výtlačky</h4>
+
+<ul>
+  <li ng-repeat="copy in book.copies">
+    <p>{{copy.bookCopyId}}</p>
+    <p>{{copy.date | date}}</p>
+    <p>{{copy.status}}</p>
+  </li>
+</ul>

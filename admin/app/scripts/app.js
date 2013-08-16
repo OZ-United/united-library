@@ -19,6 +19,10 @@ angular.module('adminApp', ['ngResource', 'ja.isbn'])
         templateUrl: 'views/rents.html',
         controller: 'RentsCtrl'
       })
+      .when('/books/:bookId', {
+        templateUrl: 'views/books/bookId.html',
+        controller: 'BooksBookidCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
