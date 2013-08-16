@@ -1,12 +1,12 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('BooksBookidCtrl', function ($scope, Books, Users, $routeParams) {
+.controller('BooksBookidCtrl', function ($scope, Books, Users, Rents, $routeParams) {
   $scope.book = Books.get({'bookId': $routeParams.bookId});
-  $scope.users = Users.query();
 
   $scope.open = function (bookCopy) {
     $scope.rentBook = true;
+    $scope.users = Users.query();
     $scope.rentCopy = {
       'bookId': $scope.book.bookId,
       'bookCopyId': bookCopy.bookCopyId
@@ -15,6 +15,13 @@ angular.module('adminApp')
 
   $scope.close = function () {
     $scope.rentBook = false;
+  };
+
+  $scope.save = function () {
+    Rents.create($scope.rentCopy, function(rent){
+      console.log(rent);
+      $scope.rentBook = false;
+    });
   };
 
   $scope.opts = {

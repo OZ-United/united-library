@@ -8,7 +8,7 @@ var error = require('../lib/error');
 
 exports.query = function(req, res, next){
   UserModel.find(function(err, users){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     res.json(users);
   });
 };
@@ -32,7 +32,7 @@ exports.create = function(req, res, next){
 
 exports.remove = function(req, res, next){
   UserModel.findById(req.params.userId, function(err, user){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     if (! user) { return next(new error.NotFound('User does not exist.')); }
 
     user.remove(function(err, user){
@@ -44,7 +44,7 @@ exports.remove = function(req, res, next){
 
 exports.update = function(req, res, next){
   UserModel.findById(req.params.userId, function(err, user){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     if (! user) { return next(new error.NotFound('User does not exist.')); }
 
     user.password = req.body.password;
@@ -70,7 +70,7 @@ exports.update = function(req, res, next){
 
 exports.auth = function(req, res, next){
   UserModel.findOne({'login': req.body.login}, function(err, user){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     if (! user) { return next(new error.NotFound('User does not exist.')); }
 
     if (user.auth(req.body.password)){

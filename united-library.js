@@ -77,9 +77,9 @@ app.delete('/books/:bookId', books.remove);
 
 app.get('/rents', rents.query);
 app.get('/rents/:rentId', rents.get);
-app.post('/rents/:rentId/', rents.returned);
-app.post('/rents/:rentId/', rents.canceled);
-app.post('/books/:bookId/rent', rents.rent);
+app.post('/rents', rents.create);
+app.put('/rents/:rentId/', rents.update);
+app.post('/books/:bookId/reserve', rents.reserve);
 
 
 var server = http.createServer(app);

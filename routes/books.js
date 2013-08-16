@@ -8,21 +8,21 @@ var error = require('../lib/error');
 
 exports.query = function(req, res, next){
   BookModel.find(function(err, books){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     res.json(books);
   });
 };
 
 exports.get = function(req, res, next){
   BookModel.findById(req.params.bookId, function(err, book){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     res.json(book);
   });
 };
 
 exports.create = function(req, res, next){
   var book = req.body;
-  
+
   new BookModel(book).save(function(err, book){
     if (err) {
       if (err.code == 11000 || err.code == 11001) {
@@ -39,7 +39,7 @@ exports.create = function(req, res, next){
 
 exports.remove = function(req, res, next){
   BookModel.findById(req.params.bookId, function(err, book){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     if (! book) { return next(new error.NotFound('Book does not exist.')); }
 
     book.remove(function(err, book){
@@ -51,7 +51,7 @@ exports.remove = function(req, res, next){
 
 exports.update = function(req, res, next){
   BookModel.findById(req.params.bookId, function(err, book){
-    if (err) { return next(error); }
+    if (err) { return next(err); }
     if (! book) { return next(new error.NotFound('Book does not exist.')); }
 
     book.title = req.body.title;

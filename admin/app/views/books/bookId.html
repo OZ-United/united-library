@@ -26,10 +26,11 @@
     <div class="modal-body">
       <p>{{rentCopy | json}}</p>
       <p>
-        <input type="text" ng-model="rentCopy.user" typeahead="user.userId as user.name for user in users | filter:$viewValue | limitTo:8">
+        <input type="text" ng-model="rentCopy.userId" typeahead="user.userId as user.name for user in users | filter:$viewValue | limitTo:8">
       </p>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-warning cancel" ng-click="close()">Cancel</button>
+        <button class="btn cancel" ng-click="close()">Zrušiť</button>
+        <button class="btn btn-success" ng-click="save()">Požičať</button>
     </div>
 </div>

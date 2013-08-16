@@ -25,24 +25,31 @@ RentModelSchema.virtual('rentId').get(function(){
   return this.id;
 });
 
-RentModelSchema.methods.reserveBook = function(bookId, userId){
+RentModelSchema.methods.reserveBook = function(bookId, userId, cb){
   this.status = 'reserved';
   this.book = bookId;
   this.user = userId;
+
+  return this.save(cb);
 };
 
-RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, endDate){
+RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
   this.status = 'rented';
-  this.book = this.book || bookId;
-  this.user = this.user || userId;
+  this.book = bookId;
+  this.user = userId;
   this.rent.startDate = Date.now();
-  this.rent.endDate = endDate || (Date.now() + 1000 * 60 * 60 * 24 * 30);
+  this.rent.endDate = Date.now() + 1000 * 60 * 60 * 24 * 30;
   this.rent.bookCopy = bookCopyId;
+
+  console.log(this);
+  return this.save(cb);
 };
 
-RentModelSchema.methods.returnBook = function(bookCopyId, userId, endDate){
+RentModelSchema.methods.returnBook = function(bookCopyId, userId, endDate, cb){
   this.status = 'returned';
   this.rent.returnDate = Date.now();
+
+  return this.save(cb);
 };
 
 module.exports = mongoose.model('RentModel', RentModelSchema);
