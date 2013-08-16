@@ -8,23 +8,19 @@
         <th>Autor</th>
         <th>Vydavateľ</th>
         <th>Rok</th>
-        <th>ISBN10</th>
-        <th>ISBN13</th>
         <th>Množstvo</th>
         <th></th>
       </tr>
     </thead>
     <tbody>
       <tr ng-repeat="book in books">
-        <td><img ng-src="{{book.cover}}" alt=""></td>
-        <td style="line-height: 50px;">{{book.title}}</td>
-        <td style="line-height: 50px;">{{book.author}}</td>
-        <td style="line-height: 50px;">{{book.publisher}}</td>
-        <td style="line-height: 50px;">{{book.year}}</td>
-        <td style="line-height: 50px;">{{book.isbn.isbn10}}</td>
-        <td style="line-height: 50px;">{{book.isbn.isbn13}}</td>
-        <td style="line-height: 50px;">{{book.quantity}}</td>
-        <td style="line-height: 50px;">
+        <td><img ng-src="{{book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
+        <td style="line-height: 100px;">{{book.title}}</td>
+        <td style="line-height: 100px;">{{book.author}}</td>
+        <td style="line-height: 100px;">{{book.publisher}}</td>
+        <td style="line-height: 100px;">{{book.year}}</td>
+        <td style="line-height: 100px;">{{book.quantity}}</td>
+        <td style="line-height: 100px;">
           <a ng-href="#/books/{{book.bookId}}" class="btn btn-link">Detail</a>
         </td>
       </tr>
