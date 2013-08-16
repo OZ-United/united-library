@@ -31,8 +31,10 @@ RentModelSchema.methods.reserveBook = function(bookId, userId){
   this.user = userId;
 };
 
-RentModelSchema.methods.rentBook = function(bookCopyId, userId, endDate){
+RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, endDate){
   this.status = 'rented';
+  this.book = this.book || bookId;
+  this.user = this.user || userId;
   this.rent.startDate = Date.now();
   this.rent.endDate = endDate || (Date.now() + 1000 * 60 * 60 * 24 * 30);
   this.rent.bookCopy = bookCopyId;

@@ -5,6 +5,7 @@ var error = require('../lib/error');
 var BookCopyModelSchema = new Schema({
   date: { type: Date, default: Date.now, index: true },
   status: { type: String, default: 'available', required: true, index: true },
+  user: { type: Schema.Types.ObjectId, ref: 'UserModel' },
 },{
   toObject:  { virtuals: true },
   toJSON:    { virtuals: true }
