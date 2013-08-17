@@ -9,6 +9,7 @@
         <th>Používateľ</th>
         <th>Od</th>
         <th>Do</th>
+        <th>Vrátené</th>
       </tr>
     </thead>
     <tbody>
@@ -23,6 +24,7 @@
         <td style="line-height: 100px;"><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.returnDate | date}}</a></td>
       </tr>
     </tbody>
   </table>

@@ -45,6 +45,12 @@ exports.reserveBook = function(req, res, next){
 };
 
 exports.returnBook = function(req, res, next){
-  res.send(200);
+  RentModel.findById(req.params.rentId, function(err, rent){
+    if (err) { return next(err); }
+    rent.returnBook(function(err, rent){
+      if (err) { return next(err); }
+      res.json(rent);
+    });
+  });
 };
 

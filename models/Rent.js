@@ -45,7 +45,7 @@ RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
   return this.save(cb);
 };
 
-RentModelSchema.methods.returnBook = function(bookCopyId, userId, endDate, cb){
+RentModelSchema.methods.returnBook = function(cb){
   this.status = 'returned';
   this.rent.returnDate = Date.now();
 
