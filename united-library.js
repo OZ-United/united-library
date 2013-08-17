@@ -80,7 +80,8 @@ app.get('/rents', rents.query);
 app.get('/rents/:rentId', rents.get);
 app.post('/rents', rents.create);
 app.put('/rents/:rentId/', rents.update);
-app.post('/books/:bookId/reserve', rents.reserve);
+app.post('/rents/:rentId/returnBook', rents.returnBook);
+app.post('/books/:bookId/reserve', rents.reserveBook);
 
 
 var server = http.createServer(app);

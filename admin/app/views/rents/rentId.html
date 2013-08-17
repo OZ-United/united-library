@@ -1,0 +1,13 @@
+<p>
+  <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
+    <img ng-src="{{rent.book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></p>
+  </a>
+<p><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.title}}</a></p>
+<p><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.author}}</a></p>
+<p><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></p>
+<p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></p>
+<p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></p>
+
+<p>
+  <button class="btn btn-success" ng-click="returnBook(rent)">Vrátiť knihu</button>
+</p>

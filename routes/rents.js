@@ -11,16 +11,19 @@ exports.query = function(req, res, next){
     .find({})
     .populate('user book')
     .exec(function(err, rents){
-    if (err) { return next(err); }
-    res.json(rents);
-  });
+      if (err) { return next(err); }
+      res.json(rents);
+    });
 };
 
 exports.get = function(req, res, next){
-  RentModel.findById(req.params.rentId, function(err, rent){
-    if (err) { return next(err); }
-    res.json(rent);
-  });
+  RentModel
+    .findById(req.params.rentId)
+    .populate('user book')
+    .exec(function(err, rent){
+      if (err) { return next(err); }
+      res.json(rent);
+    });
 };
 
 exports.create = function(req, res, next){
@@ -37,7 +40,11 @@ exports.update = function(req, res, next){
   res.send(200);
 };
 
-exports.reserve = function(req, res, next){
+exports.reserveBook = function(req, res, next){
+  res.send(200);
+};
+
+exports.returnBook = function(req, res, next){
   res.send(200);
 };
 
