@@ -23,6 +23,14 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/books/bookId.html',
         controller: 'BooksBookidCtrl'
       })
+      .when('/users/:userId', {
+        templateUrl: 'views/users/userId.html',
+        controller: 'UsersUseridCtrl'
+      })
+      .when('/rents/:rentId', {
+        templateUrl: 'views/rents/rentId.html',
+        controller: 'RentsRentidCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

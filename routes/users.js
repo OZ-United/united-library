@@ -13,6 +13,13 @@ exports.query = function(req, res, next){
   });
 };
 
+exports.get = function(req, res, next){
+  UserModel.findById(req.params.userId, function(err, users){
+    if (err) { return next(err); }
+    res.json(users);
+  });
+};
+
 exports.create = function(req, res, next){
   var user = req.body;
 

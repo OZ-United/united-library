@@ -66,6 +66,7 @@ app.get('/', routes.index);
 app.get('/users', users.query);
 app.post('/users', users.create);
 app.post('/users/auth', users.auth);
+app.get('/users/:userId', users.get);
 app.put('/users/:userId', users.update);
 app.delete('/users/:userId', users.remove);
 
