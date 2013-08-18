@@ -1,0 +1,85 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+var error = require('../lib/error');
+
+var RentModelSchema = new Schema({
+  status: { type: String, default: 'reserved' },
+  book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true },
+  user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true },
+
+  reservation: {
+    reservationDate: { type: Date, default: Date.now, index: true },
+  },
+  rent: {
+    startDate: { type: Date, index: true },
+    endDate: { type: Date, index: true },
+    returnDate: { type: Date, index: true },
+    bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel' },
+  }
+},{
+  toObject:  { virtuals: true },
+  toJSON:    { virtuals: true }
+});
+
+RentModelSchema.virtual('rentId').get(function(){
+  return this.id;
+});
+
+RentModelSchema.methods.reserveBook = function(bookId, userId, cb){
+  this.status = 'reserved';
+  this.book = bookId;
+  this.user = userId;
+
+  return this.save(cb);
+};
+
+RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
+  this.status = 'rented';
+  this.book = bookId;
+  this.user = userId;
+  this.rent.startDate = Date.now();
+  this.rent.endDate = Date.now() + 1000 * 60 * 60 * 24 * 30;
+  this.rent.bookCopy = bookCopyId;
+
+  console.log(this);
+  return this.save(cb);
+};
+
+RentModelSchema.methods.returnBook = function(cb){
+  this.status = 'available';
+  this.rent.returnDate = Date.now();
+
+  return this.save(cb);
+};
+
+RentModelSchema.pre('save', function (next) {
+
+  var bookId = this.book;
+  var bookCopyId = this.rent.bookCopy;
+  var rentId = this.rentId;
+  var status = this.status;
+
+  if (bookCopyId) {
+    mongoose.model('BookModel').findById(bookId, function(err, book){
+      if (err) { return next(err); }
+
+      bookCopy = book.copies.id(bookCopyId);
+      if (bookCopy.status !== 'available' && status == 'rented') {
+        return next(new error.HttpResponseError('Book is not available.'));
+      }
+      bookCopy.status = status;
+      bookCopy.rents.addToSet(rentId);
+
+      book.save(function(err, book){
+        if (err) { return next(err); }
+        next();
+      });
+    });
+  }
+  else {
+    next();
+  }
+  
+});
+
+module.exports = mongoose.model('RentModel', RentModelSchema);
