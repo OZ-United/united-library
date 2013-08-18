@@ -8,7 +8,7 @@ var error = require('../lib/error');
 
 exports.query = function(req, res, next){
   RentModel
-    .find({})
+    .find(req.params)
     .populate('user book')
     .exec(function(err, rents){
       if (err) { return next(err); }
