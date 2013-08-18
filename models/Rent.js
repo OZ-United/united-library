@@ -52,4 +52,30 @@ RentModelSchema.methods.returnBook = function(cb){
   return this.save(cb);
 };
 
+RentModelSchema.pre('save', function (next) {
+
+  var bookId = this.book;
+  var bookCopyId = this.rent.bookCopy;
+  var rentId = this.rentId;
+  var status = this.status;
+
+  if (bookCopyId) {
+    mongoose.model('BookModel').findById(bookId, function(err, book){
+      if (err) { return next(err); }
+      bookCopy = book.copies.id(bookCopyId);
+      bookCopy.status = status;
+      bookCopy.rents.addToSet(rentId);
+
+      book.save(function(err, book){
+        if (err) { return next(err); }
+        next();
+      });
+    });
+  }
+  else {
+    next();
+  }
+  
+});
+
 module.exports = mongoose.model('RentModel', RentModelSchema);
