@@ -9,5 +9,5 @@
 <p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></p>
 
 <p>
-  <button class="btn btn-success" ng-click="returnBook(rent)">Vrátiť knihu</button>
+  <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)">Vrátiť knihu</button>
 </p>

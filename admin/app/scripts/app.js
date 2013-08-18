@@ -29,7 +29,23 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
       })
       .when('/rents/:rentId', {
         templateUrl: 'views/rents/rentId.html',
-        controller: 'RentsRentidCtrl'
+        controller: 'RentsRentidCtrl',
+        resolve: {
+          rent: function($q, $route, Rents){
+            var deferred = $q.defer();
+            Rents.get({'rentId': $route.current.params.rentId},
+              function(rent){
+                console.log(rent);
+                deferred.resolve(rent);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
       })
       .otherwise({
         redirectTo: '/'

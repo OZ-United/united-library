@@ -1,10 +1,14 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('RentsRentidCtrl', function ($scope, Rents, $routeParams) {
-  $scope.rent = Rents.get($routeParams);
+.controller('RentsRentidCtrl', function ($scope, Rents, rent, $location) {
+  $scope.rent = rent;
+
+  $scope.rentHistory = Rents.query({'bookId': rent.book.bookId});
 
   $scope.returnBook = function(rent){
-    Rents.returnBook({'rentId': rent.rentId});
+    Rents.returnBook({'rentId': rent.rentId}, function(){
+      $location.path('/rents');
+    });
   };
 });
