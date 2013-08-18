@@ -21,6 +21,7 @@ angular.module('adminApp')
     Rents.create($scope.rentCopy, function(rent){
       console.log(rent);
       $scope.rentBook = false;
+      $location.path('/rents/' + rent.rentId);
     });
   };
 
