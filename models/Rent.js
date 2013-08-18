@@ -46,7 +46,7 @@ RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
 };
 
 RentModelSchema.methods.returnBook = function(cb){
-  this.status = 'returned';
+  this.status = 'available';
   this.rent.returnDate = Date.now();
 
   return this.save(cb);
@@ -62,7 +62,11 @@ RentModelSchema.pre('save', function (next) {
   if (bookCopyId) {
     mongoose.model('BookModel').findById(bookId, function(err, book){
       if (err) { return next(err); }
+
       bookCopy = book.copies.id(bookCopyId);
+      if (bookCopy.status !== 'available' && status == 'rented') {
+        return next(new error.HttpResponseError('Book is not available.'));
+      }
       bookCopy.status = status;
       bookCopy.rents.addToSet(rentId);
 
