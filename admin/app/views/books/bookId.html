@@ -14,7 +14,10 @@
     <p>{{copy.bookCopyId}}</p>
     <p>{{copy.date | date}}</p>
     <p>{{copy.status}}</p>
-    <p><button class="btn" ng-click="open(copy)">Požičaj</button></p>
+    <p>
+      <button class="btn" ng-show="copy.status == 'available'" ng-click="open(copy)">Požičaj</button>
+      <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>
+    </p>
   </li>
 </ul>
 

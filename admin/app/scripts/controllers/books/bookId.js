@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('BooksBookidCtrl', function ($scope, Books, Users, Rents, $routeParams) {
+.controller('BooksBookidCtrl', function ($scope, Books, Users, Rents, $routeParams, $location) {
   $scope.book = Books.get({'bookId': $routeParams.bookId});
 
   $scope.open = function (bookCopy) {
@@ -27,5 +27,12 @@ angular.module('adminApp')
   $scope.opts = {
     backdropFade: true,
     dialogFade: true
+  };
+
+  $scope.returnBook = function(bookCopy) {
+    var rentId = bookCopy.rents[bookCopy.rents.length - 1];
+    Rents.returnBook({'rentId': rentId}, function(){
+      $location.path('/rents');
+    });
   };
 });
