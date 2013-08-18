@@ -2,7 +2,7 @@
 
 angular.module('adminApp')
 .factory('Books', function ($resource) {
-  return $resource('http://united-library.dev/books/:bookId:action', { bookId: '@bookId' }, {
+  return $resource((window.host || '') + '/books/:bookId:action', { bookId: '@bookId' }, {
     'create' : { method: 'POST', params: { } },
     'query'   : { method: 'GET', params: { }, isArray: true },
     'get'   : { method: 'GET', params: { } },
