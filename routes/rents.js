@@ -28,7 +28,7 @@ exports.get = function(req, res, next){
 
 exports.create = function(req, res, next){
   var rent = new RentModel({});
-  console.log(rent);
+  
   rent.rentBook(req.body.bookCopyId, req.body.bookId, req.body.userId, function(err, rent){
     if (err) { return next(err); }
     console.log(rent);
