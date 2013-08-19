@@ -21,8 +21,10 @@ body {
 
 input.input-field {
   height: 40px;
-  line-height: 30px;
+  line-height: 20px;
+  padding: 0 6px;
   text-align: left;
+  font-size: 12px;
 }
 
 .input-field.ng-invalid:focus {
