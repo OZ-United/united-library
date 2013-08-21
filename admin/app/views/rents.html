@@ -24,7 +24,10 @@
         <td style="line-height: 100px;"><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.returnDate | date}}</a></td>
+        <td style="line-height: 100px;">
+          <a ng-href="#/rents/{{rent.rentId}}" ng-hide="rent.status == 'rented'" class="btn btn-link">{{rent.rent.returnDate | date}}</a>
+          <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)">Vrátiť knihu</button>
+        </td>
       </tr>
     </tbody>
   </table>
