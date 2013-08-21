@@ -2,7 +2,9 @@
 
 angular.module('adminApp')
 .controller('UsersUseridCtrl', function ($scope, Users, $routeParams, $location) {
-  $scope.user = Users.get($routeParams);
+  $scope.user = Users.get($routeParams, function(){
+    $scope.user.password = undefined;
+  });
 
   $scope.updateUser = function(user){
     if ($scope.updateUserForm.$valid) {
