@@ -4,12 +4,18 @@ angular.module('adminApp')
 .controller('UsersUseridCtrl', function ($scope, Users, $routeParams, $location) {
   $scope.user = Users.get($routeParams);
 
-  $scope.updateUser = function(){
+  $scope.updateUser = function(user){
     if ($scope.updateUserForm.$valid) {
-      Users.update($scope.user, function(user){
+      Users.update(user, function(user){
         $location.path('/users');
       });
       $scope.user = {};
     }
+  };
+
+  $scope.removeUser = function(user){
+    Users.remove({'userId': user.userId}, function(){
+      $location.path('/users');
+    });
   };
 });
