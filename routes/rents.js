@@ -10,6 +10,7 @@ exports.query = function(req, res, next){
   RentModel
     .find(req.params)
     .populate('user book')
+    .sort('-rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }
       res.json(rents);
