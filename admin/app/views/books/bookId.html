@@ -17,6 +17,7 @@
     <p>
       <button class="btn" ng-show="copy.status == 'available'" ng-click="open(copy)">Požičaj</button>
       <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>
+      <a class="btn" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}">Info</a>
     </p>
   </li>
 </ul>
