@@ -16,15 +16,6 @@ angular.module('adminApp')
     }
   };
 
-  // $scope.removeBook = function(book){
-  //   var index = $scope.books.indexOf(book);
-  //   if (index < 0) { return false; }
-
-  //   Books.remove({'bookId': $scope.books[index].bookId}, function(){
-  //     $scope.books.splice(index, 1);
-  //   });
-  // };
-
   $scope.setCover = function(dataUrl){
     console.log('setCover');
     $scope.book.cover = dataUrl;
@@ -37,10 +28,5 @@ angular.module('adminApp')
 
   $scope.close = function () {
     $scope.newBook = false;
-  };
-
-  $scope.opts = {
-    backdropFade: true,
-    dialogFade: true
   };
 });

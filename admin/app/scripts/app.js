@@ -50,4 +50,10 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
       .otherwise({
         redirectTo: '/'
       });
+  })
+  .run(function($rootScope){
+    $rootScope.modalOpts = {
+      backdropFade: true,
+      dialogFade: true
+    };
   });
