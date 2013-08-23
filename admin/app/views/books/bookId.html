@@ -7,6 +7,8 @@
 <p>ISBN-13: {{book.isbn.isbn13}}</p>
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
 
+<a ng-href="#/rents?book={{book.bookId}}">História</a>
+
 <h4>Výtlačky</h4>
 
 <ul>
@@ -14,6 +16,7 @@
     <p>{{copy.bookCopyId}}</p>
     <p>{{copy.date | date}}</p>
     <p>{{copy.status}}</p>
+    <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}">História</a>
     <p>
       <button class="btn" ng-show="copy.status == 'available'" ng-click="open(copy)">Požičaj</button>
       <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>

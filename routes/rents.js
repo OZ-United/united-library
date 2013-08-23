@@ -7,8 +7,9 @@ var RentModel = require('../models/Rent.js');
 var error = require('../lib/error');
 
 exports.query = function(req, res, next){
+  console.log(req.query);
   RentModel
-    .find(req.params)
+    .find(req.query)
     .populate('user book')
     .sort('-rent.startDate')
     .exec(function(err, rents){

@@ -4,8 +4,9 @@ var error = require('../lib/error');
 
 var RentModelSchema = new Schema({
   status: { type: String, default: 'reserved' },
-  book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true },
-  user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true },
+  book: { type: Schema.Types.ObjectId, ref: 'BookModel', required: true, index: true },
+  bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel', index: true },
+  user: { type: Schema.Types.ObjectId, ref: 'UserModel', required: true, index: true },
 
   reservation: {
     reservationDate: { type: Date, default: Date.now, index: true },
@@ -13,8 +14,7 @@ var RentModelSchema = new Schema({
   rent: {
     startDate: { type: Date, index: true },
     endDate: { type: Date, index: true },
-    returnDate: { type: Date, index: true },
-    bookCopy: { type: Schema.Types.ObjectId, ref: 'BookCopyModel' },
+    returnDate: { type: Date, index: true }
   }
 },{
   toObject:  { virtuals: true },
@@ -37,9 +37,9 @@ RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
   this.status = 'rented';
   this.book = bookId;
   this.user = userId;
+  this.bookCopy = bookCopyId;
   this.rent.startDate = Date.now();
   this.rent.endDate = Date.now() + 1000 * 60 * 60 * 24 * 30;
-  this.rent.bookCopy = bookCopyId;
 
   console.log(this);
   return this.save(cb);
@@ -55,7 +55,7 @@ RentModelSchema.methods.returnBook = function(cb){
 RentModelSchema.pre('save', function (next) {
 
   var bookId = this.book;
-  var bookCopyId = this.rent.bookCopy;
+  var bookCopyId = this.bookCopy;
   var rentId = this.rentId;
   var status = this.status;
 

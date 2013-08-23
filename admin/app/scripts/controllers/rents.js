@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('RentsCtrl', function ($scope, Rents, $location) {
-  $scope.rents = Rents.query();
+  .controller('RentsCtrl', function ($scope, Rents, $location, $routeParams) {
+  $scope.rents = Rents.query($routeParams);
 
   $scope.returnBook = function(rent){
     Rents.returnBook({'rentId': rent.rentId}, function(res){
