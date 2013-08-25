@@ -7,9 +7,11 @@ var RentModel = require('../models/Rent.js');
 var error = require('../lib/error');
 
 exports.query = function(req, res, next){
+  console.log(req.query);
   RentModel
-    .find(req.params)
+    .find(req.query)
     .populate('user book')
+    .sort('-rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }
       res.json(rents);
@@ -28,8 +30,8 @@ exports.get = function(req, res, next){
 
 exports.create = function(req, res, next){
   var rent = new RentModel({});
-  console.log(rent);
-  rent.rentBook(req.body.bookCopyId, req.body.bookId, req.body.userId, function(err, rent){
+  
+  rent.rentBook(req.body, function(err, rent){
     if (err) { return next(err); }
     console.log(rent);
     res.json(rent);

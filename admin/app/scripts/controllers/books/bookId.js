@@ -25,11 +25,6 @@ angular.module('adminApp')
     });
   };
 
-  $scope.opts = {
-    backdropFade: true,
-    dialogFade: true
-  };
-
   $scope.returnBook = function(bookCopy) {
     var rentId = bookCopy.rents[bookCopy.rents.length - 1];
     Rents.returnBook({'rentId': rentId}, function(){

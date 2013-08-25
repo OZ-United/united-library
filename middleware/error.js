@@ -18,6 +18,13 @@ module.exports = function() {
           errors: err.errors
         });
       }
+      else if (err.name === 'CastError') {
+        return res.send(400, {
+          type: 'CastError',
+          message: err.message,
+          errors: err.errors
+        });
+      }
     }
 
     next(err);

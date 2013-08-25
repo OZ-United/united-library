@@ -7,6 +7,8 @@
 <p>ISBN-13: {{book.isbn.isbn13}}</p>
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
 
+<a ng-href="#/rents?book={{book.bookId}}">História</a>
+
 <h4>Výtlačky</h4>
 
 <ul>
@@ -14,23 +16,44 @@
     <p>{{copy.bookCopyId}}</p>
     <p>{{copy.date | date}}</p>
     <p>{{copy.status}}</p>
+    <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}">História</a>
     <p>
       <button class="btn" ng-show="copy.status == 'available'" ng-click="open(copy)">Požičaj</button>
       <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>
+      <a class="btn" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}">Info</a>
     </p>
   </li>
 </ul>
 
 
-<div modal="rentBook" close="close()" options="opts">
+<div modal="rentBook" close="close()" options="modalOpts">
     <div class="modal-header">
         <h3>Požičať knihu</h3>
     </div>
     <div class="modal-body">
-      <p>{{rentCopy | json}}</p>
-      <p>
-        <input type="text" ng-model="rentCopy.userId" typeahead="user.userId as user.name for user in users | filter:$viewValue | limitTo:8">
-      </p>
+      <form class="form-horizontal" ng-submit="save()" name="addBookForm">
+
+        <div class="control-group">
+        <label class="control-label" for="inputUserId">UserId</label>
+        <div class="controls">
+          <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="user.userId as user.name for user in users | filter:$viewValue | limitTo:8">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputEndDate">Do kedy</label>
+        <div class="controls">
+          <input type="date" ng-model="rentCopy.endDate" id="inputEndDate" class="input-field" required placeholder="YYYY-MM-DD">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <div class="controls">
+        <button type="submit" class="btn btn-success">Požičať</button>
+        </div>
+        </div>
+
+      </form>
     </div>
     <div class="modal-footer">
         <button class="btn cancel" ng-click="close()">Zrušiť</button>
