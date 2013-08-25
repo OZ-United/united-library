@@ -33,13 +33,13 @@ RentModelSchema.methods.reserveBook = function(bookId, userId, cb){
   return this.save(cb);
 };
 
-RentModelSchema.methods.rentBook = function(bookCopyId, bookId, userId, cb){
+RentModelSchema.methods.rentBook = function(payload, cb){
   this.status = 'rented';
-  this.book = bookId;
-  this.user = userId;
-  this.bookCopy = bookCopyId;
+  this.book = payload.bookId;
+  this.user = payload.userId;
+  this.bookCopy = payload.bookCopyId;
   this.rent.startDate = Date.now();
-  this.rent.endDate = Date.now() + 1000 * 60 * 60 * 24 * 30;
+  this.rent.endDate = payload.endDate ? new Date(payload.endDate) : Date.now() + 1000 * 60 * 60 * 24 * 30;
 
   console.log(this);
   return this.save(cb);
