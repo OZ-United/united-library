@@ -18,7 +18,11 @@ app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 app.use(express.favicon());
 app.use(express.logger('dev'));
-app.use(express.bodyParser());
+app.use(express.bodyParser({
+  uploadDir: path.join(__dirname, 'public', 'tmp'),
+  keepExtensions: true,
+  limit: '5mb'
+}));
 app.use(express.methodOverride());
 app.use(app.router);
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,6 +66,7 @@ var books = require('./routes/books');
 var rents = require('./routes/rents');
 
 app.get('/', routes.index);
+app.post('/upload', routes.upload);
 
 app.get('/users', users.query);
 app.post('/users', users.create);
@@ -97,4 +102,9 @@ server.listen(app.get('port'), function(){
 var notification = require('cron').CronJob;
 new notification('0 0 */1 * * *', function(){
   // TODO
-}, null, true, "Europe/Bratislava");
+}, null, true, 'Europe/Bratislava');
+
+var clenup = require('cron').CronJob;
+new clenup('0 0 */1 * * *', function(){
+  index.clearTmp();
+}, null, true, 'Europe/Bratislava');

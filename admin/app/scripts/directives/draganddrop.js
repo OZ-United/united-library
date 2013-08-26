@@ -24,8 +24,8 @@ angular.module('adminApp')
       var dropTextOK = 'Select an image';
       var dropTextFAIL = 'Only images are allowed!';
       $scope.dropText = dropTextOK;
-      var MAX_WIDTH = 200;
-      var MAX_HEIGHT = 200;
+      var MAX_WIDTH = 100;
+      var MAX_HEIGHT = 100;
 
       var dropbox = $element.find('#dropbox')[0];
       dropbox.addEventListener('click', function() {
@@ -75,6 +75,49 @@ angular.module('adminApp')
         return deferred.promise;
       };
 
+      var upload = function(file) {
+        readAsDataURL(file).then(
+          function(dataUrl){
+            console.log(dataUrl);
+            $scope.cover = dataUrl;
+          }
+        );
+
+        var fd = new FormData();
+        fd.append('image', file);
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/upload');
+
+        xhr.upload.onprogress = function(e) {
+          if (e.lengthComputable) {
+            var percentage = (e.loaded / e.total) * 100;
+            console.log(percentage + '%');
+          }
+        };
+
+        xhr.onerror = function() {
+          console.error('An error occurred while submitting the form.', this.statusText);
+        };
+
+        xhr.onload = function(e) {
+
+          if (this.status === 200) {
+            var data = JSON.parse(e.target.responseText);
+            console.log(data);
+
+            $scope.$apply(function(){
+              $scope.cover = data.image;
+            });
+          }
+          else {
+            xhr.onerror();
+          }
+
+        };
+
+        xhr.send(fd);
+      };
+
       $scope.setFiles = function(element) {
         $scope.dropText = dropTextOK;
         $scope.dropClass = '';
@@ -85,14 +128,8 @@ angular.module('adminApp')
         }
 
         var file = element.files[0];
-        readAsDataURL(file).then(
-          function(dataUrl){
-            console.log(dataUrl);
-            $scope.cover = dataUrl;
-          }
-        );
 
-        $scope.$apply();
+        upload(file);
       };
 
 
@@ -134,20 +171,14 @@ angular.module('adminApp')
         }
 
         var file = files[0];
+
         if (file.type.match(/image/g)) {
-          readAsDataURL(file).then(
-            function(dataUrl){
-              console.log(dataUrl);
-              $scope.cover = dataUrl;
-            }
-          );
+          upload(file);
         }
         else {
           $scope.dropText = dropTextFAIL;
           $scope.dropClass = 'dropbox-not-available';
         }
-
-        $scope.$apply();
       }, false);
     }
   };
