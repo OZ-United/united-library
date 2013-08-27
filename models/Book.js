@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var BookCopyModel = require('../models/BookCopy.js');
 var error = require('../lib/error');
@@ -29,7 +28,12 @@ BookModelSchema.virtual('bookId').get(function(){
   return this.id;
 });
 
-BookModelSchema.plugin(uniqueValidator, { mongoose: mongoose });
+BookModelSchema.methods.createCopies = function(){
+  for (var i=0; i<this.quantity; i++) {
+    this.copies.push({});
+  }
+  console.log(this.copies);
+};
 
 BookModelSchema.methods.setCover = function(cover, cb){
   var book = this;
@@ -95,16 +99,6 @@ BookModelSchema.pre('save', function(next, payload){
       next();
     });
   }
-});
-
-BookModelSchema.pre('save', function(next){
-  if (this.isNew) {
-    for (var i=0; i<this.quantity; i++) {
-      this.copies.push({});
-    }
-    console.log(this.copies);
-  }
-  next();
 });
 
 BookModelSchema.pre('remove', function(next){

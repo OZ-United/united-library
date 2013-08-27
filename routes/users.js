@@ -24,7 +24,14 @@ exports.create = function(req, res, next){
   var user = req.body;
 
   new UserModel(user).save(function(err, user){
-    if (err) { return next(err); }
+    if (err) {
+      if (err.code == 11000 || err.code == 11001) {
+        return next(new error.DuplicateIndex('User with this login already exists.'));
+      }
+      else {
+        return next(err);
+      }
+    }
     console.log(user);
     res.json(user);
   });
@@ -54,7 +61,14 @@ exports.update = function(req, res, next){
     user.admin = req.body.admin;
 
     user.save(function(err, user){
-      if (err) { return next(err); }
+      if (err) {
+        if (err.code == 11000 || err.code == 11001) {
+          return next(new error.DuplicateIndex('User with this login already exists.'));
+        }
+        else {
+          return next(err);
+        }
+      }
       console.log(user);
       res.json(user);
     });

@@ -21,11 +21,20 @@ exports.get = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  var book = req.body;
+  var book = new BookModel(req.body);
+  book.createCopies();
 
-  new BookModel(book).save(function(err, book){
+  book.save(function(err, book){
     console.log(err);
-    if (err) { return next(err); }
+    if (err) {
+      if (err.code == 11000 || err.code == 11001) {
+        return next(new error.DuplicateIndex('Book already exists.'));
+      }
+      else {
+        return next(err);
+      }
+    }
+
     console.log(book);
     res.json(book);
   });
@@ -59,7 +68,14 @@ exports.update = function(req, res, next){
     book.quantity = req.body.quantity;
 
     book.save(req.body, function(err, book){
-      if (err) { return next(err); }
+      if (err) {
+        if (err.code == 11000 || err.code == 11001) {
+          return next(new error.DuplicateIndex('Book already exists.'));
+        }
+        else {
+          return next(err);
+        }
+      }
       console.log(book);
       res.json(book);
     });

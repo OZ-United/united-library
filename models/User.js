@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var error = require('../lib/error');
 var crypto = require('crypto');
@@ -18,8 +17,6 @@ var UserModelSchema = new Schema({
 UserModelSchema.virtual('userId').get(function(){
   return this.id;
 });
-
-UserModelSchema.plugin(uniqueValidator, { mongoose: mongoose });
 
 UserModelSchema.virtual('gravatar').get(function(){
   var hash = crypto.createHash('md5').update(this.email || 'ozunited@antala.sk').digest('hex');
