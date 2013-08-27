@@ -29,6 +29,10 @@ BookModelSchema.virtual('bookId').get(function(){
 BookModelSchema.methods.setImage = function(cb){
 
   var book = this;
+  if (!book.cover) {
+    return cb(undefined, book);
+  }
+
   var dir = path.join(process.cwd(), 'public');
   var fs = require('fs-extra');
 
@@ -39,6 +43,21 @@ BookModelSchema.methods.setImage = function(cb){
   fs.copy(path.join(dir, 'tmp', book.cover), path.join(dir, 'img', book.cover), function(err){
     if (err) cb(err);
     cb(undefined, book);
+  });
+};
+
+BookModelSchema.methods.removeImage = function(cb){
+  var book = this;
+  if (!book.cover) {
+    return cb(undefined, book);
+  }
+
+  var dir = path.join(process.cwd(), 'public');
+  var fs = require('fs-extra');
+
+  fs.unlink(path.join(dir, 'img', book.cover), function (err) {
+    if (err) return cb(err);
+      cb(undefined, book);
   });
 };
 

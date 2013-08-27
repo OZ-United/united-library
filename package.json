@@ -12,6 +12,7 @@
     "time": "*",
     "cron": "*",
     "nodemailer": "*",
-    "local-tld-update": "*"
+    "local-tld-update": "*",
+    "fs-extra": "*"
   }
 }
