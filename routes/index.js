@@ -39,15 +39,15 @@ exports.clearTmp = function(req, res){
     var time = new Date().getTime();
     var remove = [];
     imgs.forEach(function(img){
-      var age = time - fs.statSync(dir + img).mtime.getTime();
+      var age = time - fs.statSync(path.join(dir, img)).mtime.getTime();
       if (age > MAXAGE) {
         remove.push(img);
       }
     });
 
     remove.forEach(function(img){
-      console.log('Removing tmp img', dir + img);
-      fs.unlink(dir + csv, function (err) {
+      console.log('Removing tmp img', path.join(dir, img));
+      fs.unlink(path.join(dir, img), function (err) {
         if (err) {
           console.log(err);
           return false;
