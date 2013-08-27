@@ -26,23 +26,38 @@ BookModelSchema.virtual('bookId').get(function(){
   return this.id;
 });
 
-BookModelSchema.methods.setImage = function(cb){
-
+BookModelSchema.methods.setCover = function(cover, cb){
   var book = this;
-  if (!book.cover) {
+  if (cover !== book.cover) {
+    book.removeImage(function(err, book){
+      if (err) return cb(err);
+      book.setImage(cover, function(err, book){
+        if (err) return cb(err);
+        return cb(undefined, book);
+      });
+    });
+  }
+  else {
+    return cb(undefined, book);
+  }
+};
+
+BookModelSchema.methods.setImage = function(cover, cb){
+  var book = this;
+  if (!cover) {
     return cb(undefined, book);
   }
 
   var dir = path.join(process.cwd(), 'public');
   var fs = require('fs-extra');
 
-  var tmp_path = book.cover;
-  var res_path = '/img/' + book.cover.split('/').pop();
+  var tmp_path = cover;
+  var res_path = '/img/' + cover.split('/').pop();
   book.cover = res_path;
 
-  fs.copy(path.join(dir, 'tmp', book.cover), path.join(dir, 'img', book.cover), function(err){
+  fs.copy(path.join(dir, 'tmp', cover.split('/').pop()), path.join(dir, 'img', cover.split('/').pop()), function(err){
     if (err) cb(err);
-    cb(undefined, book);
+    return cb(undefined, book);
   });
 };
 
@@ -55,9 +70,10 @@ BookModelSchema.methods.removeImage = function(cb){
   var dir = path.join(process.cwd(), 'public');
   var fs = require('fs-extra');
 
-  fs.unlink(path.join(dir, 'img', book.cover), function (err) {
+  book.cover = undefined;
+  fs.unlink(path.join(dir, 'img', book.cover.split('/').pop()), function (err) {
     if (err) return cb(err);
-      cb(undefined, book);
+      return cb(undefined, book);
   });
 };
 
@@ -72,19 +88,25 @@ BookModelSchema.pre('save', function(next){
 });
 
 BookModelSchema.pre('save', function(next){
+  var book = this;
   if (this.isNew) {
-    this.setImage(function(err, book){
+    this.setImage(book.cover, function(err, book){
       if (err) { return next(err); }
       next();
     });
   }
   else {
-    next();
+    this.setCover(book.newCover, function(err, book){
+      if (err) { return next(err); }
+      next();
+    });
   }
 });
 
 BookModelSchema.pre('remove', function(next){
-  next();
+  this.removeImage(function(err, book){
+    next();
+  });
 });
 
 
