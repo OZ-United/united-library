@@ -35,8 +35,5 @@ UserModelSchema.methods.auth = function(password){
   return this.password == hash;
 };
 
-UserModelSchema.pre('remove', function(next){
-  next();
-});
 
 module.exports = mongoose.model('UserModel', UserModelSchema);

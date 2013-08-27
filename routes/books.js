@@ -23,20 +23,24 @@ exports.get = function(req, res, next){
 exports.create = function(req, res, next){
   var book = new BookModel(req.body);
   book.createCopies();
-
-  book.save(function(err, book){
-    console.log(err);
-    if (err) {
-      if (err.code == 11000 || err.code == 11001) {
-        return next(new error.DuplicateIndex('Book already exists.'));
+  book.setImage(book.cover, function(err, book){
+    if (err) { return next(err); }
+  
+    book.save(function(err, book){
+      console.log(err);
+      if (err) {
+        if (err.code == 11000 || err.code == 11001) {
+          return next(new error.DuplicateIndex('Book already exists.'));
+        }
+        else {
+          return next(err);
+        }
       }
-      else {
-        return next(err);
-      }
-    }
 
-    console.log(book);
-    res.json(book);
+      console.log(book);
+      res.json(book);
+    });
+
   });
 };
 
@@ -62,22 +66,25 @@ exports.update = function(req, res, next){
     book.isbn.isbn13 = req.body.isbn ? req.body.isbn.isbn13 : undefined;
     book.author = req.body.author;
     book.publisher = req.body.publisher;
-    book._cover = req.body.cover;
     book.year = req.body.year;
     book.year = req.body.year;
     book.quantity = req.body.quantity;
 
-    book.save(req.body, function(err, book){
-      if (err) {
-        if (err.code == 11000 || err.code == 11001) {
-          return next(new error.DuplicateIndex('Book already exists.'));
+    book.setCover(req.body.cover, function(err, book){
+      if (err) { return next(err); }
+    
+      book.save(req.body, function(err, book){
+        if (err) {
+          if (err.code == 11000 || err.code == 11001) {
+            return next(new error.DuplicateIndex('Book already exists.'));
+          }
+          else {
+            return next(err);
+          }
         }
-        else {
-          return next(err);
-        }
-      }
-      console.log(book);
-      res.json(book);
+        console.log(book);
+        res.json(book);
+      });
     });
   });
 };

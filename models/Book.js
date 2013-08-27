@@ -84,22 +84,6 @@ BookModelSchema.methods.removeImage = function(cb){
   });
 };
 
-BookModelSchema.pre('save', function(next, payload){
-  var book = this;
-  console.log('pre save');
-  if (this.isNew) {
-    this.setImage(book.cover, function(err, book){
-      if (err) { return next(err); }
-      next();
-    });
-  }
-  else if (payload) {
-    this.setCover(payload.cover, function(err, book){
-      if (err) { return next(err); }
-      next();
-    });
-  }
-});
 
 BookModelSchema.pre('remove', function(next){
   this.removeImage(function(err, book){
