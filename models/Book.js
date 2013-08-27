@@ -96,7 +96,7 @@ BookModelSchema.pre('save', function(next){
     });
   }
   else {
-    this.setCover(book.newCover, function(err, book){
+    this.setCover(book._cover, function(err, book){
       if (err) { return next(err); }
       next();
     });
