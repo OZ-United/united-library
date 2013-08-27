@@ -66,33 +66,29 @@ input.input-field {
 }
 
 .dropbox {
-  border: 2px solid #DDD;
   padding: 5px;
-  @include border-radius(8px);
-  background-color: #FEFFEC;
-  cursor: pointer;
+  color: rgb(216,216,214);
+  font-size: 42px;
 
   &.dropbox-not-available {
     background-color: #F88;
   }
 
   &.dropbox-over {
-    background-color: #bfb;
+    color: rgb(85,169,102);
+  }
+
+  min-height: 50px;
+
+  &:hover {
+    color: rgb(85,169,102);
+    cursor: pointer;
   }
 
   img {
     display: block;
     margin: 0 auto;
   }
-}
-
-.dropbox-text {
-  display: block;
-  text-align: center;
-  color: #BBB;
-  font-size: 2em;
-  font-family: Helvetica, sans-serif;
-  line-height: 50px;
 }
 
 .modal-body {

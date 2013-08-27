@@ -20,7 +20,7 @@ exports.upload = function(req, res){
 };
 
 exports.clearTmp = function(req, res){
-  var dir = path.join(process.cwd(), 'tmp');
+  var dir = path.join(process.cwd(), 'public', 'tmp');
   var fs = require('fs');
   fs.readdir(dir, function(err, files){
     if (err) {

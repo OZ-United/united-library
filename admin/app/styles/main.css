@@ -6826,16 +6826,18 @@ body {
 /* line 22, ../../app/styles/main.scss */
 input.input-field {
   height: 40px;
-  line-height: 30px;
+  line-height: 20px;
+  padding: 0 6px;
   text-align: left;
+  font-size: 12px;
 }
 
-/* line 28, ../../app/styles/main.scss */
+/* line 30, ../../app/styles/main.scss */
 .input-field.ng-invalid:focus {
   color: #b94a48;
   border-color: #ee5f5b;
 }
-/* line 31, ../../app/styles/main.scss */
+/* line 33, ../../app/styles/main.scss */
 .input-field.ng-invalid:focus:focus {
   border-color: #e9322d;
   -webkit-box-shadow: 0 0 6px #f8b9b7;
@@ -6843,7 +6845,7 @@ input.input-field {
   box-shadow: 0 0 6px #f8b9b7;
 }
 
-/* line 37, ../../app/styles/main.scss */
+/* line 39, ../../app/styles/main.scss */
 .hero-unit {
   margin: 50px auto 0 auto;
   width: 300px;
@@ -6855,34 +6857,31 @@ input.input-field {
   padding: 60px;
 }
 
-/* line 48, ../../app/styles/main.scss */
+/* line 50, ../../app/styles/main.scss */
 .hero-unit h1 {
   font-size: 60px;
   line-height: 1;
   letter-spacing: -1px;
 }
 
-/* line 56, ../../app/styles/main.scss */
+/* line 58, ../../app/styles/main.scss */
 .ddupload {
   position: relative;
   overflow: hidden;
 }
-/* line 59, ../../app/styles/main.scss */
+/* line 61, ../../app/styles/main.scss */
 .ddupload input[type="file"] {
   position: absolute;
   left: -500px;
   top: -50px;
 }
 
-/* line 66, ../../app/styles/main.scss */
+/* line 68, ../../app/styles/main.scss */
 .dropbox {
-  border: 2px solid #DDD;
   padding: 5px;
-  -webkit-border-radius: 8px;
-  -moz-border-radius: 8px;
-  border-radius: 8px;
-  background-color: #FEFFEC;
-  cursor: pointer;
+  color: #d8d8d6;
+  font-size: 42px;
+  min-height: 50px;
 }
 /* line 73, ../../app/styles/main.scss */
 .dropbox.dropbox-not-available {
@@ -6890,25 +6889,20 @@ input.input-field {
 }
 /* line 77, ../../app/styles/main.scss */
 .dropbox.dropbox-over {
-  background-color: #bfb;
+  color: #55a966;
 }
-/* line 81, ../../app/styles/main.scss */
+/* line 83, ../../app/styles/main.scss */
+.dropbox:hover {
+  color: #55a966;
+  cursor: pointer;
+}
+/* line 88, ../../app/styles/main.scss */
 .dropbox img {
   display: block;
   margin: 0 auto;
 }
 
-/* line 87, ../../app/styles/main.scss */
-.dropbox-text {
-  display: block;
-  text-align: center;
-  color: #BBB;
-  font-size: 2em;
-  font-family: Helvetica, sans-serif;
-  line-height: 50px;
-}
-
-/* line 96, ../../app/styles/main.scss */
+/* line 94, ../../app/styles/main.scss */
 .modal-body {
   height: 500px;
 }

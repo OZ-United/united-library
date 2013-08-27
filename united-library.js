@@ -106,5 +106,5 @@ new notification('0 0 */1 * * *', function(){
 
 var clenup = require('cron').CronJob;
 new clenup('0 0 */1 * * *', function(){
-  index.clearTmp();
+  routes.clearTmp();
 }, null, true, 'Europe/Bratislava');

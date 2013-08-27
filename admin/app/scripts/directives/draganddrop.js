@@ -6,8 +6,9 @@ angular.module('adminApp')
     template:
       '<section class="ddupload">' +
       '<input type="file" ng-model="logo" name="logo" accept="image/*" id="logo" onchange="angular.element(this).scope().setFiles(this)" ng-cloak/>' +
+      '  <span class="icon-remove" ng-show="cover" ng-click="removeCover()"></span>' +
       '<div id="dropbox" class="dropbox" ng-class="dropClass">' +
-      '  <span class="dropbox-text">{{dropText}}</span>' +
+      '  <span class="icon-picture" ng-hide="cover"></span>' +
       '  <div>' +
       '    <img ng-src="{{cover}}" alt="cover" ng-show="cover"/>' +
       '  </div>' +
@@ -31,6 +32,10 @@ angular.module('adminApp')
       dropbox.addEventListener('click', function() {
         $element.find('input[type=file]')[0].click();
       }, false);
+
+      $scope.removeCover = function() {
+        $scope.cover = undefined;
+      };
 
       var readAsDataURL = function(file){
         var deferred = $q.defer();
@@ -119,6 +124,7 @@ angular.module('adminApp')
       };
 
       $scope.setFiles = function(element) {
+        $scope.inputEl = element;
         $scope.dropText = dropTextOK;
         $scope.dropClass = '';
 
