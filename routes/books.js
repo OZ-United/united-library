@@ -24,14 +24,8 @@ exports.create = function(req, res, next){
   var book = req.body;
 
   new BookModel(book).save(function(err, book){
-    if (err) {
-      if (err.code == 11000 || err.code == 11001) {
-        return next(new error.DuplicateIndex('Book already exists.'));
-      }
-      else {
-        return next(err);
-      }
-    }
+    console.log(err);
+    if (err) { return next(err); }
     console.log(book);
     res.json(book);
   });
@@ -64,15 +58,8 @@ exports.update = function(req, res, next){
     book.year = req.body.year;
     book.quantity = req.body.quantity;
 
-    book.save(function(err, book){
-      if (err) {
-        if (err.code == 11000 || err.code == 11001) {
-          return next(new error.DuplicateIndex('Book already exists.'));
-        }
-        else {
-          return next(err);
-        }
-      }
+    book.save(req.body, function(err, book){
+      if (err) { return next(err); }
       console.log(book);
       res.json(book);
     });

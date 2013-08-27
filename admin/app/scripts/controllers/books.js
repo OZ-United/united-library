@@ -11,8 +11,8 @@ angular.module('adminApp')
       Books.create($scope.book, function(book){
         $scope.books.push(book);
         $scope.newBook = false;
+        $scope.book = {};
       });
-      $scope.book = {};
     }
   };
 

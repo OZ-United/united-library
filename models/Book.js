@@ -1,7 +1,10 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 var BookCopyModel = require('../models/BookCopy.js');
 var error = require('../lib/error');
+var fs = require('fs-extra');
+var path = require('path');
 
 var BookCopyModelSchema = BookCopyModel.schema;
 
@@ -26,6 +29,8 @@ BookModelSchema.virtual('bookId').get(function(){
   return this.id;
 });
 
+BookModelSchema.plugin(uniqueValidator, { mongoose: mongoose });
+
 BookModelSchema.methods.setCover = function(cover, cb){
   var book = this;
   if (cover !== book.cover) {
@@ -49,7 +54,6 @@ BookModelSchema.methods.setImage = function(cover, cb){
   }
 
   var dir = path.join(process.cwd(), 'public');
-  var fs = require('fs-extra');
 
   var tmp_path = cover;
   var res_path = '/img/' + cover.split('/').pop();
@@ -68,14 +72,30 @@ BookModelSchema.methods.removeImage = function(cb){
   }
 
   var dir = path.join(process.cwd(), 'public');
-  var fs = require('fs-extra');
 
-  book.cover = undefined;
   fs.unlink(path.join(dir, 'img', book.cover.split('/').pop()), function (err) {
     if (err) return cb(err);
+      book.cover = undefined;
       return cb(undefined, book);
   });
 };
+
+BookModelSchema.pre('save', function(next, payload){
+  var book = this;
+  console.log('pre save');
+  if (this.isNew) {
+    this.setImage(book.cover, function(err, book){
+      if (err) { return next(err); }
+      next();
+    });
+  }
+  else if (payload) {
+    this.setCover(payload.cover, function(err, book){
+      if (err) { return next(err); }
+      next();
+    });
+  }
+});
 
 BookModelSchema.pre('save', function(next){
   if (this.isNew) {
@@ -85,22 +105,6 @@ BookModelSchema.pre('save', function(next){
     console.log(this.copies);
   }
   next();
-});
-
-BookModelSchema.pre('save', function(next){
-  var book = this;
-  if (this.isNew) {
-    this.setImage(book.cover, function(err, book){
-      if (err) { return next(err); }
-      next();
-    });
-  }
-  else {
-    this.setCover(book._cover, function(err, book){
-      if (err) { return next(err); }
-      next();
-    });
-  }
 });
 
 BookModelSchema.pre('remove', function(next){
