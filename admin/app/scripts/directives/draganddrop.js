@@ -6,11 +6,11 @@ angular.module('adminApp')
     template:
       '<section class="ddupload">' +
       '<input type="file" ng-model="logo" name="logo" accept="image/*" id="logo" onchange="angular.element(this).scope().setFiles(this)" ng-cloak/>' +
-      '  <span class="icon-remove" ng-show="cover" ng-click="removeCover()"></span>' +
       '<div id="dropbox" class="dropbox" ng-class="dropClass">' +
-      '  <span class="icon-picture" ng-hide="cover"></span>' +
-      '  <div>' +
-      '    <img ng-src="{{cover}}" alt="cover" ng-show="cover"/>' +
+      '  <span class="icon-remove dropbox-remove" ng-show="cover" ng-click="removeCover()"></span>' +
+      '  <span class="icon-picture dropbox-add" ng-hide="cover"></span>' +
+      '  <div class="dropbox-image" ng-show="cover">' +
+      '    <img ng-src="{{cover}}" alt="cover"/>' +
       '  </div>' +
       '</div>' +
       '</section>',

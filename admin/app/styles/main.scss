@@ -6,7 +6,7 @@ $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 /* Put your CSS here */
 
 * {
-  @include box-sizing(border-box)
+  @include box-sizing(border-box);
 }
 
 html, body {
@@ -65,24 +65,38 @@ input.input-field {
   }
 }
 
+.dropbox-remove {
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
 .dropbox {
+  position: relative;
+  min-height: 50px;
   padding: 5px;
   color: rgb(216,216,214);
   font-size: 42px;
-
-  &.dropbox-not-available {
-    background-color: #F88;
-  }
+  text-align: center;
+  border: 2px solid rgb(216,216,214);
+  border-radius: 5px;
 
   &.dropbox-over {
     color: rgb(85,169,102);
+    border-color: rgb(85,169,102);
   }
-
-  min-height: 50px;
 
   &:hover {
     color: rgb(85,169,102);
+    border-color: rgb(85,169,102);
     cursor: pointer;
+  }
+
+  &:hover.dropbox-not-available {
+    // color: blue;
+    // border-color: blue;
   }
 
   img {
