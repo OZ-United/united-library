@@ -22,8 +22,6 @@ angular.module('adminApp')
     controller: function($scope, $element) {
 
       $scope.image = {};
-      var MAX_WIDTH = 100;
-      var MAX_HEIGHT = 100;
       $scope.progressStyle = {'width': 0};
 
       var dropbox = $element.find('#dropbox')[0];
@@ -47,57 +45,8 @@ angular.module('adminApp')
         });
       };
 
-      var readAsDataURL = function(file){
-        var deferred = $q.defer();
-
-        var reader = new FileReader();
-        reader.onload = function(e) {
-          var fileDataUrl = e.target.result;
-
-          var tempImg = new Image();
-          tempImg.onload = function(){
-            var tempW = tempImg.width;
-            var tempH = tempImg.height;
-            console.log(tempW, tempH);
-            if (tempW > tempH) {
-              if (tempW > MAX_WIDTH) {
-                tempH *= MAX_WIDTH / tempW;
-                tempW = MAX_WIDTH;
-                console.log(tempW, tempH);
-              }
-            }
-            else {
-              if (tempH > MAX_HEIGHT) {
-                tempW *= MAX_HEIGHT / tempH;
-                tempH = MAX_HEIGHT;
-              }
-            }
-
-            var canvas = document.createElement('canvas');
-            var ctx = canvas.getContext('2d');
-            canvas.width = tempW;
-            canvas.height = tempH;
-            ctx.drawImage(tempImg, 0, 0, tempW, tempH);
-
-            var dataURL = canvas.toDataURL('image/png');
-            deferred.resolve(dataURL);
-            $scope.$apply();
-          };
-          tempImg.src = fileDataUrl;
-        };
-        reader.readAsDataURL(file);
-
-        return deferred.promise;
-      };
-
       var upload = function(file) {
-        readAsDataURL(file).then(
-          function(dataUrl){
-            $scope.dataUrl = dataUrl;
-          }
-        );
 
-        $scope.dataUrl = undefined;
         $scope.cover = undefined;
         $scope.progressStyle.width = 0;
         $scope.$apply();
@@ -184,7 +133,6 @@ angular.module('adminApp')
         var files = evt.dataTransfer.files;
 
         if (files.length) {
-          $scope.dataUrl = undefined;
           $scope.cover = undefined;
         }
 
