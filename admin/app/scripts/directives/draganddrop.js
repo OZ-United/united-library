@@ -12,6 +12,7 @@ angular.module('adminApp')
       '  <div class="dropbox-image" ng-show="cover">' +
       '    <img ng-src="{{cover}}" alt="cover"/>' +
       '  </div>' +
+      '  <div class="dropbox-progress" ng-style="progressStyle" ng-hide="cover"></div>' +
       '</div>' +
       '</section>',
     restrict: 'E',
@@ -21,12 +22,9 @@ angular.module('adminApp')
     controller: function($scope, $element) {
 
       $scope.image = {};
-
-      var dropTextOK = 'Select an image';
-      var dropTextFAIL = 'Only images are allowed!';
-      $scope.dropText = dropTextOK;
       var MAX_WIDTH = 100;
       var MAX_HEIGHT = 100;
+      $scope.progressStyle = {'width': 0};
 
       var dropbox = $element.find('#dropbox')[0];
       dropbox.addEventListener('click', function() {
@@ -35,6 +33,18 @@ angular.module('adminApp')
 
       $scope.removeCover = function() {
         $scope.cover = undefined;
+      };
+
+      var showError = function(){
+        $scope.$apply(function(){
+          $scope.cover = undefined;
+          $scope.dropClass = 'dropbox-not-available';
+          $scope.progressStyle.width = 0;
+
+          $timeout(function(){
+            $scope.dropClass = '';
+          }, 500);
+        });
       };
 
       var readAsDataURL = function(file){
@@ -83,11 +93,12 @@ angular.module('adminApp')
       var upload = function(file) {
         readAsDataURL(file).then(
           function(dataUrl){
-            console.log(dataUrl);
-            $scope.cover = dataUrl;
+            $scope.dataUrl = dataUrl;
           }
         );
 
+        $scope.progressStyle.width = 0;
+        $scope.$apply();
         var fd = new FormData();
         fd.append('image', file);
         var xhr = new XMLHttpRequest();
@@ -97,11 +108,14 @@ angular.module('adminApp')
           if (e.lengthComputable) {
             var percentage = (e.loaded / e.total) * 100;
             console.log(percentage + '%');
+            $scope.progressStyle.width = percentage + '%';
+            $scope.$apply();
           }
         };
 
         xhr.onerror = function() {
           console.error('An error occurred while submitting the form.', this.statusText);
+          showError();
         };
 
         xhr.onload = function(e) {
@@ -110,7 +124,9 @@ angular.module('adminApp')
             var data = JSON.parse(e.target.responseText);
             console.log(data);
 
+
             $scope.$apply(function(){
+              $scope.progressStyle.width = '100%';
               $scope.cover = data.image;
             });
           }
@@ -125,17 +141,15 @@ angular.module('adminApp')
 
       $scope.setFiles = function(element) {
         $scope.inputEl = element;
-        $scope.dropText = dropTextOK;
         $scope.dropClass = '';
+        $scope.progressStyle.width = 0;
 
         if (element.files.length) {
           $scope.files = [];
           $scope.dataUrl = '';
+          var file = element.files[0];
+          upload(file);
         }
-
-        var file = element.files[0];
-
-        upload(file);
       };
 
 
@@ -144,7 +158,6 @@ angular.module('adminApp')
         evt.preventDefault();
 
         $scope.$apply(function(){
-          $scope.dropText = dropTextOK;
           $scope.dropClass = '';
         });
       };
@@ -156,7 +169,6 @@ angular.module('adminApp')
         evt.preventDefault();
         var ok = evt.dataTransfer && evt.dataTransfer.types && evt.dataTransfer.types.indexOf('Files') >= 0;
         $scope.$apply(function(){
-          $scope.dropText = ok ? dropTextOK : dropTextFAIL;
           $scope.dropClass = ok ? 'dropbox-over' : 'dropbox-not-available';
         });
       }, false);
@@ -165,7 +177,7 @@ angular.module('adminApp')
         evt.stopPropagation();
         evt.preventDefault();
         $scope.$apply(function(){
-          $scope.dropText = dropTextOK;
+          $scope.removeCover();
           $scope.dropClass = '';
         });
 
@@ -182,14 +194,7 @@ angular.module('adminApp')
           upload(file);
         }
         else {
-          $scope.$apply(function(){
-            $scope.dropText = dropTextFAIL;
-            $scope.dropClass = 'dropbox-not-available';
-
-            $timeout(function(){
-              $scope.dropClass = '';
-            }, 500);
-          });
+          showError();
         }
       }, false);
     }
