@@ -82,6 +82,7 @@ input.input-field {
   text-align: center;
   border: 2px solid rgb(216,216,214);
   border-radius: 5px;
+  @include transition(color, background-color, 0.25s);
 
   &.dropbox-over {
     color: rgb(85,169,102);
@@ -94,9 +95,9 @@ input.input-field {
     cursor: pointer;
   }
 
-  &:hover.dropbox-not-available {
-    // color: blue;
-    // border-color: blue;
+  &.dropbox-not-available {
+    color: rgb(238,162,54);
+    border-color: rgb(238,162,54);
   }
 
   img {

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('adminApp')
-.directive('draganddrop', function ($q) {
+.directive('draganddrop', function ($q, $timeout) {
   return {
     template:
       '<section class="ddupload">' +
@@ -182,8 +182,14 @@ angular.module('adminApp')
           upload(file);
         }
         else {
-          $scope.dropText = dropTextFAIL;
-          $scope.dropClass = 'dropbox-not-available';
+          $scope.$apply(function(){
+            $scope.dropText = dropTextFAIL;
+            $scope.dropClass = 'dropbox-not-available';
+
+            $timeout(function(){
+              $scope.dropClass = '';
+            }, 500);
+          });
         }
       }, false);
     }
