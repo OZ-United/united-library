@@ -53,69 +53,6 @@ input.input-field {
     letter-spacing: -1px;
 }
 
-
-
-.ddupload {
-  position: relative;
-  overflow: hidden;
-  input[type="file"] {
-    position: absolute;
-    left: -500px;
-    top: -50px;
-  }
-}
-
-.dropbox-remove {
-  font-size: 12px;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  z-index: 10;
-}
-
-.dropbox {
-  position: relative;
-  line-height: 50px;
-  padding: 5px;
-  color: rgb(216,216,214);
-  font-size: 42px;
-  text-align: center;
-  border: 2px solid rgb(216,216,214);
-  border-radius: 5px;
-  @include transition(color, background-color, 1s);
-
-  &.dropbox-over {
-    color: rgb(85,169,102);
-    border-color: rgb(85,169,102);
-  }
-
-  &:hover {
-    color: rgb(85,169,102);
-    border-color: rgb(85,169,102);
-    cursor: pointer;
-  }
-
-  &.dropbox-not-available {
-    color: rgb(238,162,54);
-    border-color: rgb(238,162,54);
-  }
-
-  img {
-    display: block;
-    margin: 0 auto;
-  }
-}
-
-.dropbox-progress {
-  width: 0;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgb(85,169,102);
-  @include transition(width, 100ms);
-}
-
 .modal-body {
   height: 500px;
 }

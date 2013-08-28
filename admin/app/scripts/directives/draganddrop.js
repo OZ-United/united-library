@@ -94,6 +94,7 @@ angular.module('adminApp')
         $scope.inputEl = element;
         $scope.dropClass = '';
         $scope.progressStyle.width = 0;
+        $scope.$apply();
 
         if (element.files.length) {
           var file = element.files[0];

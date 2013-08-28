@@ -1,0 +1,71 @@
+/* line 3, ../../app/styles/ddupload.scss */
+.ddupload {
+  position: relative;
+  overflow: hidden;
+}
+/* line 6, ../../app/styles/ddupload.scss */
+.ddupload input[type="file"] {
+  position: absolute;
+  left: -500px;
+  top: -50px;
+}
+
+/* line 13, ../../app/styles/ddupload.scss */
+.dropbox-remove {
+  font-size: 12px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 10;
+}
+
+/* line 21, ../../app/styles/ddupload.scss */
+.dropbox {
+  position: relative;
+  line-height: 50px;
+  padding: 5px;
+  color: #d8d8d6;
+  font-size: 42px;
+  text-align: center;
+  border: 2px solid #d8d8d6;
+  border-radius: 5px;
+  -webkit-transition: color, background-color, 1s;
+  -moz-transition: color, background-color, 1s;
+  -o-transition: color, background-color, 1s;
+  transition: color, background-color, 1s;
+}
+/* line 32, ../../app/styles/ddupload.scss */
+.dropbox.dropbox-over {
+  color: #55a966;
+  border-color: #55a966;
+}
+/* line 37, ../../app/styles/ddupload.scss */
+.dropbox:hover {
+  color: #55a966;
+  border-color: #55a966;
+  cursor: pointer;
+}
+/* line 43, ../../app/styles/ddupload.scss */
+.dropbox.dropbox-not-available {
+  color: #eea236;
+  border-color: #eea236;
+}
+/* line 48, ../../app/styles/ddupload.scss */
+.dropbox img {
+  display: block;
+  margin: 0 auto;
+}
+
+/* line 54, ../../app/styles/ddupload.scss */
+.dropbox-progress {
+  width: 0;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #55a966;
+  -webkit-transition: width, 100ms;
+  -moz-transition: width, 100ms;
+  -o-transition: width, 100ms;
+  transition: width, 100ms;
+}
