@@ -97,6 +97,8 @@ angular.module('adminApp')
           }
         );
 
+        $scope.dataUrl = undefined;
+        $scope.cover = undefined;
         $scope.progressStyle.width = 0;
         $scope.$apply();
         var fd = new FormData();
@@ -145,8 +147,6 @@ angular.module('adminApp')
         $scope.progressStyle.width = 0;
 
         if (element.files.length) {
-          $scope.files = [];
-          $scope.dataUrl = '';
           var file = element.files[0];
           upload(file);
         }
@@ -184,8 +184,8 @@ angular.module('adminApp')
         var files = evt.dataTransfer.files;
 
         if (files.length) {
-          $scope.files = [];
-          $scope.dataUrl = '';
+          $scope.dataUrl = undefined;
+          $scope.cover = undefined;
         }
 
         var file = files[0];
