@@ -15,6 +15,15 @@ angular.module('adminApp')
     }
   };
 
+  $scope.setPassword = function(password){
+    if ($scope.setPasswordForm.$valid) {
+      Users.update({'password': password, 'userId': $routeParams.userId}, function(password){
+        $location.path('/users');
+      });
+      $scope.password = {};
+    }
+  };
+
   $scope.removeUser = function(user){
     Users.remove({'userId': user.userId}, function(){
       $location.path('/users');

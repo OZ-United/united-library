@@ -83,16 +83,19 @@ exports.update = function(req, res, next){
   });
 };
 
-exports.auth = function(req, res, next){
-  UserModel.findOne({'login': req.body.login}, function(err, user){
-    if (err) { return next(err); }
-    if (! user) { return next(new error.NotFound('User does not exist.')); }
+exports.setPassword = function(req, res, next){
+  var user = req.user;
 
-    if (user.authenticate(req.body.password)){
-      res.json(user);
+  user.password = req.body.password;
+  user.save(function(err, user){
+    if (err) {
+      if (err.code == 11000 || err.code == 11001) {
+        return next(new error.DuplicateIndex('User with this login already exists.'));
+      }
+      else {
+        return next(err);
+      }
     }
-    else {
-      return next(new error.NotFound('User does not exist.'));
-    }
+    res.send(204);
   });
 };

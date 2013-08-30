@@ -16,13 +16,6 @@
     </div>
 
     <div class="control-group">
-    <label class="control-label" for="inputPassword">Heslo</label>
-    <div class="controls">
-    <input type="password" ng-model="user.password" id="inputPassword" class="input-field" required placeholder="******">
-    </div>
-    </div>
-
-    <div class="control-group">
     <label class="control-label" for="inputName">Meno</label>
     <div class="controls">
     <input type="text" ng-model="user.name" id="inputName" class="input-field" placeholder="Spoločenstvo United">
@@ -47,6 +40,21 @@
     <div class="control-group">
     <div class="controls">
     <button type="submit" class="btn btn-success">Aktualizovať</button>
+    </div>
+    </div>
+  </form>
+
+  <form class="form-horizontal" ng-submit="setPassword(password)" name="setPasswordForm">
+    <div class="control-group">
+    <label class="control-label" for="inputPassword">Heslo</label>
+    <div class="controls">
+    <input type="password" ng-model="password" id="inputPassword" class="input-field" required placeholder="******">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success">Nastaviť heslo</button>
     </div>
     </div>
   </form>

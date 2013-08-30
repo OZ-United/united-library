@@ -6,6 +6,7 @@ angular.module('adminApp')
     'create' : { method: 'POST', params: { } },
     'query'   : { method: 'GET', params: { }, isArray: true },
     'update'  : { method: 'PUT', params: { } },
+    'setPassword'  : { method: 'PUT', params: { } },
     'remove'  : { method: 'DELETE', params: { } },
     'delete'  : { method: 'DELETE', params: { } }
   });
