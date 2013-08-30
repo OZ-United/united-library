@@ -67,6 +67,7 @@ exports.update = function(req, res, next){
   
   var book = req.book;
   book = _.extend(book, req.body);
+  book.createCopies();
 
   book.setImage(book.cover, function(err, book){
     if (err) { return next(err); }

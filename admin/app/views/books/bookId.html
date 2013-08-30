@@ -118,13 +118,13 @@
         <div class="control-group">
         <label class="control-label" for="inputQuantity">Množstvo</label>
         <div class="controls">
-        <input type="number" ng-model="edit.quantity" id="inputQuantity" class="input-field" placeholder="1" min="0">
+        <input type="number" ng-model="edit.quantity" id="inputQuantity" class="input-field" placeholder="1" min="{{book.quantity}}">
         </div>
         </div>
 
         <div class="control-group">
         <div class="controls">
-        <button type="submit" class="btn btn-success">Pridať</button>
+        <button type="submit" class="btn btn-success">Aktualizovať</button>
         </div>
         </div>
       </form>
@@ -132,6 +132,6 @@
 
     <div class="modal-footer">
         <button class="btn cancel" ng-click="closeEdit()">Zrušiť</button>
-        <button class="btn btn-success" ng-click="saveEdit(edit)">Pridať</button>
+        <button class="btn btn-success" ng-click="saveEdit(edit)">Aktualizovať</button>
     </div>
 </div>
