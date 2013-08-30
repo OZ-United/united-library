@@ -8,6 +8,7 @@ var config = require('./config/config')[env];
 var express = require('express');
 var http = require('http');
 var path = require('path');
+var auth = require('./middleware/authorization');
 var mongoose = require('mongoose');
 var ltld = require('local-tld-update');
 
@@ -25,7 +26,7 @@ db.once('open', function callback () {
 });
 
 // routes
-require('./config/routes')(app);
+require('./config/routes')(app, auth);
 
 // cron jobs
 require('./config/cron')(app);

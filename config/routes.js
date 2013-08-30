@@ -1,4 +1,4 @@
-module.exports = function(app) {
+module.exports = function(app, auth) {
 
   app.all('/*', function(req, res, next) {
     res.header('Access-Control-Allow-Origin', '*');
@@ -22,14 +22,16 @@ module.exports = function(app) {
   app.post('/users/auth', users.auth);
   app.get('/users/:userId', users.get);
   app.put('/users/:userId', users.update);
-  app.delete('/users/:userId', users.remove);
+  app.del('/users/:userId', users.remove);
+
+  app.param('userId', users.user);
 
   var books = require('../routes/books');
   app.get('/books', books.query);
   app.get('/books/:bookId', books.get);
   app.post('/books', books.create);
   app.put('/books/:bookId', books.update);
-  app.delete('/books/:bookId', books.remove);
+  app.del('/books/:bookId', books.remove);
 
   var rents = require('../routes/rents');
   app.get('/rents', rents.query);
