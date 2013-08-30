@@ -23,6 +23,7 @@ module.exports = function(app, auth) {
   app.get('/users', users.query);
   app.post('/users', users.create);
   app.post('/users/auth', users.auth);
+  app.get('/users/me', users.me);
   app.get('/users/:userId', users.get);
   app.put('/users/:userId', users.update);
   app.del('/users/:userId', users.remove);

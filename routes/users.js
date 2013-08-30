@@ -17,6 +17,15 @@ exports.user = function(req, res, next){
   });
 };
 
+exports.me = function(req, res, next){
+  UserModel.findById(req.get('userId'), function(err, user){
+    if (err) { return next(err); }
+    if (! user) { return next(new error.NotFound('User does not exist.')); }
+
+    res.json(user);
+  });
+};
+
 exports.query = function(req, res, next){
   UserModel.find(function(err, users){
     if (err) { return next(err); }
