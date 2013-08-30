@@ -88,7 +88,7 @@ exports.auth = function(req, res, next){
     if (err) { return next(err); }
     if (! user) { return next(new error.NotFound('User does not exist.')); }
 
-    if (user.auth(req.body.password)){
+    if (user.authenticate(req.body.password)){
       res.json(user);
     }
     else {
