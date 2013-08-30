@@ -5,6 +5,17 @@
 
 var BookModel = require('../models/Book.js');
 var error = require('../lib/error');
+var _ = require('underscore');
+
+exports.book = function(req, res, next){
+  BookModel.findById(req.params.bookId, function(err, book){
+    if (err) { return next(err); }
+    if (! book) { return next(new error.NotFound('Book does not exist.')); }
+
+    req.book = book;
+    next();
+  });
+};
 
 exports.query = function(req, res, next){
   BookModel.find(function(err, books){
@@ -14,10 +25,8 @@ exports.query = function(req, res, next){
 };
 
 exports.get = function(req, res, next){
-  BookModel.findById(req.params.bookId, function(err, book){
-    if (err) { return next(err); }
-    res.json(book);
-  });
+  var book = req.book;
+  res.json(book);
 };
 
 exports.create = function(req, res, next){
@@ -45,46 +54,34 @@ exports.create = function(req, res, next){
 };
 
 exports.remove = function(req, res, next){
-  BookModel.findById(req.params.bookId, function(err, book){
-    if (err) { return next(err); }
-    if (! book) { return next(new error.NotFound('Book does not exist.')); }
 
-    book.remove(function(err, book){
-      if (err) return next(err);
-      res.send(204);
-    });
+  var book = req.book;
+
+  book.remove(function(err, book){
+    if (err) return next(err);
+    res.send(204);
   });
 };
 
 exports.update = function(req, res, next){
-  BookModel.findById(req.params.bookId, function(err, book){
+  
+  var book = req.book;
+  book = _.extend(book, req.body);
+
+  book.setImage(book.cover, function(err, book){
     if (err) { return next(err); }
-    if (! book) { return next(new error.NotFound('Book does not exist.')); }
-
-    book.title = req.body.title;
-    book.isbn.isbn10 = req.body.isbn ? req.body.isbn.isbn10 : undefined;
-    book.isbn.isbn13 = req.body.isbn ? req.body.isbn.isbn13 : undefined;
-    book.author = req.body.author;
-    book.publisher = req.body.publisher;
-    book.year = req.body.year;
-    book.year = req.body.year;
-    book.quantity = req.body.quantity;
-
-    book.setCover(req.body.cover, function(err, book){
-      if (err) { return next(err); }
-    
-      book.save(req.body, function(err, book){
-        if (err) {
-          if (err.code == 11000 || err.code == 11001) {
-            return next(new error.DuplicateIndex('Book already exists.'));
-          }
-          else {
-            return next(err);
-          }
+  
+    book.save(req.body, function(err, book){
+      if (err) {
+        if (err.code == 11000 || err.code == 11001) {
+          return next(new error.DuplicateIndex('Book already exists.'));
         }
-        console.log(book);
-        res.json(book);
-      });
+        else {
+          return next(err);
+        }
+      }
+      console.log(book);
+      res.json(book);
     });
   });
 };

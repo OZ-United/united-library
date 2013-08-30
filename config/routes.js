@@ -33,11 +33,13 @@ module.exports = function(app, auth) {
   app.put('/books/:bookId', books.update);
   app.del('/books/:bookId', books.remove);
 
+  app.param('bookId', books.book);
+
   var rents = require('../routes/rents');
   app.get('/rents', rents.query);
   app.get('/rents/:rentId', rents.get);
   app.post('/rents', rents.create);
   app.put('/rents/:rentId/', rents.update);
   app.post('/rents/:rentId/returnBook', rents.returnBook);
-  app.post('/books/:bookId/reserve', rents.reserveBook);
+  // app.post('/books/:bookId/reserve', rents.reserveBook);
 };

@@ -35,21 +35,21 @@ BookModelSchema.methods.createCopies = function(){
   console.log(this.copies);
 };
 
-BookModelSchema.methods.setCover = function(cover, cb){
-  var book = this;
-  if (cover !== book.cover) {
-    book.removeImage(function(err, book){
-      if (err) return cb(err);
-      book.setImage(cover, function(err, book){
-        if (err) return cb(err);
-        return cb(undefined, book);
-      });
-    });
-  }
-  else {
-    return cb(undefined, book);
-  }
-};
+// BookModelSchema.methods.setCover = function(cover, cb){
+//   var book = this;
+//   if (cover !== book.cover) {
+//     book.removeImage(function(err, book){
+//       if (err) return cb(err);
+//       book.setImage(cover, function(err, book){
+//         if (err) return cb(err);
+//         return cb(undefined, book);
+//       });
+//     });
+//   }
+//   else {
+//     return cb(undefined, book);
+//   }
+// };
 
 BookModelSchema.methods.setImage = function(cover, cb){
   var book = this;
