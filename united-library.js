@@ -14,13 +14,13 @@ var ltld = require('local-tld-update');
 var app = express();
 
 // express
-require('./config/express')(app);
+require('./config/express')(app, config);
 
 /**
  * MONGODB CONNECTION
  */
 
-mongoose.connect('mongodb://localhost/united-library');
+mongoose.connect(config.db);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Mongo connection error:'));
 db.once('open', function callback () {
