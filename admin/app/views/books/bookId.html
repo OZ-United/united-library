@@ -7,6 +7,7 @@
 <p>ISBN-13: {{book.isbn.isbn13}}</p>
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
 
+<button ng-click="openEdit(book)" class="btn btn-primary">Editovať</button>
 <a ng-href="#/rents?book={{book.bookId}}">História</a>
 
 <h4>Výtlačky</h4>
@@ -18,7 +19,7 @@
     <p>{{copy.status}}</p>
     <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}">História</a>
     <p>
-      <button class="btn" ng-show="copy.status == 'available'" ng-click="open(copy)">Požičaj</button>
+      <button class="btn" ng-show="copy.status == 'available'" ng-click="openRent(copy)">Požičaj</button>
       <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>
       <a class="btn" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}">Info</a>
     </p>
@@ -26,7 +27,7 @@
 </ul>
 
 
-<div modal="rentBook" close="close()" options="modalOpts">
+<div modal="rentBook" close="closeRent()" options="modalOpts">
     <div class="modal-header">
         <h3>Požičať knihu</h3>
     </div>
@@ -58,5 +59,79 @@
     <div class="modal-footer">
         <button class="btn cancel" ng-click="close()">Zrušiť</button>
         <button class="btn btn-success" ng-click="save()">Požičať</button>
+    </div>
+</div>
+
+<div modal="editBook" close="closeEdit()" options="modalOpts">
+    <div class="modal-header">
+        <h3>Nová kniha</h3>
+    </div>
+
+    <div class="modal-body">
+      <form class="form-horizontal" ng-submit="saveEdit(edit)" name="editBookForm">
+        <div class="control-group">
+          <draganddrop cover="edit.cover"></draganddrop>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputTitle">Názov</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.title" id="inputTitle" class="input-field" required placeholder="Názov">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputAuthor">Autor</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.author" id="inputAuthor" class="input-field" required placeholder="Autor">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputPublisher">Vydavateľ</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.publisher" id="inputPublisher" class="input-field" placeholder="Spoločenstvo United">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputYear">Rok</label>
+        <div class="controls">
+        <input type="number" ng-model="edit.year" id="inputYear" class="input-field" placeholder="2013" min="1600">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputISBN10">ISBN-10</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.isbn.isbn10" isbn10 id="inputISBN10" class="input-field" placeholder="1906465592">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputISBN13">ISBN-13</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.isbn.isbn13" isbn13 id="inputISBN13" class="input-field" placeholder="978-1906465599">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputQuantity">Množstvo</label>
+        <div class="controls">
+        <input type="number" ng-model="edit.quantity" id="inputQuantity" class="input-field" placeholder="1" min="0">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <div class="controls">
+        <button type="submit" class="btn btn-success">Pridať</button>
+        </div>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn cancel" ng-click="closeEdit()">Zrušiť</button>
+        <button class="btn btn-success" ng-click="saveEdit(edit)">Pridať</button>
     </div>
 </div>

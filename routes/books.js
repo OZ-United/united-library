@@ -71,7 +71,7 @@ exports.update = function(req, res, next){
   book.setImage(book.cover, function(err, book){
     if (err) { return next(err); }
   
-    book.save(req.body, function(err, book){
+    book.save(function(err, book){
       if (err) {
         if (err.code == 11000 || err.code == 11001) {
           return next(new error.DuplicateIndex('Book already exists.'));

@@ -4,7 +4,7 @@ angular.module('adminApp')
 .controller('BooksBookidCtrl', function ($scope, Books, Users, Rents, $routeParams, $location) {
   $scope.book = Books.get({'bookId': $routeParams.bookId});
 
-  $scope.open = function (bookCopy) {
+  $scope.openRent = function (bookCopy) {
     $scope.rentBook = true;
     $scope.users = Users.query();
     $scope.rentCopy = {
@@ -13,7 +13,7 @@ angular.module('adminApp')
     };
   };
 
-  $scope.close = function () {
+  $scope.closeRent = function () {
     $scope.rentBook = false;
   };
 
@@ -30,5 +30,25 @@ angular.module('adminApp')
     Rents.returnBook({'rentId': rentId}, function(){
       $location.path('/rents');
     });
+  };
+
+  $scope.openEdit = function (book) {
+    $scope.editBook = true;
+    $scope.edit = angular.copy(book);
+    delete $scope.edit.copies;
+    console.log($scope.edit);
+  };
+
+  $scope.closeEdit = function () {
+    $scope.editBook = false;
+  };
+
+  $scope.saveEdit = function(edit) {
+    console.log(edit);
+    edit.$update(function(book){
+      $scope.book = book;
+      $scope.closeEdit();
+    });
+
   };
 });
