@@ -3,7 +3,7 @@
  * Module dependencies.
  */
 
-var env = process.env.NODE_ENV || 'development';
+var env = process.env.ENV || 'development';
 var config = require('./config/config')[env];
 var express = require('express');
 var http = require('http');
@@ -16,10 +16,7 @@ var app = express();
 // express
 require('./config/express')(app, config);
 
-/**
- * MONGODB CONNECTION
- */
-
+// mongodb
 mongoose.connect(config.db);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'Mongo connection error:'));
@@ -36,6 +33,6 @@ require('./config/cron')(app);
 var server = http.createServer(app);
 server.listen((config.port || 0), function(){
   console.log('Express server listening on port ' + server.address().port);
-  ltld.update('united-library', server.address().port);
+  ltld.update(config.app.tld, server.address().port);
 });
 

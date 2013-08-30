@@ -7,7 +7,8 @@ module.exports = {
     port: 3003,
     root: rootPath,
     app: {
-        name: 'United Library - Development'
+        name: 'United Library - Development',
+        tld: 'united-library'
     }
   },
   test: {
@@ -15,7 +16,8 @@ module.exports = {
     port: 3003,
     root: rootPath,
     app: {
-        name: 'United Library - Test'
+        name: 'United Library - Test',
+        tld: 'united-library'
     }
   },
   production: {
@@ -23,7 +25,8 @@ module.exports = {
     port: 3003,
     root: rootPath,
     app: {
-        name: 'United Library - Production'
+        name: 'United Library - Production',
+        tld: 'united-library'
     }
   }
 };
