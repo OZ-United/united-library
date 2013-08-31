@@ -56,3 +56,24 @@ input.input-field {
 .modal-body {
   height: 500px;
 }
+
+.book-detail {
+  overflow: hidden;
+}
+
+.book-detail-cover {
+  width: 15%;
+  float: left;
+  padding: 25px 10px 5px;
+
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+}
+
+.book-detail-description {
+  float: right;
+  width: 85%;
+  padding: 5px 10px;
+}

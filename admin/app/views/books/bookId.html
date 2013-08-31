@@ -1,5 +1,10 @@
-<img ng-src="{{book.cover}}" alt="cover" class="pull-left">
+<section class="book-detail">
 
+<div class="book-detail-cover">
+  <img ng-src="{{book.cover}}" alt="cover">
+</div>
+
+<div class="book-detail-description">
 <h3>{{book.title}}</h3>
 <p>{{book.author}}</p>
 <p>{{book.publisher}}</p>
@@ -8,7 +13,11 @@
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
 
 <button ng-click="openEdit(book)" class="btn btn-primary">Editovať</button>
-<a ng-href="#/rents?book={{book.bookId}}">História</a>
+<a ng-href="#/rents?book={{book.bookId}}" class="btn">História</a>
+
+</div>
+
+</section>
 
 <h4>Výtlačky</h4>
 
