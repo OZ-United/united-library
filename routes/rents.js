@@ -21,7 +21,7 @@ exports.query = function(req, res, next){
   console.log(req.query);
   RentModel
     .find(req.query)
-    .populate('user book')
+    .populate('user book', 'bookId author title cover userId name email gravatar')
     .sort('-rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }
