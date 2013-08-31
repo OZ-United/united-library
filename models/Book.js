@@ -29,7 +29,7 @@ BookModelSchema.virtual('bookId').get(function(){
 });
 
 BookModelSchema.methods.createCopies = function(){
-  for (var i=this.copies.length; i<=this.quantity; i++) {
+  for (var i=this.copies.length; i<this.quantity; i++) {
     this.copies.push({});
   }
 };
