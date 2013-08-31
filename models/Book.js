@@ -51,7 +51,7 @@ BookModelSchema.methods.createCopies = function(){
 // };
 
 BookModelSchema.methods.isTmp = function(){
-  return this.coverr && (this.cover.split('/').indexOf('tmp') > -1);
+  return this.cover && (this.cover.split('/').indexOf('tmp') > -1);
 };
 
 BookModelSchema.methods.setImage = function(cover, cb){
