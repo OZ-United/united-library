@@ -11,4 +11,10 @@ angular.module('adminApp')
       rent.rent.returnDate = res.rent.returnDate;
     });
   };
+
+  $scope.getStyle = function(rent){
+    if (new Date(rent.rent.endDate) < new Date() && !rent.rent.returnDate) {
+      return 'warning';
+    }
+  };
 });

@@ -1,12 +1,12 @@
 $iconSpritePath: "../images/glyphicons-halflings.png";
 $iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
 
-@import "bootstrap-sass/lib/bootstrap";
+@import "bootstrap-sass/lib/_mixins";
 
 /* Put your CSS here */
 
 * {
-  @include box-sizing(border-box)
+  @include box-sizing(border-box);
 }
 
 html, body {
@@ -53,32 +53,18 @@ input.input-field {
     letter-spacing: -1px;
 }
 
-
-
-.ddupload {
-  position: relative;
-  overflow: hidden;
-  input[type="file"] {
-    position: absolute;
-    left: -500px;
-    top: -50px;
-  }
+.modal-body {
+  height: 500px;
 }
 
-.dropbox {
-  border: 2px solid #DDD;
-  padding: 5px;
-  @include border-radius(8px);
-  background-color: #FEFFEC;
-  cursor: pointer;
+.book-detail {
+  overflow: hidden;
+}
 
-  &.dropbox-not-available {
-    background-color: #F88;
-  }
-
-  &.dropbox-over {
-    background-color: #bfb;
-  }
+.book-detail-cover {
+  width: 15%;
+  float: left;
+  padding: 25px 10px 5px;
 
   img {
     display: block;
@@ -86,15 +72,8 @@ input.input-field {
   }
 }
 
-.dropbox-text {
-  display: block;
-  text-align: center;
-  color: #BBB;
-  font-size: 2em;
-  font-family: Helvetica, sans-serif;
-  line-height: 50px;
-}
-
-.modal-body {
-  height: 500px;
+.book-detail-description {
+  float: right;
+  width: 85%;
+  padding: 5px 10px;
 }

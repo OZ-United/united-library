@@ -11,7 +11,8 @@
     "angular-cookies": "~1.0.7",
     "angular-sanitize": "~1.0.7",
     "angular-ui-bootstrap-bower": "*",
-    "angular-isbn": "*"
+    "angular-isbn": "*",
+    "font-awesome": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",

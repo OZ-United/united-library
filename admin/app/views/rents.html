@@ -14,7 +14,7 @@
     </thead>
     <tbody>
 
-      <tr ng-repeat="rent in rents">
+      <tr ng-repeat="rent in rents" ng-class="getStyle(rent)">
         <td>
           <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
             <img ng-src="{{rent.book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
