@@ -29,12 +29,9 @@ BookModelSchema.virtual('bookId').get(function(){
 });
 
 BookModelSchema.methods.createCopies = function(){
-  console.log(this.copies.length);
-  console.log(this.quantity);
   for (var i=this.copies.length; i<=this.quantity; i++) {
     this.copies.push({});
   }
-  console.log(this.copies);
 };
 
 // BookModelSchema.methods.setCover = function(cover, cb){
@@ -53,9 +50,13 @@ BookModelSchema.methods.createCopies = function(){
 //   }
 // };
 
+BookModelSchema.methods.isTmp = function(){
+  return this.coverr && (this.cover.split('/').indexOf('tmp') > -1);
+};
+
 BookModelSchema.methods.setImage = function(cover, cb){
   var book = this;
-  if (!cover) {
+  if (!cover || !book.isTmp()) {
     return cb(undefined, book);
   }
 
@@ -66,7 +67,7 @@ BookModelSchema.methods.setImage = function(cover, cb){
   book.cover = res_path;
 
   fs.copy(path.join(dir, 'tmp', cover.split('/').pop()), path.join(dir, 'img', cover.split('/').pop()), function(err){
-    if (err) cb(err);
+    if (err) return cb(err);
     return cb(undefined, book);
   });
 };
