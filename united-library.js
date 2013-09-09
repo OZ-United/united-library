@@ -31,6 +31,9 @@ require('./config/routes')(app, auth);
 // cron jobs
 require('./config/cron')(app);
 
+// email
+require('./lib/email').setConfig(config);
+
 var server = http.createServer(app);
 server.listen((config.port || 0), function(){
   console.log('Express server listening on port ' + server.address().port);

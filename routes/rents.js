@@ -44,6 +44,8 @@ exports.create = function(req, res, next){
     if (err) { return next(err); }
     console.log(rent);
     res.json(rent);
+    req.rent = rent;
+    return next();
   });
 };
 
@@ -70,6 +72,7 @@ exports.returnBook = function(req, res, next){
   rent.returnBook(function(err, rent){
     if (err) { return next(err); }
     res.json(rent);
+    return next();
   });
 };
 

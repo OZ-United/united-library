@@ -13,6 +13,8 @@ module.exports = function(app, auth) {
     }
   });
 
+  var emails = require('../routes/emails');
+
   // index
   var routes = require('../routes');
   app.get('/', routes.index);
@@ -45,10 +47,10 @@ module.exports = function(app, auth) {
   var rents = require('../routes/rents');
   app.get('/rents', rents.query);
   app.get('/rents/:rentId', rents.get);
-  app.post('/rents', rents.create);
+  app.post('/rents', rents.create, emails.rentBook);
   app.put('/rents/:rentId/', rents.update);
   app.del('/rents/:rentId', rents.remove);
-  app.post('/rents/:rentId/returnBook', rents.returnBook);
+  app.post('/rents/:rentId/returnBook', rents.returnBook, emails.returnBook);
   
   app.param('rentId', rents.rent);
 };
