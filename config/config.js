@@ -9,6 +9,10 @@ module.exports = {
     app: {
         name: 'United Library - Development',
         tld: 'united-library'
+    },
+    email: {
+      address: 'kniznica.ozunited@gmail.com',
+      password: process.env.EMAILPASS || 'kniznica'
     }
   },
   test: {
@@ -18,6 +22,10 @@ module.exports = {
     app: {
         name: 'United Library - Test',
         tld: 'united-library'
+    },
+    email: {
+      address: 'kniznica.ozunited@gmail.com',
+      password: process.env.EMAILPASS || 'kniznica'
     }
   },
   production: {
@@ -27,6 +35,10 @@ module.exports = {
     app: {
         name: 'United Library - Production',
         tld: 'united-library'
+    },
+    email: {
+      address: 'kniznica.ozunited@gmail.com',
+      password: process.env.EMAILPASS || 'kniznica'
     }
   }
 };
