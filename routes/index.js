@@ -78,6 +78,7 @@ exports.sendReminders = function(req, res){
     .exec(function(err, rents){
       if (err) { return next(err); }
       res && res.json(rents);
+      Email.sendReminders(rents);
     });
 };
 
@@ -96,5 +97,6 @@ exports.sendTickets = function(req, res){
     .exec(function(err, rents){
       if (err) { return next(err); }
       res && res.json(rents);
+      Email.sendTickets(rents);
     });
 };
