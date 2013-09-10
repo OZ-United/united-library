@@ -1,11 +1,16 @@
 module.exports = function() {
+  var routes = require('../routes');
 
-  var notification = require('cron').CronJob;
-  new notification('0 0 */1 * * *', function(){
-    // TODO
+  var reminders = require('cron').CronJob;
+  new reminders('0 0 17 * * *', function(){
+    routes.sendReminders();
   }, null, true, 'Europe/Bratislava');
 
-  var routes = require('../routes');
+  var tickets = require('cron').CronJob;
+  new tickets('0 0 16 * * *', function(){
+    routes.sendTickets();
+  }, null, true, 'Europe/Bratislava');
+
   var clenup = require('cron').CronJob;
   new clenup('0 0 */1 * * *', function(){
     routes.clearTmp();

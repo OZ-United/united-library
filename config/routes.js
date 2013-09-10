@@ -18,6 +18,8 @@ module.exports = function(app, auth) {
   // index
   var routes = require('../routes');
   app.get('/', routes.index);
+  app.get('/reminders', routes.sendReminders);
+  app.get('/tickets', routes.sendTickets);
   app.post('/upload', routes.upload);
 
   // users

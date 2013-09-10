@@ -6,6 +6,9 @@
 var ejs = require('ejs');
 var path = require('path');
 var error = require('../lib/error');
+var Email = require('../lib/email');
+var RentModel = require('../models/Rent.js');
+
 
 exports.index = function(req, res){
   res.render('index');
@@ -55,4 +58,43 @@ exports.clearTmp = function(req, res){
       });
     });
   });
+};
+
+exports.sendReminders = function(req, res){
+
+  var now = new Date();
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  RentModel
+    .find({
+      'status': 'rented',
+      'rent.endDate': {
+        $gte: now,
+        $lte: tomorrow
+      }
+    })
+    .populate('user book')
+    .exec(function(err, rents){
+      if (err) { return next(err); }
+      res && res.json(rents);
+    });
+};
+
+exports.sendTickets = function(req, res){
+
+  var now = new Date();
+
+  RentModel
+    .find({
+      'status': 'rented',
+      'rent.endDate': {
+        $lte: now
+      }
+    })
+    .populate('user book')
+    .exec(function(err, rents){
+      if (err) { return next(err); }
+      res && res.json(rents);
+    });
 };
