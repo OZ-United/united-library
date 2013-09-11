@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('UsersCtrl', function ($scope, Users) {
-  $scope.users = Users.query();
+  .controller('UsersCtrl', function ($scope, Users, $routeParams) {
+  $scope.users = Users.query($routeParams);
 
   $scope.addUser = function(){
     if ($scope.addUserForm.$valid) {

@@ -19,9 +19,14 @@ exports.rent = function(req, res, next){
 
 exports.query = function(req, res, next){
   console.log(req.query);
+  var page = req.query.page || 1;
+  var limit = req.query.limit || 10;
+
   RentModel
-    .find(req.query)
+    .find(_.omit(req.query, 'page', 'limit'))
     .populate('user book', 'bookId author title cover userId name email gravatar')
+    .skip((page - 1) * limit)
+    .limit(limit)
     .sort('-rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }

@@ -18,10 +18,18 @@ exports.book = function(req, res, next){
 };
 
 exports.query = function(req, res, next){
-  BookModel.find(function(err, books){
-    if (err) { return next(err); }
-    res.json(books);
-  });
+  console.log(req.query);
+  var page = req.query.page || 1;
+  var limit = req.query.limit || 10;
+
+  BookModel.find(_.omit(req.query, 'page', 'limit'))
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort('title')
+    .exec(function(err, books){
+      if (err) { return next(err); }
+      res.json(books);
+    });
 };
 
 exports.get = function(req, res, next){

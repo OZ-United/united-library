@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('BooksCtrl', function ($scope, Books) {
+  .controller('BooksCtrl', function ($scope, Books, $routeParams) {
 
   $scope.book = {};
-  $scope.books = Books.query();
+  $scope.books = Books.query($routeParams);
 
   $scope.addBook = function(){
     if ($scope.addBookForm.$valid) {

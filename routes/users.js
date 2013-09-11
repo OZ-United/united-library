@@ -27,10 +27,18 @@ exports.me = function(req, res, next){
 };
 
 exports.query = function(req, res, next){
-  UserModel.find(function(err, users){
-    if (err) { return next(err); }
-    res.json(users);
-  });
+  console.log(req.query);
+  var page = req.query.page || 1;
+  var limit = req.query.limit || 10;
+
+  UserModel.find(_.omit(req.query, 'page', 'limit'))
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort('name')
+    .exec(function(err, users){
+      if (err) { return next(err); }
+      res.json(users);
+    });
 };
 
 exports.get = function(req, res, next){
