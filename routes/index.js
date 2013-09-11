@@ -62,16 +62,17 @@ exports.clearTmp = function(req, res){
 
 exports.sendReminders = function(req, res){
 
-  var now = new Date();
   var tomorrow = new Date();
+  var datomorrow = new Date();
   tomorrow.setDate(tomorrow.getDate() + 1);
+  datomorrow.setDate(tomorrow.getDate() + 1);
 
   RentModel
     .find({
       'status': 'rented',
       'rent.endDate': {
-        $gte: now,
-        $lte: tomorrow
+        $gte: tomorrow,
+        $lte: datomorrow
       }
     })
     .populate('user book')
