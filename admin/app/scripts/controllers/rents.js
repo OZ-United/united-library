@@ -17,4 +17,19 @@ angular.module('adminApp')
       return 'warning';
     }
   };
+
+  $scope.page = 1;
+  $scope.query = function(){
+    var query = {page: $scope.page + 1};
+    query = angular.extend(query, $routeParams);
+    console.log(query);
+    Rents.query(query,
+      function(rents){
+        $scope.rents = $scope.rents.concat(rents);
+        $scope.page += 1;
+      },
+      function(error){
+
+    });
+  };
 });

@@ -21,4 +21,19 @@ angular.module('adminApp')
   $scope.close = function() {
     $scope.newUser = false;
   };
+
+  $scope.page = 1;
+  $scope.query = function(){
+    var query = {page: $scope.page + 1};
+    query = angular.extend(query, $routeParams);
+    console.log(query);
+    Users.query(query,
+      function(users){
+        $scope.users = $scope.users.concat(users);
+        $scope.page += 1;
+      },
+      function(error){
+
+    });
+  };
 });

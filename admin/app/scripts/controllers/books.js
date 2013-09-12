@@ -29,4 +29,19 @@ angular.module('adminApp')
   $scope.close = function () {
     $scope.newBook = false;
   };
+
+  $scope.page = 1;
+  $scope.query = function(){
+    var query = {page: $scope.page + 1};
+    query = angular.extend(query, $routeParams);
+    console.log(query);
+    Books.query(query,
+      function(books){
+        $scope.books = $scope.books.concat(books);
+        $scope.page += 1;
+      },
+      function(error){
+
+    });
+  };
 });
