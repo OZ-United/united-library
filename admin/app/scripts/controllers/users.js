@@ -2,7 +2,7 @@
 
 angular.module('adminApp')
   .controller('UsersCtrl', function ($scope, Users, $routeParams) {
-  $scope.users = Users.query($routeParams);
+  $scope.users = [];
 
   $scope.addUser = function(){
     if ($scope.addUserForm.$valid) {
@@ -22,13 +22,19 @@ angular.module('adminApp')
     $scope.newUser = false;
   };
 
-  $scope.page = 1;
   $scope.query = function(){
+    if (!$scope.mayQuery) {
+      return false;
+    }
+
     var query = {page: $scope.page + 1};
     query = angular.extend(query, $routeParams);
     console.log(query);
     Users.query(query,
       function(users){
+        if (!users.length) {
+          $scope.mayQuery = false;
+        }
         $scope.users = $scope.users.concat(users);
         $scope.page += 1;
       },
@@ -36,4 +42,8 @@ angular.module('adminApp')
 
     });
   };
+
+  $scope.page = 0;
+  $scope.mayQuery = true;
+  $scope.query();
 });

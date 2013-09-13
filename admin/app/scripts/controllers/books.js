@@ -4,7 +4,7 @@ angular.module('adminApp')
   .controller('BooksCtrl', function ($scope, Books, $routeParams) {
 
   $scope.book = {};
-  $scope.books = Books.query($routeParams);
+  $scope.books = [];
 
   $scope.addBook = function(){
     if ($scope.addBookForm.$valid) {
@@ -30,13 +30,19 @@ angular.module('adminApp')
     $scope.newBook = false;
   };
 
-  $scope.page = 1;
   $scope.query = function(){
+    if (!$scope.mayQuery) {
+      return false;
+    }
+
     var query = {page: $scope.page + 1};
     query = angular.extend(query, $routeParams);
     console.log(query);
     Books.query(query,
       function(books){
+        if (!books.length) {
+          $scope.mayQuery = false;
+        }
         $scope.books = $scope.books.concat(books);
         $scope.page += 1;
       },
@@ -44,4 +50,8 @@ angular.module('adminApp')
 
     });
   };
+
+  $scope.page = 0;
+  $scope.mayQuery = true;
+  $scope.query();
 });
