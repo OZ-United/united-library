@@ -53,7 +53,9 @@
         <div class="control-group">
         <label class="control-label" for="inputEndDate">Do kedy</label>
         <div class="controls">
-          <input type="date" ng-model="rentCopy.endDate" id="inputEndDate" class="input-field" required placeholder="YYYY-MM-DD">
+          <div ng-model="rentCopy.endDate" >
+            <datepicker min="minDate" show-weeks="false" starting-day="1" id="inputEndDate" ng-required="true"></datepicker>
+          </div>
         </div>
         </div>
 

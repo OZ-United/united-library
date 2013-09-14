@@ -49,6 +49,7 @@ angular.module('adminApp')
       $scope.book = book;
       $scope.closeEdit();
     });
-
   };
+
+  $scope.minDate = new Date().setDate(new Date().getDate() + 1);
 });
