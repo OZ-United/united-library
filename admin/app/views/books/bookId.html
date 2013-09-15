@@ -53,20 +53,22 @@
         <div class="control-group">
         <label class="control-label" for="inputEndDate">Do kedy</label>
         <div class="controls">
-          <input type="date" ng-model="rentCopy.endDate" id="inputEndDate" class="input-field" required placeholder="YYYY-MM-DD">
+          <div ng-model="rentCopy.endDate" >
+            <datepicker min="minDate" show-weeks="false" starting-day="1" id="inputEndDate" ng-required="true"></datepicker>
+          </div>
         </div>
         </div>
 
         <div class="control-group">
         <div class="controls">
-        <button type="submit" class="btn btn-success">Požičať</button>
+        <button type="submit" class="btn btn-success hide">Požičať</button>
         </div>
         </div>
 
       </form>
     </div>
     <div class="modal-footer">
-        <button class="btn cancel" ng-click="close()">Zrušiť</button>
+        <button class="btn cancel" ng-click="closeRent()">Zrušiť</button>
         <button class="btn btn-success" ng-click="save()">Požičať</button>
     </div>
 </div>
@@ -133,7 +135,7 @@
 
         <div class="control-group">
         <div class="controls">
-        <button type="submit" class="btn btn-success">Aktualizovať</button>
+        <button type="submit" class="btn btn-success hide">Aktualizovať</button>
         </div>
         </div>
       </form>

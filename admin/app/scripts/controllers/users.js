@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('UsersCtrl', function ($scope, Users) {
-  $scope.users = Users.query();
+  .controller('UsersCtrl', function ($scope, Users, $routeParams) {
+  $scope.users = [];
 
   $scope.addUser = function(){
     if ($scope.addUserForm.$valid) {
@@ -21,4 +21,29 @@ angular.module('adminApp')
   $scope.close = function() {
     $scope.newUser = false;
   };
+
+  $scope.query = function(){
+    if (!$scope.mayQuery) {
+      return false;
+    }
+
+    var query = {page: $scope.page + 1};
+    query = angular.extend(query, $routeParams);
+    console.log(query);
+    Users.query(query,
+      function(users){
+        if (!users.length) {
+          $scope.mayQuery = false;
+        }
+        $scope.users = $scope.users.concat(users);
+        $scope.page += 1;
+      },
+      function(error){
+
+    });
+  };
+
+  $scope.page = 0;
+  $scope.mayQuery = true;
+  $scope.query();
 });

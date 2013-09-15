@@ -24,6 +24,8 @@
       </tr>
     </tbody>
   </table>
+
+  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery">Ďalšie</button>
 </section>
 
 <button class="btn" ng-click="open()">Nový používateľ</button>
@@ -74,7 +76,7 @@
 
       <div class="control-group">
       <div class="controls">
-      <button type="submit" class="btn btn-success">Pridať</button>
+      <button type="submit" class="btn btn-success hide">Pridať</button>
       </div>
       </div>
 
@@ -83,6 +85,6 @@
 
     <div class="modal-footer">
         <button class="btn cancel" ng-click="close()">Zrušiť</button>
-        <button type="submit" class="btn btn-success" ng-click="addUser()">Pridať</button>
+        <button class="btn btn-success" ng-click="addUser()">Pridať</button>
     </div>
 </div>
