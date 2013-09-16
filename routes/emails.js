@@ -17,3 +17,8 @@ exports.returnBook = function(req, res, next){
     Email.returnBook(rent);
   });
 };
+
+exports.registerUser = function(req, res, next){
+  var user = req.user;
+  Email.registerUser(user);
+};

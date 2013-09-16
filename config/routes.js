@@ -25,7 +25,7 @@ module.exports = function(app, auth) {
   // users
   var users = require('../routes/users');
   app.get('/users', users.query);
-  app.post('/users', users.create);
+  app.post('/users', users.create, emails.registerUser);
   app.get('/users/me', users.me);
   app.get('/users/:userId', users.get);
   app.put('/users/:userId', users.update);
