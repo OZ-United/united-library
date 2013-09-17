@@ -32,6 +32,21 @@ exports.query = function(req, res, next){
     });
 };
 
+exports.search = function(req, res, next){
+  console.log(req.query);
+  var query = req.query.q;
+  if (!query) {
+    res.json([]);
+  }
+
+  BookModel.find({$or:[ {title: new RegExp(query, 'i')}, {author: new RegExp(query, 'i')}]})
+    .sort('title')
+    .exec(function(err, books){
+      if (err) { return next(err); }
+      res.json(books);
+    });
+};
+
 exports.get = function(req, res, next){
   var book = req.book;
   res.json(book);

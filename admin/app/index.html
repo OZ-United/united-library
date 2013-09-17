@@ -34,6 +34,10 @@
         <a href="#/users/">Používatelia</a> ❯
         <a href="#/rents/">Požičania</a>
       </nav>
+      <div>
+        <input type="text" class="input-field" ng-model="query">
+        <button class="btn" ng-click="search(query)">Search</button>
+      </div>
     </header>
     <div class="container" ng-view=""></div>
 
@@ -89,6 +93,8 @@
         <script src="scripts/controllers/users/userId.js"></script>
         <script src="scripts/controllers/rents/rentId.js"></script>
         <script src="scripts/directives/infiniteScroll.js"></script>
+        <script src="scripts/controllers/search.js"></script>
+        <script src="scripts/services/Search.js"></script>
         <!-- endbuild -->
 </body>
 </html>

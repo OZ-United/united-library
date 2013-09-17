@@ -55,4 +55,7 @@ module.exports = function(app, auth) {
   app.post('/rents/:rentId/returnBook', rents.returnBook, emails.returnBook);
   
   app.param('rentId', rents.rent);
+
+  //search
+  app.get('/search', books.search);
 };

@@ -47,13 +47,21 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
           }
         }
       })
+      .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
   })
-  .run(function($rootScope){
+  .run(function($rootScope, $location){
     $rootScope.modalOpts = {
       backdropFade: true,
       dialogFade: true
+    };
+
+    $rootScope.search = function(query) {
+      $location.url('search?q=' + query);
     };
   });
