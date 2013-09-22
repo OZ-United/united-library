@@ -59,6 +59,9 @@ exports.create = function(req, res, next){
     }
     console.log(user);
     res.json(user);
+
+    req.user = user;
+    next();
   });
 };
 

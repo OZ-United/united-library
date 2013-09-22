@@ -12,8 +12,8 @@ var BookModelSchema = new Schema({
     isbn10: {type: String, index: { unique: true, sparse: true }},
     isbn13: {type: String, index: { unique: true, sparse: true }}
   },
-  title: {type: String, required: true},
-  author: {type: String},
+  title: {type: String, required: true, index: true},
+  author: {type: String, index: true},
   publisher: {type: String},
   cover: {type: String},
   year: {type: Number},
