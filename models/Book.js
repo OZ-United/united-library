@@ -16,6 +16,7 @@ var BookModelSchema = new Schema({
   author: {type: String, index: true},
   publisher: {type: String},
   cover: {type: String},
+  language: {type: String, default: 'sk'},
   year: {type: Number},
   quantity: {type: Number, default: 1},
   copies: [BookCopyModelSchema],

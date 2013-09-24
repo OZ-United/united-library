@@ -8,6 +8,7 @@
 <h3>{{book.title}}</h3>
 <p>{{book.author}}</p>
 <p>{{book.publisher}}</p>
+<p>{{book.language}}</p>
 <p>{{book.year}}</p>
 <p>ISBN-13: {{book.isbn.isbn13}}</p>
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
@@ -102,6 +103,13 @@
         <label class="control-label" for="inputPublisher">Vydavateľ</label>
         <div class="controls">
         <input type="text" ng-model="edit.publisher" id="inputPublisher" class="input-field" placeholder="Spoločenstvo United">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputPublisher">Jazyk</label>
+        <div class="controls">
+        <input type="text" ng-model="edit.language" id="inputLanguge" class="input-field" placeholder="sk">
         </div>
         </div>
 
