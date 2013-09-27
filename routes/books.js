@@ -109,3 +109,24 @@ exports.update = function(req, res, next){
     });
   });
 };
+
+exports.import = function(bookObj, cb){
+  var book = new BookModel(bookObj);
+  book.createCopies();
+  
+  book.save(function(err, book){
+    console.log(err);
+    if (err) {
+      if (err.code == 11000 || err.code == 11001) {
+        return cb(new error.DuplicateIndex('Book already exists.'));
+      }
+      else {
+        return cb(err);
+      }
+    }
+
+    console.log(book);
+    cb(null, book);
+  });
+
+};
