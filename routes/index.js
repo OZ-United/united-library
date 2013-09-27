@@ -5,10 +5,12 @@
 
 var ejs = require('ejs');
 var path = require('path');
+var Q = require('q');
 var error = require('../lib/error');
 var Email = require('../lib/email');
 var csv = require('../lib/import');
 var RentModel = require('../models/Rent.js');
+var BookModel = require('../models/Book.js');
 
 
 exports.index = function(req, res){
@@ -105,8 +107,47 @@ exports.sendTickets = function(req, res){
 
 exports.importBooks = function(req, res){
   var filename = req.params.filename;
-  csv.parse(filename, function(err, data, count){
-    console.log(data);
+
+  Q.fcall(function(){
+    var deferred = Q.defer();
+    csv.parse(filename, function(error, data, count){
+      if (error) {
+        deferred.reject(new Error(error));
+      } else {
+        deferred.resolve(data);
+      }
+    });
+    return deferred.promise;
+  })
+  .then(function(data){
+
+    var deferred = Q.defer();
+    var count = 0;
+
+    data.forEach(function(bookObj){
+      var book = new BookModel(bookObj);
+      book.createCopies();
+      
+      book.save(function(err, book){
+        count++;
+        
+        if (err) {
+          console.log(err);
+        }
+
+        console.log(count);
+        
+        if (count === data.length) {
+          deferred.resolve(data);
+        }
+      });
+    });
+
+    return deferred.promise;
+  })
+  .then(function(data){
+    console.log('saved');
     res.json(data);
   });
 };
+
