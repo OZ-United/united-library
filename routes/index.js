@@ -7,6 +7,7 @@ var ejs = require('ejs');
 var path = require('path');
 var error = require('../lib/error');
 var Email = require('../lib/email');
+var csv = require('../lib/import');
 var RentModel = require('../models/Rent.js');
 
 
@@ -100,4 +101,12 @@ exports.sendTickets = function(req, res){
       res && res.json(rents);
       Email.sendTickets(rents);
     });
+};
+
+exports.importBooks = function(req, res){
+  var filename = req.params.filename;
+  csv.parse(filename, function(err, data, count){
+    console.log(data);
+    res.json(data);
+  });
 };
