@@ -127,7 +127,8 @@ exports.importBooks = function(req, res){
     data.forEach(function(bookObj){
       var book = new BookModel(bookObj);
       book.createCopies();
-      
+      console.log(book);
+
       book.save(function(err, book){
         count++;
         

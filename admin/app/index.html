@@ -35,8 +35,10 @@
         <a href="#/rents/">Požičania</a>
       </nav>
       <div>
-        <input type="text" class="input-field" ng-model="query">
-        <button class="btn" ng-click="search(query)">Search</button>
+        <form name="searchBook" ng-submit="search(query)">
+          <input type="text" class="input-field" ng-model="query">
+          <button type="submit" class="btn" ng-click="search(query)">Search</button>
+        </form>
       </div>
     </header>
     <div class="container" ng-view=""></div>
