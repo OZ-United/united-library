@@ -9,15 +9,16 @@ var BookCopyModelSchema = BookCopyModel.schema;
 
 var BookModelSchema = new Schema({
   isbn: {
-    isbn10: {type: String, index: { unique: true, sparse: true }},
-    isbn13: {type: String, index: { unique: true, sparse: true }}
+    isbn10: {type: String, trim: true, index: { unique: true, sparse: true }},
+    isbn13: {type: String, trim: true, index: { unique: true, sparse: true }}
   },
-  title: {type: String, required: true, index: true},
-  author: {type: String, index: true},
-  publisher: {type: String},
-  cover: {type: String},
-  year: {type: Number},
-  quantity: {type: Number, default: 1},
+  title: {type: String, required: true, index: true, trim: true},
+  author: {type: String, index: true, trim: true},
+  publisher: {type: String, trim: true},
+  cover: {type: String, trim: true},
+  language: {type: String, default: 'sk', trim: true},
+  year: {type: Number, trim: true},
+  quantity: {type: Number, default: 1, trim: true},
   copies: [BookCopyModelSchema],
 },{
   toObject:  { virtuals: true },

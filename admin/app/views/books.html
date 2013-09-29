@@ -6,7 +6,7 @@
         <th>Obal</th>
         <th>Názov</th>
         <th>Autor</th>
-        <th>Vydavateľ</th>
+        <th>Jazyk</th>
         <th>Rok</th>
         <th>Množstvo</th>
       </tr>
@@ -20,7 +20,7 @@
           </a>
         <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.title}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.author}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.publisher}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.language}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.year}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.quantity}}</a></td>
       </tr>
@@ -61,6 +61,13 @@
         <label class="control-label" for="inputPublisher">Vydavateľ</label>
         <div class="controls">
         <input type="text" ng-model="book.publisher" id="inputPublisher" class="input-field" placeholder="Spoločenstvo United">
+        </div>
+        </div>
+
+        <div class="control-group">
+        <label class="control-label" for="inputPublisher">Jazyk</label>
+        <div class="controls">
+        <input type="text" ng-model="book.language" id="inputLanguge" class="input-field" placeholder="sk">
         </div>
         </div>
 

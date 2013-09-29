@@ -20,6 +20,7 @@ module.exports = function(app, auth) {
   app.get('/', routes.index);
   app.get('/reminders', routes.sendReminders);
   app.get('/tickets', routes.sendTickets);
+  app.get('/import/:filename', routes.importBooks);
   app.post('/upload', routes.upload);
 
   // users
