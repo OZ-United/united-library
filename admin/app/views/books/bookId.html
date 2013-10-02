@@ -13,8 +13,8 @@
 <p>ISBN-13: {{book.isbn.isbn13}}</p>
 <p>ISBN-10: {{book.isbn.isbn10}}</p>
 
-<button ng-click="openEdit(book)" class="btn btn-primary">Editovať</button>
-<a ng-href="#/rents?book={{book.bookId}}" class="btn">História</a>
+<button ng-click="openEdit(book)" class="btn btn-primary"><i class="icon-edit"></i> Editovať</button>
+<a ng-href="#/rents?book={{book.bookId}}" class="btn"><i class="icon-search"></i> História</a>
 
 </div>
 
@@ -27,12 +27,10 @@
     <p>{{copy.bookCopyId}}</p>
     <p>{{copy.date | date}}</p>
     <p>{{copy.status}}</p>
-    <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}">História</a>
-    <p>
-      <button class="btn" ng-show="copy.status == 'available'" ng-click="openRent(copy)">Požičaj</button>
-      <button class="btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)">Vrátiť</button>
-      <a class="btn" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}">Info</a>
-    </p>
+    <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}" class="btn"><i class="icon-search"></i> História</a>
+    <a class="btn btn-primary" ng-show="copy.status == 'available'" ng-click="openRent(copy)"><i class="icon-share"></i> Požičaj</a>
+    <a class="btn btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)"><i class="icon-check"></i> Vrátiť</a>
+    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-info-sign"></i> Info</a>
   </li>
 </ul>
 
