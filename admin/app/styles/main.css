@@ -100,3 +100,15 @@ input.input-search {
 .nav-search {
   margin-top: 20px;
 }
+
+/* line 106, ../../app/styles/main.scss */
+.nav-logo {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: url("../images/logoSmall.png") no-repeat center center;
+  -webkit-background-size: contain;
+  -moz-background-size: contain;
+  -o-background-size: contain;
+  background-size: contain;
+}
