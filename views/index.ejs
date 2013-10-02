@@ -4,6 +4,19 @@
   </head>
   <body>
     <h1>United Library</h1>
-    <p>Hello, how can I help you?</p>
+
+    <% for (var i=0; i<books.length; i++) { %>
+
+      <div class="book">   
+      
+        <h4 class="book-title"><%- books[i].title %></h4>
+        <p><%- books[i].author %></p>     
+          
+      </div>
+      
+      <% if (i+1 !== books.length) { %>
+        <div class="pagination"></div>
+      <% } %>
+    <% } %>
   </body>
 </html>
