@@ -1,5 +1,7 @@
 <section>
   <h4 class="content-header">Zoznam kníh</h4>
+  <button class="btn" ng-click="open()"><i class="icon-rss"></i> Nová kniha</button>
+
   <table class="table">
     <thead>
       <tr>
@@ -29,8 +31,6 @@
 
   <button class="btn btn-block" ng-click="query()" ng-show="mayQuery">Ďalšie</button>
 </section>
-
-<button class="btn" ng-click="open()">Nová kniha</button>
 
 <div modal="newBook" close="close()" options="modalOpts">
     <div class="modal-header">
