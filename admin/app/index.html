@@ -28,19 +28,20 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header>
-      <nav>
-        <a href="#/books/">Knihy</a> ❯
-        <a href="#/users/">Používatelia</a> ❯
-        <a href="#/rents/">Požičania</a>
-      </nav>
-      <div>
-        <form name="searchBook" ng-submit="search(query)">
-          <input type="text" class="input-field" ng-model="query">
-          <button type="submit" class="btn" ng-click="search(query)">Search</button>
-        </form>
-      </div>
-    </header>
+    <nav class="nav">
+      <a href="#/books/" class="nav-link">Knihy</a>
+      <a href="#/users/" class="nav-link">Používatelia</a>
+      <a href="#/rents/" class="nav-link">Požičania</a>
+
+      <form name="searchBook" ng-submit="search(query)" class="nav-search">
+        <div class="input-append">
+            <input type="search" class="input-field input-search" ng-model="query">
+            <button type="submit" class="btn" ng-click="search(query)"><i class="icon-search"></i></button>
+        </div>
+      </form>
+
+    </nav>
+
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->

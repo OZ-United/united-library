@@ -17,14 +17,19 @@ body {
     background: #fafafa;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     color: #333;
+    position: relative;
 }
 
 input.input-field {
-  height: 40px;
-  line-height: 20px;
+  height: 30px;
   padding: 0 6px;
   text-align: left;
   font-size: 12px;
+  @include box-sizing(border-box);
+}
+
+input.input-search {
+  width: 150px;
 }
 
 .input-field.ng-invalid:focus {
@@ -36,21 +41,27 @@ input.input-field {
   }
 }
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 30px;
-    background-color: #eee;
-    border-radius: 6px;
-    padding: 60px;
-}
+// .hero-unit {
+//     margin: 50px auto 0 auto;
+//     width: 300px;
+//     font-size: 18px;
+//     font-weight: 200;
+//     line-height: 30px;
+//     background-color: #eee;
+//     border-radius: 6px;
+//     padding: 60px;
+// }
 
-.hero-unit h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+// .hero-unit h1 {
+//     font-size: 60px;
+//     line-height: 1;
+//     letter-spacing: -1px;
+// }
+//
+.container {
+  width: 100%;
+  padding: 5px;
+  padding-left: 220px;
 }
 
 .modal-body {
@@ -77,3 +88,18 @@ input.input-field {
   width: 85%;
   padding: 5px 10px;
 }
+
+.nav {
+  width: 200px;
+  position: fixed;
+}
+
+.nav-link {
+  display: block;
+  line-height: 30px;
+}
+
+.nav-search {
+  margin-top: 20px;
+}
+
