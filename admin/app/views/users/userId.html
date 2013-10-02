@@ -39,7 +39,7 @@
 
     <div class="control-group">
     <div class="controls">
-    <button type="submit" class="btn btn-success">Aktualizovať</button>
+    <button type="submit" class="btn btn-success"><i class="icon-upload"></i> Aktualizovať</button>
     </div>
     </div>
   </form>
@@ -54,17 +54,17 @@
 
     <div class="control-group">
     <div class="controls">
-    <button type="submit" class="btn btn-success">Nastaviť heslo</button>
+    <button type="submit" class="btn btn-success"><i class="icon-upload"></i> Nastaviť heslo</button>
     </div>
     </div>
   </form>
 
   <div class="control-group">
     <div class="controls">
-    <button class="btn btn-danger" ng-click="removeUser(user)">Vymazať</button>
+    <button class="btn btn-danger" ng-click="removeUser(user)"><i class="icon-trash"></i> Vymazať</button>
     </div>
   </div>
   </div>
 
-  <a ng-href="#/rents?user={{user.userId}}">História</a>
+  <a ng-href="#/rents?user={{user.userId}}" class="btn"><i class="icon-search"></i> História</a>
 </section>
