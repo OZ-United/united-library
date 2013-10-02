@@ -52,7 +52,7 @@ input.input-search {
 .container {
   width: 100%;
   padding: 5px;
-  padding-left: 220px;
+  padding-left: 250px;
 }
 
 /* line 67, ../../app/styles/main.scss */
@@ -111,4 +111,10 @@ input.input-search {
   -moz-background-size: contain;
   -o-background-size: contain;
   background-size: contain;
+}
+
+/* line 114, ../../app/styles/main.scss */
+.content-header {
+  text-align: center;
+  margin-bottom: 50px;
 }
