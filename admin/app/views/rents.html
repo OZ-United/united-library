@@ -20,7 +20,7 @@
             <img ng-src="{{rent.book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
           </a>
         <td style="line-height: 100px;"><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.title}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.author}}</a></td>
+        <td style="line-height: 100px;"><a ng-href="#/books?author={{rent.book.author}}" class="btn btn-link">{{rent.book.author}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></td>
         <td style="line-height: 100px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></td>
