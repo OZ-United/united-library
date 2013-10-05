@@ -1,17 +1,17 @@
 <section class="book-detail">
 
-<div class="book-detail-cover">
+<div class="book-detail-cover" ng-show="book.cover">
   <img ng-src="{{book.cover}}" alt="cover">
 </div>
 
 <div class="book-detail-description">
 <h3>{{book.title}}</h3>
-<p>{{book.author}}</p>
-<p>{{book.publisher}}</p>
-<p>{{book.language}}</p>
-<p>{{book.year}}</p>
-<p>ISBN-13: {{book.isbn.isbn13}}</p>
-<p>ISBN-10: {{book.isbn.isbn10}}</p>
+<p ng-show="book.author">{{book.author}}</p>
+<p ng-show="book.publisher">{{book.publisher}}</p>
+<p ng-show="book.language">{{book.language}}</p>
+<p ng-show="book.year">{{book.year}}</p>
+<p ng-show="book.isbn.isbn13">ISBN-13: {{book.isbn.isbn13}}</p>
+<p ng-show="book.isbn.isbn10">ISBN-10: {{book.isbn.isbn10}}</p>
 
 <button ng-click="openEdit(book)" class="btn btn-primary"><i class="icon-edit"></i> Editovať</button>
 <a ng-href="#/rents?book={{book.bookId}}" class="btn"><i class="icon-search"></i> História</a>
