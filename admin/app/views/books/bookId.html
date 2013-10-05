@@ -6,10 +6,10 @@
 
 <div class="book-detail-description">
 <h3>{{book.title}}</h3>
-<p ng-show="book.author"><span class="book-detail-title">Autor:</span> {{book.author}}</p>
-<p ng-show="book.publisher"><span class="book-detail-title">Vydavateľ:</span> {{book.publisher}}</p>
-<p ng-show="book.language"><span class="book-detail-title">Jazyk:</span> {{book.language}}</p>
-<p ng-show="book.year"><span class="book-detail-title">Rok vydania:</span> {{book.year}}</p>
+<p ng-show="book.author"><span class="book-detail-title">Autor:</span> <a ng-href="#/books?author={{book.author}}">{{book.author}}</a></p>
+<p ng-show="book.publisher"><span class="book-detail-title">Vydavateľ:</span> <a ng-href="#/books?publisher={{book.publisher}}">{{book.publisher}}</a></p>
+<p ng-show="book.language"><span class="book-detail-title">Jazyk:</span> <a ng-href="#/books?language={{book.language}}">{{book.language}}</a></p>
+<p ng-show="book.year"><span class="book-detail-title">Rok vydania:</span> <a ng-href="#/books?year={{book.year}}">{{book.year}}</a></p>
 <p ng-show="book.isbn.isbn13"><span class="book-detail-title">ISBN-13:</span> {{book.isbn.isbn13}}</p>
 <p ng-show="book.isbn.isbn10"><span class="book-detail-title">ISBN-10:</span> {{book.isbn.isbn10}}</p>
 
@@ -20,7 +20,7 @@
 
 </section>
 
-<h4>Výtlačky</h4>
+<h4>Výtlačky:</h4>
 
 <ul>
   <li ng-repeat="copy in book.copies">
