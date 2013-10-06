@@ -26,6 +26,11 @@ angular.module('adminApp')
     },
     isLoggedIn: function() {
       return ($rootScope.user.hash && $rootScope.user.hash.length) ? true : false;
+    },
+    logout: function() {
+      $rootScope.user = {};
+      localStorage.setItem(STORAGE_ID, JSON.stringify('{}'));
+      return true;
     }
   };
 });

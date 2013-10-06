@@ -11,8 +11,10 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/users.html',
         controller: 'UsersCtrl',
         resolve: {
-          users: function($q, $route, Users){
+          users: function($q, $route, Users, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
+
             Users.query($route.current.params,
               function(users){
                 console.log(users);
@@ -31,8 +33,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/books.html',
         controller: 'BooksCtrl',
         resolve: {
-          books: function($q, $route, Books){
+          books: function($q, $route, Books, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Books.query($route.current.params,
               function(books){
                 console.log(books);
@@ -51,8 +54,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/rents.html',
         controller: 'RentsCtrl',
         resolve: {
-          rents: function($q, $route, Rents){
+          rents: function($q, $route, Rents, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Rents.query($route.current.params,
               function(rents){
                 console.log(rents);
@@ -71,8 +75,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/books/bookId.html',
         controller: 'BooksBookidCtrl',
         resolve: {
-          book: function($q, $route, Books){
+          book: function($q, $route, Books, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Books.get({'bookId': $route.current.params.bookId},
               function(book){
                 console.log(book);
@@ -91,8 +96,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/users/userId.html',
         controller: 'UsersUseridCtrl',
         resolve: {
-          user: function($q, $route, Users){
+          user: function($q, $route, Users, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Users.get({'userId': $route.current.params.userId},
               function(user){
                 console.log(user);
@@ -111,8 +117,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/rents/rentId.html',
         controller: 'RentsRentidCtrl',
         resolve: {
-          rent: function($q, $route, Rents){
+          rent: function($q, $route, Rents, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Rents.get({'rentId': $route.current.params.rentId},
               function(rent){
                 console.log(rent);
@@ -131,8 +138,9 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl',
         resolve: {
-          books: function($q, $route, Search){
+          books: function($q, $route, Search, Auth){
             var deferred = $q.defer();
+            if (!Auth.isLoggedIn()) { return deferred.reject(); }
             Search.query($route.current.params,
               function(books){
                 console.log(books);
@@ -161,9 +169,14 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
       $location.url('search?q=' + query);
     };
 
+    $rootScope.signout = function() {
+      Auth.logout();
+      $location.path( '/' );
+    };
+
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
       console.log(next.templateUrl);
-
+      console.log(Auth.isLoggedIn());
       if ( !Auth.isLoggedIn() ) {
         if ( next.templateUrl !== 'views/main.html' ) {
           $location.path( '/' );

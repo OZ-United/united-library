@@ -40,6 +40,11 @@
         </div>
       </form>
 
+      <h4 ng-show="user.name" ng-click="signout()">
+        <i class="icon-signout"></i>
+        <a href="#"><span ng-bind="user.name"></span></a>
+      </h4>
+
       <a href="http://www.spolocenstvounited.sk" class="nav-logo"></a>
 
     </nav>
