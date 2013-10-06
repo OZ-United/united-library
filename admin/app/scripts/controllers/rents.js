@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('RentsCtrl', function ($scope, Rents, $location, $routeParams) {
-  $scope.rents = [];
+  .controller('RentsCtrl', function ($scope, Rents, $location, $routeParams, rents) {
+  $scope.rents = rents;
 
   $scope.returnBook = function(rent){
     Rents.returnBook({'rentId': rent.rentId}, function(res){
@@ -39,7 +39,6 @@ angular.module('adminApp')
     });
   };
 
-  $scope.page = 0;
+  $scope.page = 1;
   $scope.mayQuery = true;
-  $scope.query();
 });

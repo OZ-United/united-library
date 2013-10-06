@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('BooksBookidCtrl', function ($scope, Books, Users, Rents, $routeParams, $location) {
-  $scope.book = Books.get({'bookId': $routeParams.bookId});
+.controller('BooksBookidCtrl', function ($scope, Users, Rents, $routeParams, $location, book) {
+  $scope.book = book;
 
   $scope.openRent = function (bookCopy) {
     $scope.rentBook = true;
