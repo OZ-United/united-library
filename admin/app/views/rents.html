@@ -19,13 +19,13 @@
           <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
             <img ng-src="{{rent.book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
           </a>
-        <td style="line-height: 50px;"><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.title}}</a></td>
-        <td style="line-height: 50px;"><a ng-href="#/books?author={{rent.book.author}}" class="btn btn-link">{{rent.book.author}}</a></td>
-        <td style="line-height: 50px;"><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></td>
-        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></td>
-        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{rent.book.bookId}}">{{rent.book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?author={{rent.book.author}}">{{rent.book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/users/{{rent.user.userId}}">{{rent.user.name}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.rent.startDate | date}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.rent.endDate | date}}</a></td>
         <td style="line-height: 50px;">
-          <a ng-href="#/rents/{{rent.rentId}}" ng-hide="rent.status == 'rented'" class="btn btn-link">{{rent.rent.returnDate | date}}</a>
+          <a ng-href="#/rents/{{rent.rentId}}" ng-hide="rent.status == 'rented'">{{rent.rent.returnDate | date}}</a>
           <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)"><i class="icon-check"></i> Vrátiť knihu</button>
         </td>
       </tr>

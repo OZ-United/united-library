@@ -15,13 +15,13 @@
       <tr ng-repeat="user in users" ng-class="{true: 'info'}[user.admin==true]">
         <td><img ng-src="{{user.gravatar}}" alt=""></td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.email}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.email}}</a>
         </td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.name}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.name}}</a>
         </td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.phone}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.phone}}</a>
         </td>
       </tr>
     </tbody>
