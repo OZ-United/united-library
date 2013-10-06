@@ -13,7 +13,7 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         resolve: {
           users: function($q, $route, Users){
             var deferred = $q.defer();
-            Users.query(
+            Users.query($route.current.params,
               function(users){
                 console.log(users);
                 deferred.resolve(users);
@@ -33,7 +33,7 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         resolve: {
           books: function($q, $route, Books){
             var deferred = $q.defer();
-            Books.query(
+            Books.query($route.current.params,
               function(books){
                 console.log(books);
                 deferred.resolve(books);
@@ -53,7 +53,7 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         resolve: {
           rents: function($q, $route, Rents){
             var deferred = $q.defer();
-            Rents.query(
+            Rents.query($route.current.params,
               function(rents){
                 console.log(rents);
                 deferred.resolve(rents);
