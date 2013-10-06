@@ -151,7 +151,7 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
         redirectTo: '/'
       });
   })
-  .run(function($rootScope, $location){
+  .run(function($rootScope, $location, Auth){
     $rootScope.modalOpts = {
       backdropFade: true,
       dialogFade: true
@@ -160,4 +160,19 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
     $rootScope.search = function(query) {
       $location.url('search?q=' + query);
     };
+
+    $rootScope.$on('$routeChangeStart', function(event, next, current) {
+      console.log(next.templateUrl);
+
+      if ( !Auth.isLoggedIn() ) {
+        if ( next.templateUrl !== 'views/main.html' ) {
+          $location.path( '/' );
+        }
+      }
+      else {
+        if ( next.templateUrl === 'views/main.html' ) {
+          $location.path( '/books' );
+        }
+      }
+    });
   });

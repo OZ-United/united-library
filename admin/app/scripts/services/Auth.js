@@ -3,7 +3,7 @@
 angular.module('adminApp')
 .factory('Auth', function ($q, $http, $rootScope) {
   var STORAGE_ID = 'united-library';
-  var user = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
+  $rootScope.user = JSON.parse(localStorage.getItem(STORAGE_ID) || '{}');
 
   return {
     login: function (user) {
@@ -11,7 +11,8 @@ angular.module('adminApp')
 
       $http.post((window.host || '') + '/auth', user)
         .success(function(res){
-          user = res;
+          $rootScope.user = res;
+          localStorage.setItem(STORAGE_ID, JSON.stringify(res));
           deferred.resolve(res);
         })
         .error(function(){
@@ -21,7 +22,10 @@ angular.module('adminApp')
       return deferred.promise;
     },
     getUser: function() {
-      return user;
+      return $rootScope.user;
+    },
+    isLoggedIn: function() {
+      return ($rootScope.user.hash && $rootScope.user.hash.length) ? true : false;
     }
   };
 });
