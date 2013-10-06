@@ -6,9 +6,9 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title></title>
+    <title>United knižnica</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
         <!-- build:css({.tmp,app}) styles/main.css -->
@@ -28,19 +28,27 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <header>
-      <nav>
-        <a href="#/books/">Knihy</a> ❯
-        <a href="#/users/">Používatelia</a> ❯
-        <a href="#/rents/">Požičania</a>
-      </nav>
-      <div>
-        <form name="searchBook" ng-submit="search(query)">
-          <input type="text" class="input-field" ng-model="query">
-          <button type="submit" class="btn" ng-click="search(query)">Search</button>
-        </form>
-      </div>
-    </header>
+    <nav class="nav">
+      <a href="#/books/" class="nav-link"><i class="icon-book"></i> Knihy</a>
+      <a href="#/users/" class="nav-link"><i class="icon-user"></i> Používatelia</a>
+      <a href="#/rents/" class="nav-link"><i class="icon-time"></i> Požičania</a>
+
+      <form name="searchBook" ng-submit="search(query)" class="nav-search">
+        <div class="input-append">
+            <input type="search" class="input-field input-search" ng-model="query">
+            <button type="submit" class="btn" ng-click="search(query)"><i class="icon-search"></i></button>
+        </div>
+      </form>
+
+      <h4 ng-show="user.name" ng-click="signout()">
+        <i class="icon-signout"></i>
+        <a href="#"><span ng-bind="user.name"></span></a>
+      </h4>
+
+      <a href="http://www.spolocenstvounited.sk" class="nav-logo"></a>
+
+    </nav>
+
     <div class="container" ng-view=""></div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -97,6 +105,7 @@
         <script src="scripts/directives/infiniteScroll.js"></script>
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/services/Search.js"></script>
+        <script src="scripts/services/Auth.js"></script>
         <!-- endbuild -->
 </body>
 </html>

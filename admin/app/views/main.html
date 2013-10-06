@@ -1,9 +1,28 @@
-<div class="hero-unit">
-  <h1>'Allo, 'Allo!</h1>
-  <p>You now have</p>
-  <ul>
-      <li ng-repeat="thing in awesomeThings">{{thing}}</li>
-  </ul>
-  <p>installed.</p>
-  <h3>Enjoy coding! - Yeoman</h3>
+<div>
+  <h1>United knižnica</h1>
+  <p>Vitajte v knižnici spoločenstva United!</p>
+
+  <form class="form-horizontal" ng-submit="auth(user)" name="authForm" style="max-width: 500px; margin: 50px auto;">
+    <h3 class="text-center">Prihlásenie</h3>
+
+    <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+    <input type="email" ng-model="user.email" id="inputEmail" class="input-field" required placeholder="admin@spolocenstvounited.sk">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputPassword">Heslo</label>
+    <div class="controls">
+    <input type="password" ng-model="user.password" id="inputPassword" class="input-field" required placeholder="******">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success"><i class="icon-signin"></i> Prihlásiť sa</button>
+    </div>
+    </div>
+  </form>
 </div>

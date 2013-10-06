@@ -1,14 +1,34 @@
-<p>
-  <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
-    <img ng-src="{{rent.book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></p>
-  </a>
-<p><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.title}}</a></p>
-<p><a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">{{rent.book.author}}</a></p>
-<p><a ng-href="#/users/{{rent.user.userId}}" class="btn btn-link">{{rent.user.name}}</a></p>
-<p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.startDate | date}}</a></p>
-<p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.endDate | date}}</a></p>
-<p><a ng-href="#/rents/{{rent.rentId}}" class="btn btn-link">{{rent.rent.returnDate | date}}</a></p>
+<section class="book-detail">
 
-<p>
-  <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)">Vrátiť knihu</button>
-</p>
+<div class="book-detail-cover" ng-show="rent.book.cover">
+  <img ng-src="{{rent.book.cover}}" alt="cover">
+</div>
+
+<div class="book-detail-description">
+  <h3>{{rent.book.title}}</h3>
+  <p ng-show="rent.book.author"><span class="book-detail-title">Autor:</span> <a ng-href="#/books?author={{rent.book.author}}">{{rent.book.author}}</a></p>
+  <p ng-show="rent.book.publisher"><span class="book-detail-title">Vydavateľ:</span> <a ng-href="#/books?publisher={{rent.book.publisher}}">{{rent.book.publisher}}</a></p>
+  <p ng-show="rent.book.language"><span class="book-detail-title">Jazyk:</span> <a ng-href="#/books?language={{rent.book.language}}">{{rent.book.language}}</a></p>
+  <p ng-show="rent.book.year"><span class="book-detail-title">Rok vydania:</span> <a ng-href="#/books?year={{rent.book.year}}">{{rent.book.year}}</a></p>
+  <p ng-show="rent.book.isbn.isbn13"><span class="book-detail-title">ISBN-13:</span> {{rent.book.isbn.isbn13}}</p>
+  <p ng-show="rent.book.isbn.isbn10"><span class="book-detail-title">ISBN-10:</span> {{rent.book.isbn.isbn10}}</p>
+
+  <a ng-href="#/rents?book={{rent.book.bookId}}" class="btn"><i class="icon-search"></i> História</a>
+</div>
+
+</section>
+
+<div class="book-copy-description">
+  <h4>Výtlačok:</h4>
+  <p><span class="book-detail-title">Požičané pre:</span> <a ng-href="#/users/{{rent.user.userId}}">{{rent.user.name}}</a></p>
+  <p><span class="book-detail-title">Požičaná od:</span> {{rent.rent.startDate | date}}</p>
+  <p><span class="book-detail-title">Požičaná da:</span> {{rent.rent.endDate | date}}</p>
+  <p><span class="book-detail-title">Vrátená:</span> {{rent.rent.returnDate | date}}</p>
+
+
+  <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)"><i class="icon-check"></i> Vrátiť knihu</button>
+  <a ng-href="#/rents?bookCopy={{rent.bookCopy}}" class="btn"><i class="icon-search"></i> História</a>
+</div>
+
+
+

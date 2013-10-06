@@ -11,10 +11,22 @@ var Email = require('../lib/email');
 var csv = require('../lib/import');
 var RentModel = require('../models/Rent.js');
 var BookModel = require('../models/Book.js');
+var _ = require('underscore');
 
 
 exports.index = function(req, res){
-  res.render('index');
+  console.log(req.query);
+  var page = req.query.page || 1;
+  var limit = req.query.limit || 1000;
+
+  BookModel.find(_.omit(req.query, 'page', 'limit'))
+    .skip((page - 1) * limit)
+    .limit(limit)
+    .sort('title')
+    .exec(function(err, books){
+      if (err) { return next(err); }
+      res.render('index', {books: books});
+    });
 };
 
 exports.upload = function(req, res){

@@ -1,5 +1,7 @@
-<section style="margin: 50px auto;">
-  <h4 style="text-align: center;margin: 50px auto;">Zoznam používateľov</h4>
+<section>
+  <h4 class="content-header">Zoznam používateľov</h4>
+  <button class="btn" ng-click="open()"><i class="icon-rss"></i> Nový používateľ</button>
+
   <table class="table">
     <thead>
       <tr>
@@ -13,22 +15,20 @@
       <tr ng-repeat="user in users" ng-class="{true: 'info'}[user.admin==true]">
         <td><img ng-src="{{user.gravatar}}" alt=""></td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.email}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.email}}</a>
         </td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.name}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.name}}</a>
         </td>
         <td style="line-height: 50px;">
-          <a ng-href="#/users/{{user.userId}}" class="btn btn-link">{{user.phone}}</a>
+          <a ng-href="#/users/{{user.userId}}">{{user.phone}}</a>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery">Ďalšie</button>
+  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery"><i class="icon-repeat"></i> Ďalší</button>
 </section>
-
-<button class="btn" ng-click="open()">Nový používateľ</button>
 
 <div modal="newUser" close="close()" options="modalOpts">
     <div class="modal-header">

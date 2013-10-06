@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('UsersCtrl', function ($scope, Users, $routeParams) {
-  $scope.users = [];
+  .controller('UsersCtrl', function ($scope, Users, $routeParams, users) {
+  $scope.users = users;
 
   $scope.addUser = function(){
     if ($scope.addUserForm.$valid) {
@@ -43,7 +43,6 @@ angular.module('adminApp')
     });
   };
 
-  $scope.page = 0;
+  $scope.page = 1;
   $scope.mayQuery = true;
-  $scope.query();
 });

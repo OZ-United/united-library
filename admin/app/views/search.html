@@ -1,5 +1,5 @@
 <section style="margin: 50px auto;">
-  <h4 style="text-align: center;margin: 50px auto;" ng-show="books.length">Knihy:</h4>
+  <h4 class="content-header" ng-show="books.length">Knihy:</h4>
   <table class="table" ng-show="books.length">
     <thead>
       <tr>
@@ -16,13 +16,13 @@
       <tr ng-repeat="book in books">
         <td>
           <a ng-href="#/books/{{book.bookId}}" class="btn btn-link">
-            <img ng-src="{{book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
+            <img ng-src="{{book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
           </a>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.title}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.author}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.publisher}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.year}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.quantity}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.publisher}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.year}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.quantity}}</a></td>
       </tr>
     </tbody>
   </table>

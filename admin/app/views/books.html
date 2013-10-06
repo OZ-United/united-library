@@ -1,5 +1,7 @@
-<section style="margin: 50px auto;">
-  <h4 style="text-align: center;margin: 50px auto;">Zoznam kníh</h4>
+<section>
+  <h4 class="content-header">Zoznam kníh</h4>
+  <button class="btn" ng-click="open()"><i class="icon-rss"></i> Nová kniha</button>
+
   <table class="table">
     <thead>
       <tr>
@@ -16,21 +18,19 @@
       <tr ng-repeat="book in books">
         <td>
           <a ng-href="#/books/{{book.bookId}}" class="btn btn-link">
-            <img ng-src="{{book.cover}}" alt="" style="height: 100px; width: auto; line-height: 100px;"></td>
+            <img ng-src="{{book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
           </a>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.title}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.author}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.language}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.year}}</a></td>
-        <td style="line-height: 100px;"><a ng-href="#/books/{{book.bookId}}" class="btn btn-link">{{book.quantity}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?author={{book.author}}">{{book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?language={{book.language}}">{{book.language}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?year={{book.year}}">{{book.year}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.quantity}}</a></td>
       </tr>
     </tbody>
   </table>
 
-  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery">Ďalšie</button>
+  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery"><i class="icon-repeat"></i> Ďalšie</button>
 </section>
-
-<button class="btn" ng-click="open()">Nová kniha</button>
 
 <div modal="newBook" close="close()" options="modalOpts">
     <div class="modal-header">

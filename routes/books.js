@@ -20,7 +20,7 @@ exports.book = function(req, res, next){
 exports.query = function(req, res, next){
   console.log(req.query);
   var page = req.query.page || 1;
-  var limit = req.query.limit || 10;
+  var limit = req.query.limit || 100;
 
   BookModel.find(_.omit(req.query, 'page', 'limit'))
     .skip((page - 1) * limit)

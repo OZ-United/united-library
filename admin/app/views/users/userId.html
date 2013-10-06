@@ -1,12 +1,23 @@
 
-<section style="margin: 50px auto;">
-  <h4 style="text-align: center;margin: 50px auto;">Používateľ</h4>
+<section>
+  <h4 class="content-header">Používateľ</h4>
   <div style="width: 500px; margin: 0 auto;">
-  <form class="form-horizontal" ng-submit="updateUser(user)" name="updateUserForm">
 
-    <div class="control-group">
-      <img ng-src="{{user.gravatar}}" alt="">
-    </div>
+
+  <p class="text-center">
+    <img ng-src="{{user.gravatar}}" alt="">
+
+    <span>{{user.name}}</span>
+  </p>
+
+  <p class="text-center">
+    <button class="btn btn-danger" ng-click="removeUser(user)"><i class="icon-trash"></i> Vymazať</button>
+    <a ng-href="#/rents?user={{user.userId}}" class="btn"><i class="icon-search"></i> História</a>
+  </p>
+
+  <h5 class="text-center" style="margin-top: 40px;">Zmena údajov:</h5>
+
+  <form class="form-horizontal" ng-submit="updateUser(user)" name="updateUserForm">
 
     <div class="control-group">
     <label class="control-label" for="inputEmail">Email</label>
@@ -39,10 +50,12 @@
 
     <div class="control-group">
     <div class="controls">
-    <button type="submit" class="btn btn-success">Aktualizovať</button>
+    <button type="submit" class="btn btn-success"><i class="icon-upload"></i> Aktualizovať</button>
     </div>
     </div>
   </form>
+
+  <h5 class="text-center" style="margin-top: 40px;">Zmena hesla:</h5>
 
   <form class="form-horizontal" ng-submit="setPassword(password)" name="setPasswordForm">
     <div class="control-group">
@@ -54,17 +67,9 @@
 
     <div class="control-group">
     <div class="controls">
-    <button type="submit" class="btn btn-success">Nastaviť heslo</button>
+    <button type="submit" class="btn btn-success"><i class="icon-upload"></i> Nastaviť heslo</button>
     </div>
     </div>
   </form>
 
-  <div class="control-group">
-    <div class="controls">
-    <button class="btn btn-danger" ng-click="removeUser(user)">Vymazať</button>
-    </div>
-  </div>
-  </div>
-
-  <a ng-href="#/rents?user={{user.userId}}">História</a>
 </section>

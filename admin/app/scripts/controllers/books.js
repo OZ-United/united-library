@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('adminApp')
-  .controller('BooksCtrl', function ($scope, Books, $routeParams) {
+  .controller('BooksCtrl', function ($scope, Books, $routeParams, books) {
 
   $scope.book = {};
-  $scope.books = [];
+  $scope.books = books;
 
   $scope.addBook = function(){
     if ($scope.addBookForm.$valid) {
@@ -51,7 +51,6 @@ angular.module('adminApp')
     });
   };
 
-  $scope.page = 0;
+  $scope.page = 1;
   $scope.mayQuery = true;
-  $scope.query();
 });
