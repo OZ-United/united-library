@@ -5,7 +5,7 @@ angular.module('adminApp')
   $scope.auth = function(user) {
     Auth.login(user).then(function(user){
       console.log(user);
-      $location.path('/books');
+      $location.path('/');
     },
     function(){
       $scope.error = true;
