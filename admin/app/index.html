@@ -45,6 +45,11 @@
         <a href="#"><span ng-bind="user.name"></span></a>
       </h4>
 
+      <h4 ng-hide="user.name">
+        <i class="icon-signin"></i>
+        <a href="#/auth"><span>Prihlásiť sa</span></a>
+      </h4>
+
       <a href="http://www.spolocenstvounited.sk" class="nav-logo"></a>
 
     </nav>
@@ -106,6 +111,7 @@
         <script src="scripts/controllers/search.js"></script>
         <script src="scripts/services/Search.js"></script>
         <script src="scripts/services/Auth.js"></script>
+        <script src="scripts/controllers/auth.js"></script>
         <!-- endbuild -->
 </body>
 </html>
