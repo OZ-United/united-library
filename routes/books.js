@@ -33,6 +33,15 @@ exports.query = function(req, res, next){
     });
 };
 
+exports.getTopRented = function(req, res, next){
+  console.log(req.query);
+
+  BookModel.getTopRented(req.query, function(err, books){
+    if (err) { return next(err); }
+    res.json(books);
+  });
+};
+
 exports.search = function(req, res, next){
   console.log(req.query);
   var query = req.query.q;

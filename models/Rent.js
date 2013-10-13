@@ -54,42 +54,6 @@ RentModelSchema.methods.returnBook = function(cb){
 };
 
 
-RentModelSchema.statics.getTopRented = function(query, cb){
-  var limit = query.limit || 10;
-
-  mongoose.model('RentModel').aggregate([
-    {
-      $project: { book: '$book' }
-    },
-    {
-      $group : {
-        _id: '$book',
-        count : { $sum : 1 }
-      }
-    },
-    {
-      $project: {
-        _id: 0,
-        book: '$_id',
-        count: 1
-      }
-    },
-    {
-      $sort: { count: -1 }
-    },
-    {
-      $limit : limit
-    }
-  ],
-  function(err, books){
-    if (err) { return cb(err); }
-    mongoose.model('BookModel').populate(books, { path: 'book' }, function(err, books){
-      if (err) { return cb(err); }
-      return cb(null, books);
-    });
-  });
-};
-
 RentModelSchema.pre('save', function (next) {
 
   var bookId = this.book;

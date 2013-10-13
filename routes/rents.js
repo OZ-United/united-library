@@ -34,15 +34,6 @@ exports.query = function(req, res, next){
     });
 };
 
-exports.getTopRented = function(req, res, next){
-  console.log(req.query);
-
-  RentModel.getTopRented(req.query, function(err, books){
-    if (err) { return next(err); }
-    res.json(books);
-  });
-};
-
 exports.get = function(req, res, next){
   var rent = req.rent;
   rent.populate('user book', function(err, rent){

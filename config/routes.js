@@ -40,6 +40,7 @@ module.exports = function(app, auth) {
   // books
   var books = require('../routes/books');
   app.get('/books', books.query);
+  app.get('/books/topRented', books.getTopRented);
   app.get('/books/:bookId', books.get);
   app.post('/books', books.create);
   app.put('/books/:bookId', books.update);
@@ -50,7 +51,6 @@ module.exports = function(app, auth) {
   // rents
   var rents = require('../routes/rents');
   app.get('/rents', rents.query);
-  app.get('/rents/topRented', rents.getTopRented);
   app.get('/rents/:rentId', rents.get);
   app.post('/rents', rents.create, emails.rentBook);
   app.put('/rents/:rentId/', rents.update);
