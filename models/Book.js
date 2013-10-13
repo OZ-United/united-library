@@ -89,7 +89,7 @@ BookModelSchema.methods.removeImage = function(cb){
 };
 
 BookModelSchema.statics.getTopRented = function(query, cb){
-  var limit = query.limit || 10;
+  var limit = Number(query.limit) || 10;
 
   mongoose.model('RentModel').aggregate([
     {

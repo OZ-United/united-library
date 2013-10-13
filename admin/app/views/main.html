@@ -1,4 +1,15 @@
 <div>
   <h1>United knižnica</h1>
   <p>Vitajte v knižnici spoločenstva United!</p>
+
+  <div class="books-pick">
+    <h4>Najviac požičiavané knihy:</h4>
+    <div ng-repeat="rent in books">
+      <a ng-href="#/books/{{rent.book.bookId}}">
+        <span>{{rent.count}}: </span>
+        <span>{{rent.book.title}}</span>
+        <span ng-show="rent.book.author">({{rent.book.author}})</span>
+      </a>
+    </div>
+  </div>
 </div>
