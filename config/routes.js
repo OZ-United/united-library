@@ -50,6 +50,7 @@ module.exports = function(app, auth) {
   // rents
   var rents = require('../routes/rents');
   app.get('/rents', rents.query);
+  app.get('/rents/topRented', rents.getTopRented);
   app.get('/rents/:rentId', rents.get);
   app.post('/rents', rents.create, emails.rentBook);
   app.put('/rents/:rentId/', rents.update);

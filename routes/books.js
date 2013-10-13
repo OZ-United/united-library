@@ -21,11 +21,12 @@ exports.query = function(req, res, next){
   console.log(req.query);
   var page = req.query.page || 1;
   var limit = req.query.limit || 100;
+  var sort = req.query.sort || 'title';
 
-  BookModel.find(_.omit(req.query, 'page', 'limit'))
+  BookModel.find(_.omit(req.query, 'page', 'limit', 'sort'))
     .skip((page - 1) * limit)
     .limit(limit)
-    .sort('title')
+    .sort(sort)
     .exec(function(err, books){
       if (err) { return next(err); }
       res.json(books);

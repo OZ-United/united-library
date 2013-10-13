@@ -88,7 +88,6 @@ BookModelSchema.methods.removeImage = function(cb){
   });
 };
 
-
 BookModelSchema.pre('remove', function(next){
   this.removeImage(function(err, book){
     next();
