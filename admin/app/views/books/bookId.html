@@ -50,7 +50,7 @@
         <div class="control-group">
         <label class="control-label" for="inputUserId">UserId</label>
         <div class="controls">
-          <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="user.userId as user.name for user in users | filter:$viewValue | limitTo:8">
+          <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8">
         </div>
         </div>
 

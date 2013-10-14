@@ -6,7 +6,7 @@ angular.module('adminApp')
 
   $scope.openRent = function (bookCopy) {
     $scope.rentBook = true;
-    $scope.users = Users.query();
+    $scope.rentUsers = Users.query();
     $scope.rentCopy = {
       'bookId': $scope.book.bookId,
       'bookCopyId': bookCopy.bookCopyId
