@@ -155,6 +155,10 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
           }
         }
       })
+      .when('/auth', {
+        templateUrl: 'views/auth.html',
+        controller: 'AuthCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -178,13 +182,13 @@ angular.module('adminApp', ['ngResource', 'ja.isbn', 'ui.bootstrap'])
       console.log(next.templateUrl);
       console.log(Auth.isLoggedIn());
       if ( !Auth.isLoggedIn() ) {
-        if ( next.templateUrl !== 'views/main.html' ) {
-          $location.path( '/' );
+        if ( next.templateUrl !== 'views/auth.html' ) {
+          $location.path( '/auth' );
         }
       }
       else {
-        if ( next.templateUrl === 'views/main.html' ) {
-          $location.path( '/books' );
+        if ( next.templateUrl === 'views/auth.html' ) {
+          $location.path( '/' );
         }
       }
     });

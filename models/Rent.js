@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 var error = require('../lib/error');
+var _ = require('underscore');
 
 var RentModelSchema = new Schema({
   status: { type: String, default: 'reserved' },
@@ -51,6 +52,7 @@ RentModelSchema.methods.returnBook = function(cb){
 
   return this.save(cb);
 };
+
 
 RentModelSchema.pre('save', function (next) {
 
