@@ -25,15 +25,15 @@ module.exports = function(app, auth) {
 
   // users
   var users = require('../routes/users');
-  app.get('/users', users.query);
-  app.post('/users', users.create, emails.registerUser);
-  app.get('/users/me', users.me);
-  app.get('/users/:userId', users.get);
-  app.put('/users/:userId', users.update);
-  app.put('/users/:userId', users.setPassword);
+  app.get('/users', users.hasAuthorization, users.isAdmin, users.query);
+  app.post('/users', users.hasAuthorization, users.isAdmin, users.create, emails.registerUser);
+  app.get('/users/me', users.hasAuthorization, users.me);
+  app.get('/users/:userId', users.hasAuthorization, users.isAdmin, users.get);
+  app.put('/users/:userId', users.hasAuthorization, users.isAdmin, users.update);
+  app.put('/users/:userId', users.hasAuthorization, users.isAdmin, users.setPassword);
   app.post('/auth', users.auth);
 
-  app.del('/users/:userId', users.remove);
+  app.del('/users/:userId', users.hasAuthorization, users.isAdmin, users.remove);
 
   app.param('userId', users.user);
 
@@ -42,20 +42,20 @@ module.exports = function(app, auth) {
   app.get('/books', books.query);
   app.get('/books/topRented', books.getTopRented);
   app.get('/books/:bookId', books.get);
-  app.post('/books', books.create);
-  app.put('/books/:bookId', books.update);
-  app.del('/books/:bookId', books.remove);
+  app.post('/books', users.hasAuthorization, users.isAdmin, books.create);
+  app.put('/books/:bookId', users.hasAuthorization, users.isAdmin, books.update);
+  app.del('/books/:bookId', users.hasAuthorization, users.isAdmin, books.remove);
 
   app.param('bookId', books.book);
 
   // rents
   var rents = require('../routes/rents');
-  app.get('/rents', rents.query);
-  app.get('/rents/:rentId', rents.get);
-  app.post('/rents', rents.create, emails.rentBook);
-  app.put('/rents/:rentId/', rents.update);
-  app.del('/rents/:rentId', rents.remove);
-  app.post('/rents/:rentId/returnBook', rents.returnBook, emails.returnBook);
+  app.get('/rents', users.hasAuthorization, users.isAdmin, rents.query);
+  app.get('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.get);
+  app.post('/rents', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
+  app.put('/rents/:rentId/', users.hasAuthorization, users.isAdmin, rents.update);
+  app.del('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.remove);
+  app.post('/rents/:rentId/returnBook', users.hasAuthorization, users.isAdmin, rents.returnBook, emails.returnBook);
   
   app.param('rentId', rents.rent);
 

@@ -17,15 +17,6 @@ exports.user = function(req, res, next){
   });
 };
 
-exports.me = function(req, res, next){
-  UserModel.findById(req.get('userId'), function(err, user){
-    if (err) { return next(err); }
-    if (! user) { return next(new error.NotFound('User does not exist.')); }
-
-    res.json(user);
-  });
-};
-
 exports.query = function(req, res, next){
   console.log(req.query);
   var page = req.query.page || 1;
@@ -121,4 +112,26 @@ exports.auth = function(req, res, next){
 
     res.json(_.pick(user, 'userId','email', 'name', 'admin', 'hash', 'gravatar'));
   });
+};
+
+exports.hasAuthorization = function(req, res, next){
+
+  UserModel.findOne({'userId': req.headers.userId, 'hash': req.headers.hash}, function(err, user){
+    if (err) { return next(err); }
+    if (! user) { return next(new error.Unauthorized('User does not exist.')); }
+
+    req.authorization = user;
+    return next();
+  });
+};
+
+exports.isAdmin = function(req, res, next){
+
+  if (! req.authorization.admin) { return next(new error.Forbidden()); }
+  return next();
+};
+
+exports.me = function(req, res, next){
+
+    res.json(req.authorization);
 };
