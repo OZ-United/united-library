@@ -21,6 +21,12 @@ angular.module('adminApp')
 
       return deferred.promise;
     },
+    getCradentials: function() {
+      return {
+        'userId': $rootScope.user.userId,
+        'hash': $rootScope.user.hash
+      };
+    },
     getUser: function() {
       return $rootScope.user;
     },
