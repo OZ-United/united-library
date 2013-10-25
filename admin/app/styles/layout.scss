@@ -1,0 +1,73 @@
+$iconSpritePath: "../images/glyphicons-halflings.png";
+$iconWhiteSpritePath: "../images/glyphicons-halflings-white.png";
+
+@import "bootstrap-sass/lib/_mixins";
+
+
+* {
+  @include box-sizing(border-box);
+}
+
+html, body {
+  margin: 20px;
+}
+
+body {
+    background: #fafafa;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    color: #333;
+    position: relative;
+}
+
+.container {
+  width: 100%;
+  padding: 5px;
+  padding-left: 250px;
+}
+
+.modal-body {
+  height: 500px;
+}
+
+.nav {
+  width: 200px;
+  position: fixed;
+}
+
+.nav-link {
+  display: block;
+  line-height: 30px;
+}
+
+.nav-search {
+  margin-top: 20px;
+}
+
+.nav-logo {
+  display: block;
+  width: 100%;
+  height: 200px;
+  background: url("../images/logoSmall.png") no-repeat center center;
+  @include background-size(contain);
+}
+
+input.input-field {
+  height: 30px;
+  padding: 0 6px;
+  text-align: left;
+  font-size: 12px;
+  @include box-sizing(border-box);
+}
+
+input.input-search {
+  width: 150px;
+}
+
+.input-field.ng-invalid:focus {
+  color: #b94a48;
+  border-color: #ee5f5b;
+  &:focus {
+    border-color: darken(#ee5f5b, 10%);
+    @include box-shadow(0 0 6px lighten(#ee5f5b, 20%));
+  }
+}
