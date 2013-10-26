@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('dashboardApp', ['ngRoute'])
+angular.module('dashboardApp', ['ngRoute', 'ngResource'])
   .config(function ($routeProvider) {
     $routeProvider
       .when('/', {
@@ -22,6 +22,10 @@ angular.module('dashboardApp', ['ngRoute'])
       .when('/search', {
         templateUrl: 'views/search.html',
         controller: 'SearchCtrl'
+      })
+      .when('/auth', {
+        templateUrl: 'views/auth.html',
+        controller: 'AuthCtrl'
       })
       .otherwise({
         redirectTo: '/'

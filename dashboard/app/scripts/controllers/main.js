@@ -1,10 +1,7 @@
 'use strict';
 
 angular.module('dashboardApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+.controller('MainCtrl', function ($scope, Books) {
+
+  $scope.books = Books.topRented({limit: 10});
+});
