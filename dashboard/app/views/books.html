@@ -1,1 +1,32 @@
-<p>This is the books view.</p>
+<section>
+  <h4 class="content-header">Zoznam kníh</h4>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Obal</th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Jazyk</th>
+        <th>Rok</th>
+        <th>Množstvo</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="book in books">
+        <td>
+          <a ng-href="#/books/{{book.bookId}}" class="btn btn-link">
+            <img ng-src="{{book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
+          </a>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?author={{book.author}}">{{book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?language={{book.language}}">{{book.language}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?year={{book.year}}">{{book.year}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.quantity}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery"><i class="icon-repeat"></i> Ďalšie</button>
+</section>

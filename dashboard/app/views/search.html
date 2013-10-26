@@ -1,1 +1,33 @@
-<p>This is the search view.</p>
+<section style="margin: 50px auto;">
+  <h4 class="content-header" ng-show="books.length">Knihy:</h4>
+  <table class="table" ng-show="books.length">
+    <thead>
+      <tr>
+        <th>Obal</th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Vydavateľ</th>
+        <th>Rok</th>
+        <th>Množstvo</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="book in books">
+        <td>
+          <a ng-href="#/books/{{book.bookId}}" class="btn btn-link">
+            <img ng-src="{{book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
+          </a>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.publisher}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.year}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{book.bookId}}">{{book.quantity}}</a></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div ng-hide="books.length">
+    <p>Nenašiel sa výsledok</p>
+  </div>
+</section>
