@@ -32,8 +32,8 @@
     <nav class="nav">
       <a href="#/" class="nav-link"><i class="icon-home"></i> Hlavná stránka</a>
       <a href="#/books/" class="nav-link"><i class="icon-book"></i> Knihy</a>
-      <a href="#/users/" class="nav-link"><i class="icon-user"></i> Používatelia</a>
-      <a href="#/rents/" class="nav-link"><i class="icon-time"></i> Požičania</a>
+      <a href="#/profile/" class="nav-link" ng-show="user.name"><i class="icon-user"></i> Môj účet</a>
+      <a href="#/rents/" class="nav-link" ng-show="user.name"><i class="icon-time"></i> Požičania</a>
 
       <form name="searchBook" ng-submit="search(query)" class="nav-search">
         <div class="input-append">
@@ -100,6 +100,14 @@
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
         <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/controllers/profile.js"></script>
+        <script src="scripts/controllers/rents.js"></script>
+        <script src="scripts/controllers/books.js"></script>
+        <script src="scripts/services/Auth.js"></script>
+        <script src="scripts/services/Books.js"></script>
+        <script src="scripts/services/Rents.js"></script>
+        <script src="scripts/controllers/search.js"></script>
+        <script src="scripts/services/Search.js"></script>
         <!-- endbuild -->
 </body>
 </html>
