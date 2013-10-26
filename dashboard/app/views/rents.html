@@ -1,1 +1,36 @@
-<p>This is the rents view.</p>
+<section>
+  <h4 class="content-header">Zoznam požičaní</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Obal</th>
+        <th>Názov</th>
+        <th>Autor</th>
+        <th>Používateľ</th>
+        <th>Od</th>
+        <th>Do</th>
+        <th>Vrátené</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr ng-repeat="rent in rents" ng-class="getStyle(rent)">
+        <td>
+          <a ng-href="#/books/{{rent.book.bookId}}" class="btn btn-link">
+            <img ng-src="{{rent.book.cover}}" alt="" style="height: 50px; width: auto; line-height: 50px;"></td>
+          </a>
+        <td style="line-height: 50px;"><a ng-href="#/books/{{rent.book.bookId}}">{{rent.book.title}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/books?author={{rent.book.author}}">{{rent.book.author}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/users/{{rent.user.userId}}">{{rent.user.name}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.rent.startDate | date}}</a></td>
+        <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.rent.endDate | date}}</a></td>
+        <td style="line-height: 50px;">
+          <a ng-href="#/rents/{{rent.rentId}}" ng-hide="rent.status == 'rented'">{{rent.rent.returnDate | date}}</a>
+          <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)"><i class="icon-check"></i> Vrátiť knihu</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <button class="btn btn-block" ng-click="query()" ng-show="mayQuery"><i class="icon-repeat"></i> Ďalšie</button>
+</section>

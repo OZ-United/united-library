@@ -29,7 +29,23 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
       })
       .when('/rents', {
         templateUrl: 'views/rents.html',
-        controller: 'RentsCtrl'
+        controller: 'RentsCtrl',
+        resolve: {
+          rents: function($q, $route, Rents, Auth){
+            var deferred = $q.defer();
+            Rents.query({user: Auth.getUser().userId},
+              function(rents){
+                console.log(rents);
+                deferred.resolve(rents);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
       })
       .when('/books', {
         templateUrl: 'views/books.html',

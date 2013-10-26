@@ -1,6 +1,11 @@
 'use strict';
 
 angular.module('dashboardApp')
-  .service('Rents', function Rents() {
-    // AngularJS will instantiate a singleton by calling "new" on this function
+.factory('Rents', function ($resource, Auth) {
+  return $resource((window.host || '') + '/rents/:rentId/:action', { rentId: '@rentId' }, {
+    'get' : { method: 'GET', params: { }, headers: Auth.getCradentials() },
+    'create' : { method: 'POST', params: { }, headers: Auth.getCradentials() },
+    'returnBook' : { method: 'POST', params: { action: 'returnBook' }, headers: Auth.getCradentials() },
+    'query'   : { method: 'GET', params: { }, headers: Auth.getCradentials(), isArray: true },
   });
+});
