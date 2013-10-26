@@ -9,7 +9,23 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
       })
       .when('/profile', {
         templateUrl: 'views/profile.html',
-        controller: 'ProfileCtrl'
+        controller: 'ProfileCtrl',
+        resolve: {
+          user: function($q, $route, Users, Auth){
+            var deferred = $q.defer();
+            Users.get({'userId': Auth.getUser().userId},
+              function(user){
+                console.log(user);
+                deferred.resolve(user);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
       })
       .when('/rents', {
         templateUrl: 'views/rents.html',
