@@ -19,14 +19,7 @@ exports.index = function(req, res){
   var page = req.query.page || 1;
   var limit = req.query.limit || 1000;
 
-  BookModel.find(_.omit(req.query, 'page', 'limit'))
-    .skip((page - 1) * limit)
-    .limit(limit)
-    .sort('title')
-    .exec(function(err, books){
-      if (err) { return next(err); }
-      res.render('index', {books: books});
-    });
+  res.redirect('/dashboard');
 };
 
 exports.upload = function(req, res){

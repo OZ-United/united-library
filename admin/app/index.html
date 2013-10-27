@@ -11,8 +11,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+
         <!-- build:css({.tmp,app}) styles/main.css -->
-        <link rel="stylesheet" href="bower_components/bootstrap-sass/bootstrap-2.3.2.min.css">
+        <link rel="stylesheet" href="/bower_components/bootstrap-sass/bootstrap-2.3.2.min.css">
+        <link rel="stylesheet" href="/assets/styles/layout.css">
+
         <link rel="stylesheet" href="styles/main.css">
         <link rel="stylesheet" href="styles/ddupload.css">
         <!-- endbuild -->
@@ -43,12 +46,12 @@
 
       <h4 ng-show="user.name" ng-click="signout()">
         <p ng-bind="user.name"></p>
-        <i class="icon-signout"></i>
+        <i class="icon-power-off"></i>
         <a href="#"><span>Odhlásiť sa</span></a>
       </h4>
 
       <h4 ng-hide="user.name">
-        <i class="icon-signin"></i>
+        <i class="icon-sign-in"></i>
         <a href="#/auth"><span>Prihlásiť sa</span></a>
       </h4>
 
@@ -67,53 +70,55 @@
     </script>
 
     <script src="scripts/config.js"></script>
-    <script src="bower_components/jquery/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
+    <script src="/bower_components/jquery/jquery.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
 
-    <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/bower_components/font-awesome/css/font-awesome.min.css">
 
         <!-- build:js scripts/plugins.js -->
-        <script src="bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-tooltip.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-modal.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-transition.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-button.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-popover.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-typeahead.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-carousel.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-scrollspy.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-collapse.js"></script>
-        <script src="bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-affix.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-alert.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-dropdown.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-tooltip.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-modal.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-transition.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-button.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-popover.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-typeahead.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-carousel.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-scrollspy.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-collapse.js"></script>
+        <script src="/bower_components/bootstrap-sass/js/bootstrap-tab.js"></script>
         <!-- endbuild -->
 
         <!-- build:js scripts/modules.js -->
-        <script src="bower_components/angular-resource/angular-resource.js"></script>
-        <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-        <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-route.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-resource.min.js"></script>
         <script src="bower_components/angular-isbn/src/angular-isbn.js"></script>
-        <script src="bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
+        <script src="/bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls.min.js"></script>
         <!-- endbuild -->
 
         <!-- build:js({.tmp,app}) scripts/scripts.js -->
         <script src="scripts/app.js"></script>
-        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/services/Auth.js"></script>
         <script src="scripts/services/Users.js"></script>
+        <script src="scripts/services/Books.js"></script>
+        <script src="scripts/services/Rents.js"></script>
+        <script src="scripts/services/Search.js"></script>
+
+        <script src="scripts/controllers/main.js"></script>
         <script src="scripts/controllers/users.js"></script>
         <script src="scripts/controllers/books.js"></script>
-        <script src="scripts/services/Books.js"></script>
-        <script src="scripts/directives/draganddrop.js"></script>
         <script src="scripts/controllers/rents.js"></script>
-        <script src="scripts/services/Rents.js"></script>
         <script src="scripts/controllers/books/bookId.js"></script>
         <script src="scripts/controllers/users/userId.js"></script>
         <script src="scripts/controllers/rents/rentId.js"></script>
-        <script src="scripts/directives/infiniteScroll.js"></script>
         <script src="scripts/controllers/search.js"></script>
-        <script src="scripts/services/Search.js"></script>
-        <script src="scripts/services/Auth.js"></script>
         <script src="scripts/controllers/auth.js"></script>
+
+        <script src="scripts/directives/draganddrop.js"></script>
+        <script src="scripts/directives/infiniteScroll.js"></script>
+
         <!-- endbuild -->
 </body>
 </html>

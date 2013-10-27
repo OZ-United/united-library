@@ -13,7 +13,7 @@
   <p ng-show="rent.book.isbn.isbn13"><span class="book-detail-title">ISBN-13:</span> {{rent.book.isbn.isbn13}}</p>
   <p ng-show="rent.book.isbn.isbn10"><span class="book-detail-title">ISBN-10:</span> {{rent.book.isbn.isbn10}}</p>
 
-  <a ng-href="#/rents?book={{rent.book.bookId}}" class="btn"><i class="icon-search"></i> História</a>
+  <a ng-href="#/rents?book={{rent.book.bookId}}" class="btn"><i class="icon-time"></i> História</a>
 </div>
 
 </section>
@@ -27,7 +27,7 @@
 
 
   <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)"><i class="icon-check"></i> Vrátiť knihu</button>
-  <a ng-href="#/rents?bookCopy={{rent.bookCopy}}" class="btn"><i class="icon-search"></i> História</a>
+  <a ng-href="#/rents?bookCopy={{rent.bookCopy}}" class="btn"><i class="icon-time"></i> História</a>
 </div>
 
 
