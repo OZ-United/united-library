@@ -91,6 +91,46 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
         templateUrl: 'views/auth.html',
         controller: 'AuthCtrl'
       })
+      .when('/books/:bookId', {
+        templateUrl: 'views/books/bookId.html',
+        controller: 'BooksBookidCtrl',
+        resolve: {
+          book: function($q, $route, Books, Auth){
+            var deferred = $q.defer();
+            Books.get({'bookId': $route.current.params.bookId},
+              function(book){
+                console.log(book);
+                deferred.resolve(book);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
+      })
+      .when('/rents/:rentId', {
+        templateUrl: 'views/rents/rentId.html',
+        controller: 'RentsRentidCtrl',
+        resolve: {
+          rent: function($q, $route, Rents, Auth){
+            var deferred = $q.defer();
+            Rents.get({'rentId': $route.current.params.rentId},
+              function(rent){
+                console.log(rent);
+                deferred.resolve(rent);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
