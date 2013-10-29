@@ -13,7 +13,7 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
         resolve: {
           user: function($q, $route, Users, Auth){
             var deferred = $q.defer();
-            Users.get({'userId': Auth.getUser().userId},
+            Users.me({'userId': 'me'},
               function(user){
                 console.log(user);
                 deferred.resolve(user);
@@ -131,6 +131,10 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
           }
         }
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -153,15 +157,14 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
       console.log(next.templateUrl);
       console.log(Auth.isLoggedIn());
-      // if ( !Auth.isLoggedIn() ) {
-      //   if ( next.templateUrl !== 'views/auth.html' ) {
-      //     $location.path( '/auth' );
-      //   }
-      // }
-      // else {
-      //   if ( next.templateUrl === 'views/auth.html' ) {
-      //     $location.path( '/' );
-      //   }
-      // }
+      if ( Auth.isLoggedIn() ) {
+        if ( next.templateUrl === 'views/auth.html' ) {
+          $location.path( '/' );
+        }
+
+        if ( next.templateUrl === 'views/register.html' ) {
+          $location.path( '/' );
+        }
+      }
     });
   });
