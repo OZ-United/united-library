@@ -50,8 +50,8 @@ module.exports = function(app, auth) {
 
   // rents
   var rents = require('../routes/rents');
-  app.get('/rents', users.hasAuthorization, users.isAdmin, rents.query);
-  app.get('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.get);
+  app.get('/rents', users.hasAuthorization, users.isMe, rents.query);
+  app.get('/rents/:rentId', users.hasAuthorization, users.isMe, rents.get);
   app.post('/rents', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
   app.post('/rents/reserveBook', users.hasAuthorization,rents.reserveBook, emails.reserveBook);
   app.post('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);

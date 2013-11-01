@@ -17,6 +17,12 @@ exports.user = function(req, res, next){
   });
 };
 
+exports.me = function(req, res, next){
+
+  res.json(req.authorization);
+};
+
+
 exports.query = function(req, res, next){
   console.log(req.query);
   var page = req.query.page || 1;
@@ -131,7 +137,13 @@ exports.isAdmin = function(req, res, next){
   return next();
 };
 
-exports.me = function(req, res, next){
+exports.isMe = function(req, res, next){
 
-    res.json(req.authorization);
+  if (! req.authorization.admin) {
+    var userId = req.query.user || req.query.userId;
+    if (userId !== req.authorization.userId) {
+      return next(new error.Forbidden());
+    }
+  }
+  return next();
 };
