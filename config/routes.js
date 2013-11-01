@@ -53,7 +53,9 @@ module.exports = function(app, auth) {
   app.get('/rents', users.hasAuthorization, users.isAdmin, rents.query);
   app.get('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.get);
   app.post('/rents', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
-  app.put('/rents/:rentId/', users.hasAuthorization, users.isAdmin, rents.update);
+  app.post('/rents/reserveBook', users.hasAuthorization,rents.reserveBook, emails.reserveBook);
+  app.post('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
+  app.put('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.update);
   app.del('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.remove);
   app.post('/rents/:rentId/returnBook', users.hasAuthorization, users.isAdmin, rents.returnBook, emails.returnBook);
   

@@ -43,7 +43,7 @@ exports.get = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  var rent = new RentModel({});
+  var rent = req.rent || new RentModel({});
   
   rent.rentBook(req.body, function(err, rent){
     if (err) { return next(err); }
@@ -69,7 +69,15 @@ exports.update = function(req, res, next){
 };
 
 exports.reserveBook = function(req, res, next){
-  res.send(200);
+  var rent = new RentModel({});
+  
+  rent.reserveBook(req.body, function(err, rent){
+    if (err) { return next(err); }
+    console.log(rent);
+    res.json(rent);
+    req.rent = rent;
+    return next();
+  });
 };
 
 exports.returnBook = function(req, res, next){

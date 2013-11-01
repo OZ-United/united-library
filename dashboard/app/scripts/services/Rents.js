@@ -5,6 +5,7 @@ angular.module('dashboardApp')
   return $resource((window.host || '') + '/rents/:rentId/:action', { rentId: '@rentId' }, {
     'get' : { method: 'GET', params: { }, headers: Auth.getCradentials() },
     'create' : { method: 'POST', params: { }, headers: Auth.getCradentials() },
+    'reserveBook' : { method: 'POST', params: { action: 'reserveBook' }, headers: Auth.getCradentials() },
     'returnBook' : { method: 'POST', params: { action: 'returnBook' }, headers: Auth.getCradentials() },
     'query'   : { method: 'GET', params: { }, headers: Auth.getCradentials(), isArray: true },
   });
