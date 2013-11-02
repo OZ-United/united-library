@@ -15,6 +15,10 @@ angular.module('adminApp')
     $scope.reservations = Rents.query({status: 'reserved', book: $scope.book.bookId});
   };
 
+  $scope.clearRent = function(rent) {
+    rent.rentId = undefined;
+  };
+
   $scope.closeRent = function () {
     $scope.rentBook = false;
   };

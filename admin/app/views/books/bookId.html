@@ -50,7 +50,12 @@
         <div class="control-group">
         <label class="control-label" for="inputUserId">UserId:</label>
         <div class="controls">
-          <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8">
+          <input type="text"
+            ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId"
+            ng-change="clearRent(rentCopy)"
+            typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8"
+
+          >
           <!-- <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8"> -->
         </div>
         </div>
@@ -58,7 +63,10 @@
         <div class="control-group" ng-show="reservations.length">
         <label class="control-label">Rezervácie:</label>
         <div class="controls">
-          <p ng-repeat="reservation in reservations" ng-click="rentCopy.userId = reservation.user.userId">{{reservation.user.name}}</p>
+          <p ng-repeat="reservation in reservations"
+            ng-click="rentCopy.userId = reservation.user.userId; rentCopy.rentId = reservation.rentId;"
+          >
+            {{reservation.user.name}}</p>
         </div>
         </div>
 
