@@ -11,6 +11,8 @@ angular.module('adminApp')
       'bookId': $scope.book.bookId,
       'bookCopyId': bookCopy.bookCopyId
     };
+
+    $scope.reservations = Rents.query({status: 'reserved', book: $scope.book.bookId});
   };
 
   $scope.closeRent = function () {

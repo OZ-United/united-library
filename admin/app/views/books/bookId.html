@@ -48,15 +48,22 @@
       <form class="form-horizontal" ng-submit="save()" name="addBookForm">
 
         <div class="control-group">
-        <label class="control-label" for="inputUserId">UserId</label>
+        <label class="control-label" for="inputUserId">UserId:</label>
         <div class="controls">
           <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8">
           <!-- <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8"> -->
         </div>
         </div>
 
+        <div class="control-group" ng-show="reservations.length">
+        <label class="control-label">Rezervácie:</label>
+        <div class="controls">
+          <p ng-repeat="reservation in reservations" ng-click="rentCopy.userId = reservation.user.userId">{{reservation.user.name}}</p>
+        </div>
+        </div>
+
         <div class="control-group">
-        <label class="control-label" for="inputEndDate">Do kedy</label>
+        <label class="control-label" for="inputEndDate">Do kedy:</label>
         <div class="controls">
           <div ng-model="rentCopy.endDate" >
             <datepicker min="minDate" show-weeks="false" starting-day="1" id="inputEndDate" ng-required="true"></datepicker>
