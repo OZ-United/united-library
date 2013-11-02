@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('dashboardApp')
-.controller('RentsCtrl', function ($scope, Rents, $location, $routeParams, rents) {
+.controller('RentsCtrl', function ($scope, Rents, $location, $routeParams, Auth, rents) {
   $scope.rents = rents;
 
   $scope.returnBook = function(rent){
@@ -24,7 +24,7 @@ angular.module('dashboardApp')
     }
 
     var query = {page: $scope.page + 1};
-    query = angular.extend(query, $routeParams);
+    query = angular.extend(query, $routeParams, {user: Auth.getUser().userId});
     console.log(query);
     Rents.query(query,
       function(rents){

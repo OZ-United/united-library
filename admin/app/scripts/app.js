@@ -159,6 +159,28 @@ angular.module('adminApp', ['ngRoute', 'ngResource', 'ja.isbn', 'ui.bootstrap'])
         templateUrl: 'views/auth.html',
         controller: 'AuthCtrl'
       })
+      .when('/reservations', {
+        templateUrl: 'views/reservations.html',
+        controller: 'ReservationsCtrl',
+        resolve: {
+          reservations: function($q, $route, Rents, Auth){
+            var deferred = $q.defer();
+            var query = {};
+            angular.extend(query, $route.current.params, {status: 'reserved'});
+            Rents.query(query,
+              function(reservations){
+                console.log(reservations);
+                deferred.resolve(reservations);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });

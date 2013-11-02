@@ -22,12 +22,15 @@ exports.query = function(req, res, next){
   var page = req.query.page || 1;
   var limit = req.query.limit || 100;
 
+  var query = _.omit(req.query, 'page', 'limit', 'status');
+  query.status = req.query.status || { $not: /reserved/ };
+
   RentModel
-    .find(_.omit(req.query, 'page', 'limit'))
+    .find(query)
     .populate('user book', 'bookId author title cover userId name email gravatar')
     .skip((page - 1) * limit)
     .limit(limit)
-    .sort('-rent.startDate')
+    .sort('-reservation.reservationDate -rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }
       res.json(rents);

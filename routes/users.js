@@ -114,7 +114,6 @@ exports.auth = function(req, res, next){
     if (err) { return next(err); }
     if (! user) { return next(new error.Unauthorized('User does not exist.')); }
     if (! user.authenticate(req.body.password)) { return next(new error.Forbidden()); }
-    if (! user.admin) { return next(new error.Forbidden()); }
 
     res.json(_.pick(user, 'userId','email', 'name', 'admin', 'hash', 'gravatar'));
   });

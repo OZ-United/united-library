@@ -34,6 +34,7 @@
       <a href="#/books/" class="nav-link"><i class="icon-book"></i> Knihy</a>
       <a href="#/profile/" class="nav-link" ng-show="user.name"><i class="icon-user"></i> Môj účet</a>
       <a href="#/rents/" class="nav-link" ng-show="user.name"><i class="icon-time"></i> Požičania</a>
+      <a href="#/reservations/" class="nav-link" ng-show="user.name"><i class="icon-time"></i> Rezervácie</a>
 
       <form name="searchBook" ng-submit="search(query)" class="nav-search">
         <div class="input-append">
@@ -113,6 +114,7 @@
         <script src="scripts/controllers/books/bookId.js"></script>
         <script src="scripts/controllers/rents/rentId.js"></script>
         <script src="scripts/controllers/register.js"></script>
+        <script src="scripts/controllers/reservations.js"></script>
         <!-- endbuild -->
 </body>
 </html>
