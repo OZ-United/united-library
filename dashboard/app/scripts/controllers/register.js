@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('dashboardApp')
-.controller('AuthCtrl', function ($scope, Auth, $location) {
+.controller('RegisterCtrl', function ($scope, Auth, $location) {
 
   $scope.auth = function(user) {
-    Auth.login(user).then(function(user){
+    Auth.register(user).then(function(user){
       console.log(user);
       $location.path('/');
     },
     function(){
-      $scope.error = 'Nepodarilo sa prihlásiť';
+      $scope.error = 'Nepodarilo sa zaregistrovať';
     });
   };
 });

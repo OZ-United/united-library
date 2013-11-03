@@ -1,0 +1,49 @@
+<div>
+  <form class="form-horizontal" ng-submit="auth(register)" name="authForm" style="max-width: 500px; margin: 50px auto;">
+    <h3 class="text-center">Registrácia</h3>
+
+    <p ng-show="error" class="alert alert-error">{{error}}</p>
+
+    <div class="control-group">
+    <label class="control-label" for="inputEmail">Email</label>
+    <div class="controls">
+    <input type="email" ng-model="register.email" id="inputEmail" class="input-field" required placeholder="admin@spolocenstvounited.sk">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputName">Meno</label>
+    <div class="controls">
+    <input type="text" ng-model="register.name" id="inputName" class="input-field" required placeholder="Spolocenstvo united">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputPhone">Tel. Číslo</label>
+    <div class="controls">
+    <input type="tel" ng-model="register.phone" id="inputPhone" class="input-field" required placeholder="+421 900 123 456">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <label class="control-label" for="inputPassword">Heslo</label>
+    <div class="controls">
+    <input type="password" ng-model="register.password" id="inputPassword" class="input-field" required placeholder="******">
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <button type="submit" class="btn btn-success"><i class="icon-signin"></i> Zaregistrovať sa</button>
+    </div>
+    </div>
+
+    <div class="control-group">
+    <div class="controls">
+    <p><a href="#/auth">Prihlásiť sa</a></p>
+    </div>
+    </div>
+
+
+  </form>
+</div>

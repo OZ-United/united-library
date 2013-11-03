@@ -22,12 +22,15 @@ exports.query = function(req, res, next){
   var page = req.query.page || 1;
   var limit = req.query.limit || 100;
 
+  var query = _.omit(req.query, 'page', 'limit', 'status');
+  query.status = req.query.status || { $not: /reserved/ };
+
   RentModel
-    .find(_.omit(req.query, 'page', 'limit'))
+    .find(query)
     .populate('user book', 'bookId author title cover userId name email gravatar')
     .skip((page - 1) * limit)
     .limit(limit)
-    .sort('-rent.startDate')
+    .sort('-reservation.reservationDate -rent.startDate')
     .exec(function(err, rents){
       if (err) { return next(err); }
       res.json(rents);
@@ -43,7 +46,7 @@ exports.get = function(req, res, next){
 };
 
 exports.create = function(req, res, next){
-  var rent = new RentModel({});
+  var rent = req.rent || new RentModel({});
   
   rent.rentBook(req.body, function(err, rent){
     if (err) { return next(err); }
@@ -69,7 +72,15 @@ exports.update = function(req, res, next){
 };
 
 exports.reserveBook = function(req, res, next){
-  res.send(200);
+  var rent = new RentModel({});
+  
+  rent.reserveBook(req.body, function(err, rent){
+    if (err) { return next(err); }
+    console.log(rent);
+    res.json(rent);
+    req.rent = rent;
+    return next();
+  });
 };
 
 exports.returnBook = function(req, res, next){

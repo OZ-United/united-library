@@ -26,11 +26,12 @@ RentModelSchema.virtual('rentId').get(function(){
   return this.id;
 });
 
-RentModelSchema.methods.reserveBook = function(bookId, userId, cb){
+RentModelSchema.methods.reserveBook = function(payload, cb){
   this.status = 'reserved';
-  this.book = bookId;
-  this.user = userId;
+  this.book = payload.bookId;
+  this.user = payload.userId;
 
+  console.log(this);
   return this.save(cb);
 };
 

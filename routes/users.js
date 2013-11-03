@@ -17,6 +17,12 @@ exports.user = function(req, res, next){
   });
 };
 
+exports.me = function(req, res, next){
+
+  res.json(req.authorization);
+};
+
+
 exports.query = function(req, res, next){
   console.log(req.query);
   var page = req.query.page || 1;
@@ -108,7 +114,6 @@ exports.auth = function(req, res, next){
     if (err) { return next(err); }
     if (! user) { return next(new error.Unauthorized('User does not exist.')); }
     if (! user.authenticate(req.body.password)) { return next(new error.Forbidden()); }
-    if (! user.admin) { return next(new error.Forbidden()); }
 
     res.json(_.pick(user, 'userId','email', 'name', 'admin', 'hash', 'gravatar'));
   });
@@ -131,7 +136,13 @@ exports.isAdmin = function(req, res, next){
   return next();
 };
 
-exports.me = function(req, res, next){
+exports.isMe = function(req, res, next){
 
-    res.json(req.authorization);
+  if (! req.authorization.admin) {
+    var userId = req.query.user || req.query.userId;
+    if (userId !== req.authorization.userId) {
+      return next(new error.Forbidden());
+    }
+  }
+  return next();
 };

@@ -21,6 +21,21 @@ angular.module('dashboardApp')
 
       return deferred.promise;
     },
+    register: function (user) {
+      var deferred = $q.defer();
+
+      $http.post((window.host || '') + '/users', user)
+        .success(function(res){
+          $rootScope.user = res;
+          localStorage.setItem(STORAGE_ID, JSON.stringify(res));
+          deferred.resolve(res);
+        })
+        .error(function(){
+          deferred.reject();
+        });
+
+      return deferred.promise;
+    },
     getCradentials: function() {
       return {
         'userId': $rootScope.user.userId,

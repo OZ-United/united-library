@@ -13,7 +13,7 @@ angular.module('adminApp')
   };
 
   $scope.getStyle = function(rent){
-    if (new Date(rent.rent.endDate) < new Date() && !rent.rent.returnDate) {
+    if (rent.rent && (new Date(rent.rent.endDate) < new Date() && !rent.rent.returnDate)) {
       return 'warning';
     }
   };

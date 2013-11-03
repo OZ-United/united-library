@@ -26,7 +26,7 @@ module.exports = function(app, auth) {
   // users
   var users = require('../routes/users');
   app.get('/users', users.hasAuthorization, users.isAdmin, users.query);
-  app.post('/users', users.hasAuthorization, users.isAdmin, users.create, emails.registerUser);
+  app.post('/users', users.create, emails.registerUser);
   app.get('/users/me', users.hasAuthorization, users.me);
   app.get('/users/:userId', users.hasAuthorization, users.isAdmin, users.get);
   app.put('/users/:userId', users.hasAuthorization, users.isAdmin, users.update);
@@ -50,10 +50,12 @@ module.exports = function(app, auth) {
 
   // rents
   var rents = require('../routes/rents');
-  app.get('/rents', users.hasAuthorization, users.isAdmin, rents.query);
-  app.get('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.get);
+  app.get('/rents', users.hasAuthorization, users.isMe, rents.query);
+  app.get('/rents/:rentId', users.hasAuthorization, users.isMe, rents.get);
   app.post('/rents', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
-  app.put('/rents/:rentId/', users.hasAuthorization, users.isAdmin, rents.update);
+  app.post('/rents/reserveBook', users.hasAuthorization,rents.reserveBook, emails.reserveBook);
+  app.post('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
+  app.put('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.update);
   app.del('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.remove);
   app.post('/rents/:rentId/returnBook', users.hasAuthorization, users.isAdmin, rents.returnBook, emails.returnBook);
   

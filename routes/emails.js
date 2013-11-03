@@ -9,6 +9,15 @@ exports.rentBook = function(req, res, next){
   });
 };
 
+exports.reserveBook = function(req, res, next){
+  var rent = req.rent;
+
+  rent.populate('user').populate('book', function(err, rent){
+    if (err) return;
+    Email.reserveBook(rent);
+  });
+};
+
 exports.returnBook = function(req, res, next){
   var rent = req.rent;
 

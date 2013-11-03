@@ -13,7 +13,7 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
         resolve: {
           user: function($q, $route, Users, Auth){
             var deferred = $q.defer();
-            Users.get({'userId': Auth.getUser().userId},
+            Users.me({'userId': 'me'},
               function(user){
                 console.log(user);
                 deferred.resolve(user);
@@ -33,7 +33,9 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
         resolve: {
           rents: function($q, $route, Rents, Auth){
             var deferred = $q.defer();
-            Rents.query({user: Auth.getUser().userId},
+            var query = {};
+            angular.extend(query, $route.current.params, {user: Auth.getUser().userId});
+            Rents.query(query,
               function(rents){
                 console.log(rents);
                 deferred.resolve(rents);
@@ -131,6 +133,32 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
           }
         }
       })
+      .when('/register', {
+        templateUrl: 'views/register.html',
+        controller: 'RegisterCtrl'
+      })
+      .when('/reservations', {
+        templateUrl: 'views/reservations.html',
+        controller: 'ReservationsCtrl',
+        resolve: {
+          reservations: function($q, $route, Rents, Auth){
+            var deferred = $q.defer();
+            var query = {};
+            angular.extend(query, $route.current.params, {user: Auth.getUser().userId, status: 'reserved'});
+            Rents.query(query,
+              function(reservations){
+                console.log(reservations);
+                deferred.resolve(reservations);
+              },
+              function(){
+                deferred.reject();
+              }
+            );
+
+            return deferred.promise;
+          }
+        }
+      })
       .otherwise({
         redirectTo: '/'
       });
@@ -153,15 +181,14 @@ angular.module('dashboardApp', ['ngRoute', 'ngResource'])
     $rootScope.$on('$routeChangeStart', function(event, next, current) {
       console.log(next.templateUrl);
       console.log(Auth.isLoggedIn());
-      // if ( !Auth.isLoggedIn() ) {
-      //   if ( next.templateUrl !== 'views/auth.html' ) {
-      //     $location.path( '/auth' );
-      //   }
-      // }
-      // else {
-      //   if ( next.templateUrl === 'views/auth.html' ) {
-      //     $location.path( '/' );
-      //   }
-      // }
+      if ( Auth.isLoggedIn() ) {
+        if ( next.templateUrl === 'views/auth.html' ) {
+          $location.path( '/' );
+        }
+
+        if ( next.templateUrl === 'views/register.html' ) {
+          $location.path( '/' );
+        }
+      }
     });
   });
