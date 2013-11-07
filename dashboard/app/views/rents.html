@@ -26,7 +26,7 @@
         <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.rent.endDate | date}}</a></td>
         <td style="line-height: 50px;">
           <a ng-href="#/rents/{{rent.rentId}}" ng-hide="rent.status == 'rented'">{{rent.rent.returnDate | date}}</a>
-          <button class="btn btn-success" ng-show="rent.status == 'rented'" ng-click="returnBook(rent)"><i class="icon-check"></i> Vrátiť knihu</button>
+          <button class="btn btn-info" ng-show="rent.status == 'rented'"><i class="icon-book"></i> Požičaná</button>
         </td>
       </tr>
     </tbody>

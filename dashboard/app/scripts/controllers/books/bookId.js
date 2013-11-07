@@ -18,7 +18,7 @@ angular.module('dashboardApp')
       'userId': Auth.getUser().userId
     };
     Rents.reserveBook(payload, function(){
-      $location.path('/rents');
+      $location.path('/reservations');
     });
   };
 
