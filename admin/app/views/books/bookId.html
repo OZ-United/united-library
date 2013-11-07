@@ -27,14 +27,22 @@
     <!-- <p>{{copy.bookCopyId}}</p> -->
     <!-- <p>{{copy.date | date}}</p> -->
     <!-- <p>{{copy.status}}</p> -->
-    <p ng-show="copy.status == 'rented'">Požičaná</p>
+    <!-- <p ng-show="copy.status == 'rented'">Požičaná</p>
     <p ng-show="copy.status == 'available' || copy.status == 'returned'">Dostupná</p>
-    <p ng-show="copy.status == 'reserved'">Rezervovaná</p>
+    <p ng-show="copy.status == 'reserved'">Rezervovaná</p> -->
     <p>{{copy.info}}</p>
+
     <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}" class="btn"><i class="icon-time"></i> História</a>
-    <a class="btn btn-primary" ng-show="copy.status == 'available' || copy.status == 'returned'" ng-click="openRent(copy)"><i class="icon-share"></i> Požičaj</a>
+    <!-- <a class="btn btn-primary" ng-show="copy.status == 'available' || copy.status == 'returned'" ng-click="openRent(copy)"><i class="icon-share"></i> Požičaj</a>
     <a class="btn btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)"><i class="icon-check"></i> Vrátiť</a>
-    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Info</a>
+    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Info</a> -->
+
+    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Požičaná</a>
+    <a class="btn btn-primary" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)"><i class="icon-check"></i> Vrátiť</a>
+    <a class="btn btn-success" ng-show="copy.status == 'available' || copy.status == 'returned'"><i class="icon-ok"></i> Dostupná</a>
+    <a class="btn btn-primary" ng-show="copy.status == 'available' || copy.status == 'returned'" ng-click="openRent(copy)"><i class="icon-share"></i> Požičaj</a>
+    <a class="btn btn-info" ng-show="copy.status == 'reserved'"><i class="icon-search"></i> Rezervovaná</a>
+    <p></p>
     <p></p>
   </li>
 </ul>

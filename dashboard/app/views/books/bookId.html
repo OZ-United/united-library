@@ -12,7 +12,7 @@
 <p ng-show="book.year"><span class="book-detail-title">Rok vydania:</span> <a ng-href="#/books?year={{book.year}}">{{book.year}}</a></p>
 <p ng-show="book.isbn.isbn13"><span class="book-detail-title">ISBN-13:</span> {{book.isbn.isbn13}}</p>
 <p ng-show="book.isbn.isbn10"><span class="book-detail-title">ISBN-10:</span> {{book.isbn.isbn10}}</p>
-<a class="btn btn-primary" ng-click="reserveBook()"><i class="icon-share"></i> Rezervuj</a>
+<a class="btn btn-primary" ng-click="reserveBook()" ng-show="Auth.getUser().userId"><i class="icon-share"></i> Rezervuj</a>
 
 
 </div>
@@ -26,11 +26,10 @@
     <!-- <p>{{copy.bookCopyId}}</p> -->
     <!-- <p>{{copy.date | date}}</p> -->
     <!-- <p>{{copy.status}}</p> -->
-    <p ng-show="copy.status == 'rented'">Požičaná</p>
-    <p ng-show="copy.status == 'available' || copy.status == 'returned'">Dostupná</p>
-    <p ng-show="copy.status == 'reserved'">Rezervovaná</p>
     <p>{{copy.info}}</p>
     <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Požičaná</a>
+    <a class="btn btn-success" ng-show="copy.status == 'available' || copy.status == 'returned'"><i class="icon-ok"></i> Dostupná</a>
+    <a class="btn btn-info" ng-show="copy.status == 'reserved'"><i class="icon-search"></i> Rezervovaná</a>
     <p></p>
   </li>
 </ul>

@@ -3,6 +3,7 @@
 angular.module('dashboardApp')
 .controller('BooksBookidCtrl', function ($scope, Rents, $routeParams, $location, book, Auth) {
   $scope.book = book;
+  $scope.Auth = Auth;
 
   $scope.returnBook = function(bookCopy) {
     var rentId = bookCopy.rents[bookCopy.rents.length - 1];
@@ -12,8 +13,6 @@ angular.module('dashboardApp')
   };
 
   $scope.reserveBook = function() {
-    console.log($routeParams);
-    console.log(Auth.getUser());
     var payload = {
       'bookId': $routeParams.bookId,
       'userId': Auth.getUser().userId
