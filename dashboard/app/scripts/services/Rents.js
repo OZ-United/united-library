@@ -8,5 +8,6 @@ angular.module('dashboardApp')
     'reserveBook' : { method: 'POST', params: { action: 'reserveBook' }, headers: Auth.getCradentials() },
     'returnBook' : { method: 'POST', params: { action: 'returnBook' }, headers: Auth.getCradentials() },
     'query'   : { method: 'GET', params: { }, headers: Auth.getCradentials(), isArray: true },
+    'cancelReservation': { method: 'DELETE', params: { action: 'reservation' }, headers: Auth.getCradentials(), isArray: true },
   });
 });

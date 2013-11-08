@@ -28,4 +28,11 @@ angular.module('dashboardApp')
 
   $scope.page = 1;
   $scope.mayQuery = true;
+
+  $scope.cancelReservation = function(reservation, index){
+
+    Rents.cancelReservation({rentId: reservation.rentId}, function(){
+      $scope.reservations.splice(index, 1);
+    });
+  };
 });

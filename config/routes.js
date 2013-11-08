@@ -57,6 +57,7 @@ module.exports = function(app, auth) {
   app.post('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.create, emails.rentBook);
   app.put('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.update);
   app.del('/rents/:rentId', users.hasAuthorization, users.isAdmin, rents.remove);
+  app.del('/rents/:rentId/reservation', users.hasAuthorization, users.isMe, rents.remove);
   app.post('/rents/:rentId/returnBook', users.hasAuthorization, users.isAdmin, rents.returnBook, emails.returnBook);
   
   app.param('rentId', rents.rent);
