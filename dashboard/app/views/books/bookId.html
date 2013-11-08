@@ -12,8 +12,16 @@
 <p ng-show="book.year"><span class="book-detail-title">Rok vydania:</span> <a ng-href="#/books?year={{book.year}}">{{book.year}}</a></p>
 <p ng-show="book.isbn.isbn13"><span class="book-detail-title">ISBN-13:</span> {{book.isbn.isbn13}}</p>
 <p ng-show="book.isbn.isbn10"><span class="book-detail-title">ISBN-10:</span> {{book.isbn.isbn10}}</p>
-<a class="btn btn-primary" ng-click="reserveBook()" ng-show="Auth.getUser().userId"><i class="icon-share"></i> Rezervuj</a>
+<a class="btn btn-primary"
+  ng-click="reserveBook()"
+  ng-show="Auth.isLoggedIn() && (!reserved && !rented)"
+>
+  <i class="icon-share"></i> Rezervuj
+</a>
 
+  <p ng-show="!Auth.isLoggedIn()" class="alert alert-warning">Na rezerváciu knihu je potrebné sa <a href="#/auth">prihlásiť</a></p>
+  <p ng-show="reserved" class="alert alert-warning">Kniha je už rezervovaná</p>
+  <p ng-show="rented" class="alert alert-warning">Kniha je už požičaná</p>
 
 </div>
 

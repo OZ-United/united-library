@@ -5,12 +5,29 @@ angular.module('dashboardApp')
   $scope.book = book;
   $scope.Auth = Auth;
 
-  $scope.returnBook = function(bookCopy) {
-    var rentId = bookCopy.rents[bookCopy.rents.length - 1];
-    Rents.returnBook({'rentId': rentId}, function(){
-      $location.path('/rents');
+  if (Auth.isLoggedIn()) {
+    var userId = Auth.getUser().userId;
+
+    Rents.query({book: $scope.book.bookId, user: userId, status: 'reserved'}, function(reservations){
+      for (var i=0; i<reservations.length; i++){
+        console.log(reservations[i].user.userId, userId, reservations[i].user.userId === userId);
+        if (reservations[i].user.userId === userId) {
+          $scope.reserved = true;
+          break;
+        }
+      }
     });
-  };
+
+    Rents.query({book: $scope.book.bookId, user: userId, status: 'rented'}, function(reservations){
+      for (var i=0; i<reservations.length; i++){
+        console.log(reservations[i].user.userId, userId, reservations[i].user.userId === userId);
+        if (reservations[i].user.userId === userId) {
+          $scope.rented = true;
+          break;
+        }
+      }
+    });
+  }
 
   $scope.reserveBook = function() {
     var payload = {
@@ -21,5 +38,4 @@ angular.module('dashboardApp')
       $location.path('/reservations');
     });
   };
-
 });
