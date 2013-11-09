@@ -48,6 +48,11 @@ module.exports = function(app, auth) {
 
   app.param('bookId', books.book);
 
+  // bookCopies
+  app.put('/bookCopies/:bookCopyId', users.hasAuthorization, users.isAdmin, books.updateBookCopy);
+
+  app.param('bookCopyId', books.bookCopy);
+
   // rents
   var rents = require('../routes/rents');
   app.get('/rents', users.hasAuthorization, users.isMe, rents.query);

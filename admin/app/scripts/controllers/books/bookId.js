@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('BooksBookidCtrl', function ($scope, Users, Rents, $routeParams, $location, book) {
+.controller('BooksBookidCtrl', function ($scope, Users, Rents, $routeParams, $location, book, BookCopy) {
   $scope.book = book;
 
   $scope.openRent = function (bookCopy) {
@@ -59,5 +59,12 @@ angular.module('adminApp')
   };
 
   $scope.minDate = new Date().setDate(new Date().getDate() + 1);
+
+  $scope.updateCopy = function(copy){
+
+    BookCopy.update(copy, function(){
+      copy.changed = false;
+    });
+  };
 
 });
