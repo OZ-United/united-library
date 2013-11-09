@@ -11,6 +11,9 @@ angular.module('adminApp')
 
       $http.post((window.host || '') + '/auth', user)
         .success(function(res){
+          if (!res.admin) {
+            deferred.reject();
+          }
           $rootScope.user = res;
           localStorage.setItem(STORAGE_ID, JSON.stringify(res));
           deferred.resolve(res);
