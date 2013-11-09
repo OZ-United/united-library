@@ -10,7 +10,6 @@ angular.module('dashboardApp')
 
     Rents.query({book: $scope.book.bookId, user: userId, status: 'reserved'}, function(reservations){
       for (var i=0; i<reservations.length; i++){
-        console.log(reservations[i].user.userId, userId, reservations[i].user.userId === userId);
         if (reservations[i].user.userId === userId) {
           $scope.reserved = true;
           break;
@@ -20,7 +19,6 @@ angular.module('dashboardApp')
 
     Rents.query({book: $scope.book.bookId, user: userId, status: 'rented'}, function(reservations){
       for (var i=0; i<reservations.length; i++){
-        console.log(reservations[i].user.userId, userId, reservations[i].user.userId === userId);
         if (reservations[i].user.userId === userId) {
           $scope.rented = true;
           break;
@@ -38,4 +36,5 @@ angular.module('dashboardApp')
       $location.path('/reservations');
     });
   };
+
 });
