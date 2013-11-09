@@ -35,7 +35,7 @@ angular.module('adminApp')
     },
     logout: function() {
       $rootScope.user = {};
-      localStorage.setItem(STORAGE_ID, JSON.stringify('{}'));
+      localStorage.setItem(STORAGE_ID, JSON.stringify({}));
       return true;
     }
   };
