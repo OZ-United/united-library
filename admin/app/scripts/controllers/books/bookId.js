@@ -1,18 +1,19 @@
 'use strict';
 
 angular.module('adminApp')
-.controller('BooksBookidCtrl', function ($scope, Users, Rents, $routeParams, $location, book) {
+.controller('BooksBookidCtrl', function ($scope, Users, Rents, $routeParams, $location, book, BookCopy) {
   $scope.book = book;
 
   $scope.openRent = function (bookCopy) {
     $scope.rentBook = true;
-    $scope.rentUsers = Users.query();
+    $scope.rentUsers = $scope.rentUsers || Users.query();
     $scope.rentCopy = {
       'bookId': $scope.book.bookId,
-      'bookCopyId': bookCopy.bookCopyId
+      'bookCopyId': bookCopy.bookCopyId,
+      'limit': 1000
     };
 
-    $scope.reservations = Rents.query({status: 'reserved', book: $scope.book.bookId});
+    $scope.reservations = $scope.reservations || Rents.query({status: 'reserved', book: $scope.book.bookId, 'limit': 1000});
   };
 
   $scope.clearRent = function(rent) {
@@ -58,4 +59,12 @@ angular.module('adminApp')
   };
 
   $scope.minDate = new Date().setDate(new Date().getDate() + 1);
+
+  $scope.updateCopy = function(copy){
+
+    BookCopy.update(copy, function(){
+      copy.changed = false;
+    });
+  };
+
 });

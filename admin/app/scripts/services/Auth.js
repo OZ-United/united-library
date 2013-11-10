@@ -11,6 +11,9 @@ angular.module('adminApp')
 
       $http.post((window.host || '') + '/auth', user)
         .success(function(res){
+          if (!res.admin) {
+            return deferred.reject();
+          }
           $rootScope.user = res;
           localStorage.setItem(STORAGE_ID, JSON.stringify(res));
           deferred.resolve(res);
@@ -35,7 +38,7 @@ angular.module('adminApp')
     },
     logout: function() {
       $rootScope.user = {};
-      localStorage.setItem(STORAGE_ID, JSON.stringify('{}'));
+      localStorage.setItem(STORAGE_ID, JSON.stringify({}));
       return true;
     }
   };

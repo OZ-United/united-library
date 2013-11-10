@@ -7,7 +7,8 @@
         <th>Názov</th>
         <th>Autor</th>
         <th>Používateľ</th>
-        <th>Od</th>
+        <th>Rezervované</th>
+        <th>Zrušiť</th>
       </tr>
     </thead>
     <tbody>
@@ -21,6 +22,7 @@
         <td style="line-height: 50px;"><a ng-href="#/books?author={{rent.book.author}}">{{rent.book.author}}</a></td>
         <td style="line-height: 50px;"><a ng-href="#/users/{{rent.user.userId}}">{{rent.user.name}}</a></td>
         <td style="line-height: 50px;"><a ng-href="#/rents/{{rent.rentId}}">{{rent.reservation.reservationDate | date}}</a></td>
+        <td style="line-height: 50px;"><button class="btn btn-danger" ng-click="cancelReservation(rent, $index)"><i class="icon-remove"></i></button></td>
       </tr>
     </tbody>
   </table>

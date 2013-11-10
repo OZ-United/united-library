@@ -3,23 +3,37 @@
 angular.module('dashboardApp')
 .controller('BooksBookidCtrl', function ($scope, Rents, $routeParams, $location, book, Auth) {
   $scope.book = book;
+  $scope.Auth = Auth;
 
-  $scope.returnBook = function(bookCopy) {
-    var rentId = bookCopy.rents[bookCopy.rents.length - 1];
-    Rents.returnBook({'rentId': rentId}, function(){
-      $location.path('/rents');
+  if (Auth.isLoggedIn()) {
+    var userId = Auth.getUser().userId;
+
+    Rents.query({book: $scope.book.bookId, user: userId, status: 'reserved'}, function(reservations){
+      for (var i=0; i<reservations.length; i++){
+        if (reservations[i].user.userId === userId) {
+          $scope.reserved = true;
+          break;
+        }
+      }
     });
-  };
+
+    Rents.query({book: $scope.book.bookId, user: userId, status: 'rented'}, function(reservations){
+      for (var i=0; i<reservations.length; i++){
+        if (reservations[i].user.userId === userId) {
+          $scope.rented = true;
+          break;
+        }
+      }
+    });
+  }
 
   $scope.reserveBook = function() {
-    console.log($routeParams);
-    console.log(Auth.getUser());
     var payload = {
       'bookId': $routeParams.bookId,
       'userId': Auth.getUser().userId
     };
     Rents.reserveBook(payload, function(){
-      $location.path('/rents');
+      $location.path('/reservations');
     });
   };
 

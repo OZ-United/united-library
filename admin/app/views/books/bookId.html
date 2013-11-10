@@ -27,15 +27,23 @@
     <!-- <p>{{copy.bookCopyId}}</p> -->
     <!-- <p>{{copy.date | date}}</p> -->
     <!-- <p>{{copy.status}}</p> -->
-    <p ng-show="copy.status == 'rented'">Požičaná</p>
-    <p ng-show="copy.status == 'available' || copy.status == 'returned'">Dostupná</p>
-    <p ng-show="copy.status == 'reserved'">Rezervovaná</p>
-    <p>{{copy.info}}</p>
+
     <a ng-href="#/rents?bookCopy={{copy.bookCopyId}}" class="btn"><i class="icon-time"></i> História</a>
+
+    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Požičaná</a>
+    <a class="btn btn-primary" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)"><i class="icon-check"></i> Vrátiť</a>
+    <a class="btn btn-success" ng-show="copy.status == 'available' || copy.status == 'returned'"><i class="icon-ok"></i> Dostupná</a>
     <a class="btn btn-primary" ng-show="copy.status == 'available' || copy.status == 'returned'" ng-click="openRent(copy)"><i class="icon-share"></i> Požičaj</a>
-    <a class="btn btn-success" ng-show="copy.status == 'rented'" ng-click="returnBook(copy)"><i class="icon-check"></i> Vrátiť</a>
-    <a class="btn btn-info" ng-show="copy.status == 'rented'" ng-href="#/rents/{{copy.rents[copy.rents.length - 1]}}"><i class="icon-search"></i> Info</a>
-    <p></p>
+    <a class="btn btn-info" ng-show="copy.status == 'reserved'"><i class="icon-search"></i> Rezervovaná</a>
+
+    <p>
+      <div class="input-append">
+          <input type="text" placeholder="Info" ng-change="copy.changed=true" ng-model="copy.info" class="input-field">
+          <button type="submit" class="btn" ng-hide="copy.changed"><i class="icon-ok"></i></button>
+          <button type="submit" class="btn btn-success" ng-show="copy.changed" ng-click="updateCopy(copy)"><i class="icon-upload"></i></button>
+      </div>
+    </p>
+
   </li>
 </ul>
 
@@ -53,10 +61,7 @@
           <input type="text"
             ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId"
             ng-change="clearRent(rentCopy)"
-            typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8"
-
           >
-          <!-- <input type="text" ng-model="rentCopy.userId" id="inputUserId" class="input-field" required placeholder="UserId" typeahead="rentUser.userId as rentUser.name for rentUser in rentUsers | filter:$viewValue | limitTo:8"> -->
         </div>
         </div>
 
@@ -67,6 +72,16 @@
             ng-click="rentCopy.userId = reservation.user.userId; rentCopy.rentId = reservation.rentId;"
           >
             {{reservation.user.name}}</p>
+        </div>
+        </div>
+
+        <div class="control-group" ng-show="rentUsers.length">
+        <label class="control-label">Používatelia:</label>
+        <div class="controls">
+          <p ng-repeat="rentUser in rentUsers | filter: rentCopy.userId"
+            ng-click="rentCopy.userId = rentUser.userId;"
+          >
+            {{rentUser.name}}</p>
         </div>
         </div>
 
